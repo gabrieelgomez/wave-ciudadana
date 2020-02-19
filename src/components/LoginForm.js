@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 const CustomInput = styled(Input)`
   input {
@@ -62,6 +63,7 @@ class LoginForm extends React.Component {
     })
     .then((response) => {
       console.log(response);
+      this.props.saveCurrentUser(response.data.data)
       let obj = {
         client: response.headers.client,
         accessToken: response.headers['access-token'],
@@ -128,4 +130,22 @@ class LoginForm extends React.Component {
 }
 
 const WrappedLoginForm = Form.create({ name: 'normal_login' })(LoginForm);
-export default WrappedLoginForm;
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+const saveCurrentUser = (currentUser) => {
+  return {
+    type: 'SET_CURRENT_USER',
+    currentUser: currentUser
+  }
+}
+
+const mapDispatchToProps = {
+  saveCurrentUser: saveCurrentUser
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )(WrappedLoginForm);

@@ -63,21 +63,21 @@ export default class Navbar extends React.Component {
             <Link to="/">Home</Link>
             </li>
           </ul>
-          { !userInfo ? (
-            <ul>
-              <li>
-                <Link onClick={() => this.showForm('Login')}><i className="fa fa-user"></i>Login</Link>
-              </li>
-              <li>
-                <Link onClick={() => this.showForm('Register')}><i className="fa fa-user"></i>Sign up</Link>
-              </li>
-            </ul>
+          { userInfo.length > 0 ? (
+              <p>{userInfo[0].email}</p>
             ) : (
-              <p>{userInfo.uid}</p>
+              <ul>
+                <li>
+                  <Link onClick={() => this.showForm('Login')}><i className="fa fa-user"></i>Login</Link>
+                </li>
+                <li>
+                  <Link onClick={() => this.showForm('Register')}><i className="fa fa-user"></i>Sign up</Link>
+                </li>
+              </ul>
             )
           }
         </nav>
-        <CustomModal 
+        <CustomModal
           visible={this.state.visible}
           handleCancel={this.handleCancel}
         >
