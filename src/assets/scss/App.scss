@@ -23,7 +23,13 @@ h1, h2, h3, h4 {
 
 .layout {
   height: 100vh;
+
+  @media screen and (min-width: 0px) and (max-width: 720px) {
+    height: auto;
+  }
 }
+
+
 
 .App {
   font-family: 'Martel Sans', sans-serif;
@@ -49,12 +55,6 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
-.ant-card {
-  width: calc(100% - 20px) !important;
-  margin: 0 10px;
-  height: 350px;
-}
-
 .login-box {
   background-color: white;
   padding: 50px;
@@ -67,6 +67,10 @@ h1, h2, h3, h4 {
     color: $secondary;
     font-weight: 700;
     margin-bottom: 30px;
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 720px) {
+    padding: 30px 20px;
   }
 }
 

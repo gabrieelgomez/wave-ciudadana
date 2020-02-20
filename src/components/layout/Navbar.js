@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { Icon } from "antd";
 import CustomModal from '../Modal';
 import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
@@ -52,7 +53,7 @@ export default class Navbar extends React.Component {
     if (showLogin) {
       form = <LoginForm cb={(opt) => callback(this, opt)}/>
     } else if (showRegister) {
-      form = <RegisterForm cb={cb}/>
+      form = <RegisterForm cb={(opt) => callback(this, opt)}/>
     }
 
     return (
@@ -68,10 +69,10 @@ export default class Navbar extends React.Component {
             ) : (
               <ul>
                 <li>
-                  <Link onClick={() => this.showForm('Login')}><i className="fa fa-user"></i>Login</Link>
+                  <span onClick={() => this.showForm('Login')}><Icon type="user"/>Login</span>
                 </li>
                 <li>
-                  <Link onClick={() => this.showForm('Register')}><i className="fa fa-user"></i>Sign up</Link>
+                  <span onClick={() => this.showForm('Register')}><Icon type="login"/>Sign up</span>
                 </li>
               </ul>
             )

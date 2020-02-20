@@ -3,8 +3,9 @@ import 'antd/dist/antd.css';
 import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
-const CustomInput = styled(Input)`
+const StyledInput = styled(Input)`
   input {
     padding: 10px 20px;
     height: auto;
@@ -12,7 +13,7 @@ const CustomInput = styled(Input)`
   }
 `
 
-const CustomButton = styled(Button)`
+const StyledButton = styled(Button)`
   border-radius: 25px;
   padding: 15px 20px;
   height: auto;
@@ -32,6 +33,8 @@ const CustomButton = styled(Button)`
 
 class RegisterForm extends React.Component {
   state = {
+    name: '',
+    nickname: '',
     email: '',
     password: ''
   }
@@ -43,6 +46,10 @@ class RegisterForm extends React.Component {
   }
 
   registerUser = () => {
+    const {
+      cb
+    } = this.props;
+
     const headers = {
       'Content-Type': 'application/json',
       'Accept': '*/*'
@@ -50,15 +57,24 @@ class RegisterForm extends React.Component {
 
     axios({
       method: 'POST',
-      url: `https://api.ibigwave.com/v1/auth/sign_in`,
+      url: `https://api.ibigwave.com/v1/auth`,
       headers: headers,
       data: {
+        name: this.state.name,
+        nickname: this.state.nickname,
         email: this.state.email,
         password: this.state.password
       },
     })
     .then((response) => {
       console.log(response)
+      this.props.saveCurrentUser(response.data.data)
+      let obj = {
+        client: response.headers.client,
+        accessToken: response.headers['access-token'],
+        uid: response.headers.uid
+      }
+      cb(obj);
     })
     .catch((error) => {
       console.log(error, '<== Error being returned');
@@ -72,11 +88,37 @@ class RegisterForm extends React.Component {
         <h1>Registro</h1>
         <Form className="login-form">
           <Form.Item>
+            {getFieldDecorator('name', {
+              rules: [{ required: true, message: 'Please input your name!' }],
+            })(
+              <StyledInput
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="name"
+                name="name"
+                placeholder="Name"
+                onChange={this.handleChange}
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('nickname', {
+              rules: [{ required: true, message: 'Please input your nickname!' }],
+            })(
+              <StyledInput
+                prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="nickname"
+                name="nickname"
+                placeholder="Nickname"
+                onChange={this.handleChange}
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
             {getFieldDecorator('email', {
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
-              <CustomInput
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              <StyledInput
+                prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -88,7 +130,7 @@ class RegisterForm extends React.Component {
             {getFieldDecorator('password', {
               rules: [{ required: true, message: 'Please input your Password!' }],
             })(
-              <CustomInput
+              <StyledInput
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 name="password"
@@ -97,9 +139,9 @@ class RegisterForm extends React.Component {
               />,
             )}
           </Form.Item>
-          <CustomButton onClick={this.registerUser} className="login-form-button">
+          <StyledButton onClick={this.registerUser} className="login-form-button">
             Registrarse
-          </CustomButton>
+          </StyledButton>
         </Form>
       </div>
     );
@@ -107,4 +149,22 @@ class RegisterForm extends React.Component {
 }
 
 const WrappedRegisterForm = Form.create({ name: 'normal_login' })(RegisterForm);
-export default WrappedRegisterForm;
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+const saveCurrentUser = (currentUser) => {
+  return {
+    type: 'SET_CURRENT_USER',
+    currentUser: currentUser
+  }
+}
+
+const mapDispatchToProps = {
+  saveCurrentUser: saveCurrentUser
+}
+
+export default connect( mapStateToProps, mapDispatchToProps )(WrappedRegisterForm);
