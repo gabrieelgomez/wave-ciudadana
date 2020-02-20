@@ -69,10 +69,10 @@ export default class Navbar extends React.Component {
             ) : (
               <ul>
                 <li>
-                  <span onClick={() => this.showForm('Login')}><Icon type="user"/>Login</span>
+                  <span style={{cursor : 'pointer'}} onClick={() => this.showForm('Login')}><Icon type="user"/>Login</span>
                 </li>
                 <li>
-                  <span onClick={() => this.showForm('Register')}><Icon type="login"/>Sign up</span>
+                  <span style={{cursor : 'pointer'}} onClick={() => this.showForm('Register')}><Icon type="login"/>Sign up</span>
                 </li>
               </ul>
             )

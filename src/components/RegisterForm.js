@@ -45,7 +45,8 @@ class RegisterForm extends React.Component {
     });
   }
 
-  registerUser = () => {
+  registerUser = (e) => {
+    e.preventDefault();
     const {
       cb
     } = this.props;
@@ -86,7 +87,7 @@ class RegisterForm extends React.Component {
     return (
       <div className="login-box">
         <h1>Registro</h1>
-        <Form className="login-form">
+        <Form className="login-form" onSubmit={this.registerUser}>
           <Form.Item>
             {getFieldDecorator('name', {
               rules: [{ required: true, message: 'Please input your name!' }],
@@ -139,7 +140,7 @@ class RegisterForm extends React.Component {
               />,
             )}
           </Form.Item>
-          <StyledButton onClick={this.registerUser} className="login-form-button">
+          <StyledButton htmlType="submit">
             Registrarse
           </StyledButton>
         </Form>

@@ -43,7 +43,8 @@ class LoginForm extends React.Component {
     });
   }
 
-  loginUser = () => {
+  loginUser = (e) => {
+    e.preventDefault();
     const {
       cb
     } = this.props;
@@ -81,7 +82,7 @@ class LoginForm extends React.Component {
     return (
       <div className="login-box">
         <h1>Inicio de sesión</h1>
-        <Form className="login-form">
+        <Form className="login-form" onSubmit={this.loginUser}>
           <Form.Item>
             {getFieldDecorator('email', {
               rules: [{ required: true, message: 'Please input your email!' }],
@@ -108,7 +109,7 @@ class LoginForm extends React.Component {
               />,
             )}
           </Form.Item>
-          <StyledButton onClick={this.loginUser} className="login-form-button">
+          <StyledButton htmlType="submit">
             Iniciar sesión
           </StyledButton>
           <div className="login-box-footer">
