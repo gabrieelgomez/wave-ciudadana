@@ -4,10 +4,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import store from './initializers/store'
+import storeRedux from './initializers/store'
+import { saveState } from './initializers/states'
+
+storeRedux.subscribe(() => {
+  saveState(storeRedux.getState());
+})
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={storeRedux}>
     <App />
   </Provider>,
   document.getElementById('root')
