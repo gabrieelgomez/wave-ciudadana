@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-const CustomInput = styled(Input)`
+const StyledInput = styled(Input)`
   input {
     padding: 10px 20px;
     height: auto;
@@ -13,7 +13,7 @@ const CustomInput = styled(Input)`
   }
 `
 
-const CustomButton = styled(Button)`
+const StyledButton = styled(Button)`
   border-radius: 25px;
   padding: 15px 20px;
   height: auto;
@@ -43,7 +43,8 @@ class LoginForm extends React.Component {
     });
   }
 
-  loginUser = () => {
+  loginUser = (e) => {
+    e.preventDefault();
     const {
       cb
     } = this.props;
@@ -81,13 +82,13 @@ class LoginForm extends React.Component {
     return (
       <div className="login-box">
         <h1>Inicio de sesión</h1>
-        <Form className="login-form">
+        <Form className="login-form" onSubmit={this.loginUser}>
           <Form.Item>
             {getFieldDecorator('email', {
               rules: [{ required: true, message: 'Please input your email!' }],
             })(
-              <CustomInput
-                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              <StyledInput
+                prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -99,7 +100,7 @@ class LoginForm extends React.Component {
             {getFieldDecorator('password', {
               rules: [{ required: true, message: 'Please input your Password!' }],
             })(
-              <CustomInput
+              <StyledInput
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 name="password"
@@ -108,19 +109,14 @@ class LoginForm extends React.Component {
               />,
             )}
           </Form.Item>
-          <CustomButton onClick={this.loginUser} className="login-form-button">
+          <StyledButton htmlType="submit">
             Iniciar sesión
-          </CustomButton>
-          <div className="login-form-register">
-            <a href="">
-              Regístrate ahora
-            </a>
-          </div>
+          </StyledButton>
           <div className="login-box-footer">
             Inicia sesión con
             <ul>
-              <li><a href="#"><i className="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i className="fa fa-google"></i></a></li>
+              <li><span><Icon type="facebook" /></span></li>
+              <li><span><Icon type="google" /></span></li>
             </ul>
           </div>
         </Form>
