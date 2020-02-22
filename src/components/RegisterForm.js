@@ -69,13 +69,8 @@ class RegisterForm extends React.Component {
     })
     .then((response) => {
       console.log(response)
-      this.props.saveCurrentUser(response.data.data)
-      let obj = {
-        client: response.headers.client,
-        accessToken: response.headers['access-token'],
-        uid: response.headers.uid
-      }
-      cb(obj);
+      this.props.saveCurrentUser(response.data.data);
+      cb();
     })
     .catch((error) => {
       console.log(error, '<== Error being returned');

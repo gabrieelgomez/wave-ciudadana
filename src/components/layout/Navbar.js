@@ -4,9 +4,9 @@ import { Icon } from "antd";
 import CustomModal from '../Modal';
 import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
+import { connect } from 'react-redux';
 
-
-export default class Navbar extends React.Component {
+class Navbar extends React.Component {
   state = {
     visible: false,
     showLogin: true,
@@ -33,6 +33,10 @@ export default class Navbar extends React.Component {
     });
   };
 
+  handleLogOut = () => {
+    this.props.removeCurrentUser();
+  }
+
   render() {
     const {
       showLogin,
@@ -40,22 +44,15 @@ export default class Navbar extends React.Component {
     } = this.state;
 
     const {
-      cb,
       userInfo
     } = this.props;
-    let form
-
-    let callback = (that, opt) => {
-      cb(opt);
-      that.handleCancel();
-    }
+    let form;
 
     if (showLogin) {
-      form = <LoginForm cb={(opt) => callback(this, opt)}/>
+      form = <LoginForm cb={this.handleCancel}/>
     } else if (showRegister) {
-      form = <RegisterForm cb={(opt) => callback(this, opt)}/>
+      form = <RegisterForm cb={this.handleCancel}/>
     }
-
     return (
       <div className="header">
         <nav>
@@ -64,8 +61,15 @@ export default class Navbar extends React.Component {
             <Link to="/">Home</Link>
             </li>
           </ul>
-          { userInfo.length > 0 ? (
-              <p>{userInfo[0].email}</p>
+          { userInfo.currentUser ? (
+              <ul>
+                <li>
+                  <p>{userInfo.currentUser.email}</p>
+                </li>
+                <li>
+                  <span style={{cursor : 'pointer'}} onClick={this.handleLogOut}><Icon type="login"/>Log out</span>
+                </li>
+              </ul>
             ) : (
               <ul>
                 <li>
@@ -88,3 +92,14 @@ export default class Navbar extends React.Component {
     );
   }
 }
+
+const removeCurrentUser = () => {
+  return {
+    type: 'REMOVE_CURRENT_USER',
+    payload: {}
+  }
+}
+
+const mapDispatchToProps = { removeCurrentUser }
+
+export default connect((state) => state, mapDispatchToProps)(Navbar);

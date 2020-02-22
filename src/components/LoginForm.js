@@ -63,17 +63,11 @@ class LoginForm extends React.Component {
       },
     })
     .then((response) => {
-      console.log(response);
       this.props.saveCurrentUser(response.data.data)
-      let obj = {
-        client: response.headers.client,
-        accessToken: response.headers['access-token'],
-        uid: response.headers.uid
-      }
-      cb(obj);
+      cb();
     })
     .catch((error) => {
-      console.log(error, '<== Error being returned');
+      alert(error)
     });
   }
 
@@ -136,7 +130,9 @@ const mapStateToProps = (state) => {
 const saveCurrentUser = (currentUser) => {
   return {
     type: 'SET_CURRENT_USER',
-    currentUser: currentUser
+    payload: {
+      currentUser
+    }
   }
 }
 
