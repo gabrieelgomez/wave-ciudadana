@@ -155,7 +155,9 @@ const mapStateToProps = (state) => {
 const saveCurrentUser = (currentUser) => {
   return {
     type: 'SET_CURRENT_USER',
-    currentUser: currentUser
+    payload: {
+      currentUser
+    }
   }
 }
 
