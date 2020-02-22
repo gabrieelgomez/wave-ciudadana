@@ -73,7 +73,7 @@ class RegisterForm extends React.Component {
       cb();
     })
     .catch((error) => {
-      console.log(error, '<== Error being returned');
+      alert(error.response.data.errors.full_messages)
     });
   }
 

@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
       cb();
     })
     .catch((error) => {
-      alert(error)
+      alert(error.response.data.errors)
     });
   }
 
