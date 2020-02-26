@@ -26,7 +26,9 @@ const CustomModal = (props) => {
         onCancel={handleCancel}
         footer={false}
       >
-        {props.children}
+        <div className="modal-box">
+          {props.children}
+        </div>
       </StyledModal>
     </div>
   );
