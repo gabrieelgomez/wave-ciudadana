@@ -12,7 +12,7 @@ const StyledCard = styled(Card)`
 
 const ProposalsList = () => {
   return (
-    <div className="container">
+    <div>
       <h1 className="title">Propuestas</h1>
       <Row>
         <Col xs={24} sm={12} md={8} lg={6}>
