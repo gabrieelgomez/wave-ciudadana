@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Icon } from "antd";
-import CustomModal from '../Modal';
+import CustomModal from '../ui/Modal';
 import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
+import LogOutButton from '../LogOutButton';
 import { connect } from 'react-redux';
+import { REMOVE_CURRENT_USER } from '../../actions/session';
 
 class Navbar extends React.Component {
   state = {
@@ -32,10 +34,6 @@ class Navbar extends React.Component {
       visible: false,
     });
   };
-
-  handleLogOut = () => {
-    this.props.removeCurrentUser();
-  }
 
   render() {
     const {
@@ -67,7 +65,7 @@ class Navbar extends React.Component {
                   <p>{userInfo.currentUser.email}</p>
                 </li>
                 <li>
-                  <span style={{cursor : 'pointer'}} onClick={this.handleLogOut}><Icon type="login"/>Log out</span>
+                  <LogOutButton removeUser={this.props.REMOVE_CURRENT_USER}/>
                 </li>
               </ul>
             ) : (
@@ -93,13 +91,6 @@ class Navbar extends React.Component {
   }
 }
 
-const removeCurrentUser = () => {
-  return {
-    type: 'REMOVE_CURRENT_USER',
-    payload: {}
-  }
-}
-
-const mapDispatchToProps = { removeCurrentUser }
+const mapDispatchToProps = { REMOVE_CURRENT_USER }
 
 export default connect((state) => state, mapDispatchToProps)(Navbar);

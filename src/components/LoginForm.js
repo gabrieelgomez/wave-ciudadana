@@ -4,6 +4,7 @@ import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { SET_CURRENT_USER } from '../actions/session';
 
 const StyledInput = styled(Input)`
   input {
@@ -127,17 +128,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-const saveCurrentUser = (currentUser) => {
-  return {
-    type: 'SET_CURRENT_USER',
-    payload: {
-      currentUser
-    }
-  }
-}
-
 const mapDispatchToProps = {
-  saveCurrentUser: saveCurrentUser
+  saveCurrentUser: SET_CURRENT_USER
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(WrappedLoginForm);

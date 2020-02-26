@@ -22,8 +22,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-DefaultLayout = connect(
-  mapStateToProps
-)(DefaultLayout);
-
-export default DefaultLayout;
+export default connect(mapStateToProps)(DefaultLayout);
