@@ -62,7 +62,7 @@ class Navbar extends React.Component {
           { userInfo.currentUser ? (
               <ul>
                 <li>
-                  <Link to='/profile'>{userInfo.currentUser.email}</Link>
+                  <Link to={`/profile/${userInfo.currentUser.id}`}>{userInfo.currentUser.email}</Link>
                 </li>
                 <li>
                   <LogOutButton removeUser={this.props.REMOVE_CURRENT_USER}/>

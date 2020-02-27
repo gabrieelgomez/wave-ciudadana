@@ -13,7 +13,7 @@ export default [
     component: Home
   },
   {
-    path: "/profile",
+    path: "/profile/:id",
     layout: DefaultLayout,
     component: Profile
   }
