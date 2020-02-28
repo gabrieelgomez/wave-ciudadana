@@ -1,6 +1,5 @@
 const initialState = {
   currentUser: null,
-  stay: 0,
 }
 
 export default function sessionReducer(state = initialState, action) {

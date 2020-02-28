@@ -42,8 +42,8 @@ class Navbar extends React.Component {
     } = this.state;
 
     const {
-      userInfo
-    } = this.props;
+      currentUser
+    } = this.props.session;
     let form;
 
     if (showLogin) {
@@ -59,10 +59,10 @@ class Navbar extends React.Component {
             <Link to="/">Home</Link>
             </li>
           </ul>
-          { userInfo.currentUser ? (
+          { currentUser ? (
               <ul>
                 <li>
-                  <Link to={`/profile/${userInfo.currentUser.id}`}>{userInfo.currentUser.email}</Link>
+                  <Link to={`/profile`}>{currentUser.email}</Link>
                 </li>
                 <li>
                   <LogOutButton removeUser={this.props.REMOVE_CURRENT_USER}/>

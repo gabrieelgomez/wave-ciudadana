@@ -3,7 +3,7 @@ import { loadState } from '../initializers/states';
 import sessionReducer from './session';
 
 let rootReducer = combineReducers({
-  currentUser:  sessionReducer,
+  session:  sessionReducer,
 });
 
 const persistedState = loadState();
