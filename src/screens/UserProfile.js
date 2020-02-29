@@ -5,8 +5,7 @@ import styled from 'styled-components';
 import ProfileForm from '../components/User/profileForm';
 
 const StyledCard = styled(Card)`
-  text-align: center;
-
+  padding: 0 50px;
   h1 {
     font-weight: 700;
     margin-top: 30px;
@@ -20,7 +19,7 @@ class UserProfileScreen extends React.Component {
       <div className="container">
         <Row>
           <Col span={14} offset={5}>
-            <StyledCard mn={false}>
+            <StyledCard>
               <ProfileForm />
             </StyledCard>
           </Col>

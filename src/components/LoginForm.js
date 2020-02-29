@@ -27,7 +27,7 @@ const StyledButton = styled(Button)`
   text-transform: uppercase;
   border: none;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   &:hover {
     color: #0c2e60;
@@ -81,7 +81,11 @@ class LoginForm extends React.Component {
       this.props.setTokens(tokens)
 
       cb();
-      swal("Login successfully", "", "success");
+      if (response.status === 200) {
+        swal("Inicio de sesión exitoso", "", "success");
+      } else {
+        swal("Ha ocurrido un error, intenta de nuevo", "", "warning");
+      }
     })
     .catch((error) => {
       swal(`${error.response.data.errors}`, "", "error");
@@ -96,7 +100,7 @@ class LoginForm extends React.Component {
         <Form className="login-form" onSubmit={this.loginUser}>
           <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please input your email!' }],
+              rules: [{ required: true, message: 'Ingresa tu correo!' }],
             })(
               <StyledInput
                 prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -109,13 +113,13 @@ class LoginForm extends React.Component {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
+              rules: [{ required: true, message: 'Ingresa tu contraseña!' }],
             })(
               <StyledInput
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Contraseña"
                 onChange={this.handleChange}
               />,
             )}
@@ -123,16 +127,14 @@ class LoginForm extends React.Component {
           <StyledButton htmlType="submit">
             Iniciar sesión
           </StyledButton>
+          <Link to={`/reset-password`}>
+            Reset password
+          </Link>
           <div className="login-box-footer">
             Inicia sesión con
             <ul>
               <li><span><Icon type="facebook" /></span></li>
               <li><span><Icon type="google" /></span></li>
-              <li>
-                <Link to={`/reset-password`}>
-                  Reset password
-                </Link>
-              </li>
             </ul>
           </div>
         </Form>
