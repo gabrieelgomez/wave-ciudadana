@@ -18,7 +18,7 @@ class LogOutButton extends React.Component {
         style={{cursor : 'pointer'}}
         onClick={this.handleLogOut}>
 
-        <Icon type="login"/>Log out
+        <Icon type="login"/>Cerrar sesión
       </span>
     )
   }

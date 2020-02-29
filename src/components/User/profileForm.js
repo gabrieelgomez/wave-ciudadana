@@ -4,6 +4,31 @@ import { BASE_DOMAIN } from '../../constants';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { SET_CURRENT_USER, SET_TOKENS } from '../../actions/session';
+import styled from 'styled-components';
+import swal from 'sweetalert';
+
+const StyledInput = styled(Input)`
+  padding: 10px 20px;
+  height: auto;
+  border-radius: 25px;
+`
+
+const StyledButton = styled(Button)`
+  border-radius: 25px;
+  padding: 15px 20px;
+  height: auto;
+  width: 100%;
+  box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.1);
+  background-color: #ff663b;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  font-weight: 700;
+
+  &:hover {
+    color: #0c2e60;
+  }
+`
 
 class ProfileForm extends Component {
 
@@ -75,7 +100,7 @@ class ProfileForm extends Component {
     });
   }
 
-  updateUserData() {
+  updateUserData = () => {
     const { uid, client, access_token } = this.props.session.tokens;
     const headers = {
       'Content-Type': 'application/json',
@@ -100,6 +125,7 @@ class ProfileForm extends Component {
       }
       this.props.setTokens(headers);
       this.props.setCurrentUser(response.data.data)
+      swal('Datos actualizados exitosamente', '', 'success')
     })
     .catch(error => {
       console.log(error, 'error being returned')
@@ -122,46 +148,43 @@ class ProfileForm extends Component {
       this.updateUserData();
     }
     
-    const layout = {
-      labelCol: { span: 8 },
-      wrapperCol: { span: 16 },
-    };
-
     const Item = Form.Item;
 
     return (
       <div>
-        <Avatar
+        {/* <Avatar
           size={150}
           src={avatar == null ? "https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/img/ryan.jpg" : avatar}
-        />
-        <Form {...layout} name="nest-messages" onSubmit={handleSubmit}>
-          <Item name={['user', 'nickname']} label="Nickname" rules={[{ required: true }]}>
-            <Input placeholder="Nickname" value={nickname} name="nickname" onChange={this.handleChange}/>
+        /> */}
+        <Form name="nest-messages" onSubmit={handleSubmit}>
+          <Item name={['user', 'nickname']} rules={[{ required: true }]}>
+            <label>Usuario</label>
+            <StyledInput placeholder="Nickname" value={nickname} name="nickname" onChange={this.handleChange}/>
           </Item>
-          <Item name={['user', 'name']} label="Name" rules={[{ required: true }]}>
-            <Input placeholder="Name" value={name} name="name" onChange={this.handleChange}/>
+          <Item name={['user', 'name']} rules={[{ required: true }]}>
+            <label>Nombre</label>
+            <StyledInput placeholder="Name" value={name} name="name" onChange={this.handleChange}/>
           </Item>
-          <Item name={['user', 'last_name']} label="Last name" rules={[{ required: false }]}>
-            <Input placeholder="Last name" value={lastname} name="lastname" onChange={this.handleChange}/>
+          <Item name={['user', 'last_name']} rules={[{ required: false }]}>
+            <label>Apellido</label>
+            <StyledInput placeholder="Last name" value={lastname} name="lastname" onChange={this.handleChange}/>
           </Item>
-          <Item name={['user', 'email']} label="email" rules={[{ required: true }]}>
-            <Input placeholder="email" value={email} name="email" onChange={this.handleChange}/>
+          <Item name={['user', 'email']} rules={[{ required: true }]}>
+            <label>Email</label>
+            <StyledInput placeholder="email" value={email} name="email" onChange={this.handleChange}/>
           </Item>
-          <Item name={['user', 'phone_one']} label="Primary Phone" rules={[{ required: false }]}>
-            <Input placeholder="Primary Phone" value={phone_one} name="phone_one" onChange={this.handleChange}/>
+          <Item name={['user', 'phone_one']} rules={[{ required: false }]}>
+            <label>Teléfono</label>
+            <StyledInput placeholder="Primary Phone" value={phone_one} name="phone_one" onChange={this.handleChange}/>
           </Item>
-          <Item name={['user', 'phone_two']} label="Secundary Phone" rules={[{ required: false }]}>
-            <Input placeholder="Secundary Phone" value={phone_two} name="phone_two" onChange={this.handleChange}/>
+          <Item name={['user', 'phone_two']} rules={[{ required: false }]}>
+            <label>Otro teléfono</label>
+            <StyledInput placeholder="Secundary Phone" value={phone_two} name="phone_two" onChange={this.handleChange}/>
           </Item>
-          <Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
+          <Item>
+            <StyledButton onClick={this.updateUserData}>Actualizar datos</StyledButton>
           </Item>
         </Form>
-
-        <Button onClick={this.updateUserData}>Actualizar user profile</Button>
       </div>
     )
   } 

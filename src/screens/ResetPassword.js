@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
-import { Form, Input, Card, Button } from 'antd';
+import { Form, Input, Card, Button, Col, Row } from 'antd';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { BASE_DOMAIN } from '../constants';
 import { withRouter } from "react-router-dom";
+import styled from 'styled-components';
 
+const StyledInput = styled(Input)`
+  padding: 10px 20px;
+  height: auto;
+  border-radius: 25px;
+`
 
+const StyledButton = styled(Button)`
+  border-radius: 25px;
+  padding: 15px 20px;
+  height: auto;
+  width: 50%;
+  box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.1);
+  background-color: #ff663b;
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  font-weight: 700;
+
+  &:hover {
+    color: #0c2e60;
+  }
+`
+
+const StyledCard = styled(Card)`
+  text-align:center;
+  padding: 0 50px;
+  h1 {
+    font-weight: 700;
+    margin-top: 30px;
+  }
+`
 
 const Item = Form.Item;
 
@@ -52,7 +83,7 @@ class ResetPassword extends Component {
     })
     .then((response) => {
       const that = this;
-      swal("Password resetted successfully", "", "success").then((value) => {
+      swal("Contraseña cambiada exitosamente", "", "success").then((value) => {
         that.props.history.push("/");
       });
     })
@@ -79,67 +110,76 @@ class ResetPassword extends Component {
     .then((response) => {
 
       const that = this;
-      swal("Email was sent successfully", "", "success").then((value) => {
+      swal("Correo enviado exitosamente", "Revisa tu bandeja de entrada", "success").then((value) => {
         that.setState({
+          email: '',
           emailIsSent: true
         })
       });
 
     })
     .catch((error) => {
-      swal(`${error.response.data.errors}`, "", "error");
+      const errMessage = error ? error.response.data.errors : 'Algo salió mal, intenta de nuevo';
+      swal(errMessage, "", "error");
     });
   }
   render() {
 
-    const layout = {
-      labelCol: { span: 6 },
-      wrapperCol: { span: 12 },
-    };
-
     const {
-      emailIsSent
+      emailIsSent,
+      password,
+      password_confirmation,
+      token,
+      email
     } = this.state;
     return (
       <div className="container">
-        <Card>
-          { emailIsSent ? (
-              <div>
-                <h1>Form with new passwords and token</h1>
-                <Form {...layout} onSubmit={this.resetPassword}>
-                  <Item label="Password">
-                    <Input name="password" onChange={this.handleChange}></Input>
-                  </Item>
-                  <Item label="Password confirmation">
-                    <Input name="password_confirmation" onChange={this.handleChange}></Input>
-                  </Item>
-                  <Item label="Token">
-                    <Input name="token" onChange={this.handleChange}></Input>
-                  </Item>
-                  <Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button type="primary" htmlType="submit">
-                      Submit
-                    </Button>
-                  </Item>
-                </Form>
-              </div>
-            ) : (
-              <div>
-                <h1 style={{textAlign: 'center'}}>Introduce your email, we will send you an email</h1>
-                <Form {...layout} onSubmit={this.sendResetPassEmail}>
-                  <Item label="Email">
-                    <Input name="email" onChange={this.handleChange}></Input>
-                  </Item>
-                  <Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-                    <Button type="primary" htmlType="submit">
-                      Submit
-                    </Button>
-                  </Item>
-                </Form>
-              </div>
-            )
-          }
-        </Card>
+        <Row>
+          <Col span={14} offset={5}>
+            <StyledCard>
+              { emailIsSent ? (
+                  <div>
+                    <h1>Cambia tu contraseña</h1>
+                    <Form name="send_email" onSubmit={this.resetPassword}>
+                      <Item>
+                        <label>Nueva contraseña</label>
+                        <StyledInput type="password" name="password" value={password} onChange={this.handleChange}></StyledInput>
+                      </Item>
+                      <Item>
+                        <label>Confirmación de nueva contraseña</label>
+                        <StyledInput type="password" name="password_confirmation" value={password_confirmation} onChange={this.handleChange}></StyledInput>
+                      </Item>
+                      <Item>
+                        <label>Código de verificación</label>
+                        <StyledInput name="token" value={token} onChange={this.handleChange}></StyledInput>
+                        <small>Ingresa el código recibido en tu correo</small>
+                      </Item>
+                      <Item>
+                        <StyledButton htmlType="submit">
+                          Cambiar contraseña
+                        </StyledButton>
+                      </Item>
+                    </Form>
+                  </div>
+                ) : (
+                  <div>
+                    <h1>Ingresa tu correo, te enviaremos un mensaje</h1>
+                    <Form name="reset_password" onSubmit={this.sendResetPassEmail}>
+                      <Item>
+                        <StyledInput name="email" value={email} onChange={this.handleChange}></StyledInput>
+                      </Item>
+                      <Item>
+                        <StyledButton htmlType="submit">
+                          Enviar
+                        </StyledButton>
+                      </Item>
+                    </Form>
+                  </div>
+                )
+              }
+            </StyledCard>
+          </Col>
+        </Row>
       </div>
     );
   }

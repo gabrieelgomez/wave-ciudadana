@@ -5,6 +5,7 @@ $secondary: #ff663b;
 
 a {
   color: $primary !important;
+  font-family: 'Martel Sans';
 }
 
 h1, h2, h3, h4 {
@@ -22,7 +23,7 @@ h1, h2, h3, h4 {
 }
 
 .layout {
-  height: 100vh;
+  min-height: 100vh;
 
   @media screen and (min-width: 0px) and (max-width: 720px) {
     height: auto;
@@ -83,6 +84,7 @@ h1, h2, h3, h4 {
 .login-box-footer {
   border-top: 1px solid #e9e9e9;
   padding-top: 20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;

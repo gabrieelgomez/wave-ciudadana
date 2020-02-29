@@ -36,6 +36,7 @@ const StyledButton = styled(Button)`
 class RegisterForm extends React.Component {
   state = {
     name: '',
+    lastname: '',
     nickname: '',
     email: '',
     password: ''
@@ -64,6 +65,7 @@ class RegisterForm extends React.Component {
       headers: headers,
       data: {
         name: this.state.name,
+        lastname: this.state.lastname,
         nickname: this.state.nickname,
         email: this.state.email,
         password: this.state.password
@@ -79,7 +81,7 @@ class RegisterForm extends React.Component {
       this.props.setTokens(tokens);
 
       cb();
-      swal("Register successfully", "", "success");
+      swal("Registrado exitosamente", "", "success");
     })
     .catch((error) => {
       swal(`${error.response.data.errors.full_messages}`, "", "error");
@@ -94,33 +96,46 @@ class RegisterForm extends React.Component {
         <Form className="login-form" onSubmit={this.registerUser}>
           <Form.Item>
             {getFieldDecorator('name', {
-              rules: [{ required: true, message: 'Please input your name!' }],
+              rules: [{ required: true, message: 'Ingresa tu nombre!' }],
             })(
               <StyledInput
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="name"
+                type="text"
                 name="name"
-                placeholder="Name"
+                placeholder="Nombre"
+                onChange={this.handleChange}
+              />,
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('lastname', {
+              rules: [{ required: true, message: 'Ingresa tu apellido!' }],
+            })(
+              <StyledInput
+                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                type="text"
+                name="lastname"
+                placeholder="Apellido"
                 onChange={this.handleChange}
               />,
             )}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('nickname', {
-              rules: [{ required: true, message: 'Please input your nickname!' }],
+              rules: [{ required: true, message: 'Ingresa tu usuario!' }],
             })(
               <StyledInput
                 prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                type="nickname"
+                type="text"
                 name="nickname"
-                placeholder="Nickname"
+                placeholder="Usuario"
                 onChange={this.handleChange}
               />,
             )}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please input your email!' }],
+              rules: [{ required: true, message: 'Ingresa tu email!' }],
             })(
               <StyledInput
                 prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -133,7 +148,7 @@ class RegisterForm extends React.Component {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
+              rules: [{ required: true, message: 'Ingresa tu contraseña!' }],
             })(
               <StyledInput
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
