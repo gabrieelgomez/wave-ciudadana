@@ -29,7 +29,6 @@ class ResetPassword extends Component {
   resetPassword = (e) => {
     e.preventDefault();
 
-    console.log('resetPass')
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -52,12 +51,10 @@ class ResetPassword extends Component {
       },
     })
     .then((response) => {
-      console.log('response: ', response)
       const that = this;
       swal("Password resetted successfully", "", "success").then((value) => {
         that.props.history.push("/");
-      });;
-
+      });
     })
     .catch((error) => {
       swal(`${error.response.data.errors}`, "", "error");
@@ -66,7 +63,7 @@ class ResetPassword extends Component {
 
   sendResetPassEmail = (e) => {
     e.preventDefault();
-    console.log('sendResetPassEmail')
+
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -80,13 +77,13 @@ class ResetPassword extends Component {
       },
     })
     .then((response) => {
-      console.log('response: ', response)
+
       const that = this;
       swal("Email was sent successfully", "", "success").then((value) => {
         that.setState({
           emailIsSent: true
         })
-      });;
+      });
 
     })
     .catch((error) => {
