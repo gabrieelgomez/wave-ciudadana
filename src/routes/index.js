@@ -4,6 +4,7 @@ import { DefaultLayout } from "../layouts";
 // Route Views
 import Home from "../screens/Home";
 import UserProfile from "../screens/UserProfile";
+import ResetPassword from "../screens/ResetPassword";
 
 export default [
   {
@@ -16,5 +17,10 @@ export default [
     path: "/profile",
     layout: DefaultLayout,
     component: UserProfile
+  },
+  {
+    path: "/reset-password",
+    layout: DefaultLayout,
+    component: ResetPassword
   }
 ];

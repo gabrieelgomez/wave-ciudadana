@@ -6,6 +6,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { SET_CURRENT_USER, SET_TOKENS } from '../actions/session';
 import swal from 'sweetalert';
+import { Link } from "react-router-dom";
 
 const StyledInput = styled(Input)`
   input {
@@ -127,6 +128,11 @@ class LoginForm extends React.Component {
             <ul>
               <li><span><Icon type="facebook" /></span></li>
               <li><span><Icon type="google" /></span></li>
+              <li>
+                <Link to={`/reset-password`}>
+                  Reset password
+                </Link>
+              </li>
             </ul>
           </div>
         </Form>
