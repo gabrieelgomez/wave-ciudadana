@@ -2,8 +2,9 @@
 import { DefaultLayout } from "../layouts";
 
 // Route Views
-import Home from "../views/HomeScreen";
-import Profile from "../views/ProfileScreen";
+import Home from "../screens/Home";
+import UserProfile from "../screens/UserProfile";
+import ResetPassword from "../screens/ResetPassword";
 
 export default [
   {
@@ -13,8 +14,13 @@ export default [
     component: Home
   },
   {
-    path: "/profile/:id",
+    path: "/profile",
     layout: DefaultLayout,
-    component: Profile
+    component: UserProfile
+  },
+  {
+    path: "/reset-password",
+    layout: DefaultLayout,
+    component: ResetPassword
   }
 ];

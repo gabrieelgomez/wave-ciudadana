@@ -4,8 +4,9 @@ import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { SET_CURRENT_USER } from '../actions/session';
+import { SET_CURRENT_USER, SET_TOKENS } from '../actions/session';
 import swal from 'sweetalert';
+import { Link } from "react-router-dom";
 
 const StyledInput = styled(Input)`
   input {
@@ -26,7 +27,7 @@ const StyledButton = styled(Button)`
   text-transform: uppercase;
   border: none;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 
   &:hover {
     color: #0c2e60;
@@ -65,9 +66,26 @@ class LoginForm extends React.Component {
       },
     })
     .then((response) => {
-      this.props.saveCurrentUser(response.data.data)
+      const { client, uid } = response.headers
+
+      const tokens = {
+        access_token: response.headers['access-token'],
+        client, uid
+      }
+
+      const currentUser = {
+        ...response.data.data
+      }
+
+      this.props.setCurrentUser(currentUser)
+      this.props.setTokens(tokens)
+
       cb();
-      swal("Login successfully", "", "success");
+      if (response.status === 200) {
+        swal("Inicio de sesión exitoso", "", "success");
+      } else {
+        swal("Ha ocurrido un error, intenta de nuevo", "", "warning");
+      }
     })
     .catch((error) => {
       swal(`${error.response.data.errors}`, "", "error");
@@ -82,7 +100,7 @@ class LoginForm extends React.Component {
         <Form className="login-form" onSubmit={this.loginUser}>
           <Form.Item>
             {getFieldDecorator('email', {
-              rules: [{ required: true, message: 'Please input your email!' }],
+              rules: [{ required: true, message: 'Ingresa tu correo!' }],
             })(
               <StyledInput
                 prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -95,13 +113,13 @@ class LoginForm extends React.Component {
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
-              rules: [{ required: true, message: 'Please input your Password!' }],
+              rules: [{ required: true, message: 'Ingresa tu contraseña!' }],
             })(
               <StyledInput
                 prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Contraseña"
                 onChange={this.handleChange}
               />,
             )}
@@ -109,6 +127,9 @@ class LoginForm extends React.Component {
           <StyledButton htmlType="submit">
             Iniciar sesión
           </StyledButton>
+          <Link to={`/reset-password`}>
+            Reset password
+          </Link>
           <div className="login-box-footer">
             Inicia sesión con
             <ul>
@@ -126,12 +147,13 @@ const WrappedLoginForm = Form.create({ name: 'normal_login' })(LoginForm);
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.session.currentUser
   }
 }
 
 const mapDispatchToProps = {
-  saveCurrentUser: SET_CURRENT_USER
+  setCurrentUser: SET_CURRENT_USER,
+  setTokens: SET_TOKENS
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(WrappedLoginForm);

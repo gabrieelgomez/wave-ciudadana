@@ -6,7 +6,7 @@ import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
 import LogOutButton from '../LogOutButton';
 import { connect } from 'react-redux';
-import { REMOVE_CURRENT_USER } from '../../actions/session';
+import { DROP_CURRENT_USER } from '../../actions/session';
 
 class Navbar extends React.Component {
   state = {
@@ -40,9 +40,8 @@ class Navbar extends React.Component {
       showLogin,
       showRegister
     } = this.state;
-
     const {
-      userInfo
+      currentUser
     } = this.props;
     let form;
 
@@ -59,22 +58,22 @@ class Navbar extends React.Component {
             <Link to="/">Home</Link>
             </li>
           </ul>
-          { userInfo.currentUser ? (
+          { currentUser ? (
               <ul>
                 <li>
-                  <Link to={`/profile/${userInfo.currentUser.id}`}>{userInfo.currentUser.email}</Link>
+                  <Link to={`/profile`}>{currentUser.email}</Link>
                 </li>
                 <li>
-                  <LogOutButton removeUser={this.props.REMOVE_CURRENT_USER}/>
+                  <LogOutButton removeUser={this.props.dropCurrentUser}/>
                 </li>
               </ul>
             ) : (
               <ul>
                 <li>
-                  <span style={{cursor : 'pointer'}} onClick={() => this.showForm('Login')}><Icon type="user"/>Login</span>
+                  <span style={{cursor : 'pointer'}} onClick={() => this.showForm('Login')}><Icon type="user"/>Entrar</span>
                 </li>
                 <li>
-                  <span style={{cursor : 'pointer'}} onClick={() => this.showForm('Register')}><Icon type="login"/>Sign up</span>
+                  <span style={{cursor : 'pointer'}} onClick={() => this.showForm('Register')}><Icon type="login"/>Regístrate</span>
                 </li>
               </ul>
             )
@@ -91,6 +90,6 @@ class Navbar extends React.Component {
   }
 }
 
-const mapDispatchToProps = { REMOVE_CURRENT_USER }
+const mapDispatchToProps = { dropCurrentUser: DROP_CURRENT_USER }
 
-export default connect((state) => state, mapDispatchToProps)(Navbar);
+export default connect(null, mapDispatchToProps)(Navbar);

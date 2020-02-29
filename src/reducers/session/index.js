@@ -1,14 +1,21 @@
 const initialState = {
-  currentUser: null,
-  stay: 0,
+  tokens: {
+    client: null,
+    access_token: null,
+    uid: null,
+  },
+  currentUser: null
 }
 
 export default function sessionReducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_CURRENT_USER':
-      return { ...state, ...action.payload };
+      return { ...state, currentUser: action.payload };
 
-    case 'REMOVE_CURRENT_USER':
+    case 'SET_TOKENS':
+      return {...state, tokens: action.payload };
+
+    case 'DROP_CURRENT_USER':
       return initialState;
 
     default:

@@ -8,7 +8,7 @@ class DefaultLayout extends Component {
     return (
       <Layout className="layout">
         <Navbar
-          userInfo={this.props.currentUser}
+          currentUser={this.props.currentUser}
         />
         {this.props.children}
       </Layout>
@@ -18,7 +18,7 @@ class DefaultLayout extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.session.currentUser
   }
 }
 
