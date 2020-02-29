@@ -8,7 +8,7 @@ class DefaultLayout extends Component {
     return (
       <Layout className="layout">
         <Navbar
-          userInfo={this.props.currentUser}
+          currentUser={this.props.currentUser}
         />
         {this.props.children}
       </Layout>

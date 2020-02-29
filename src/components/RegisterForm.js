@@ -4,7 +4,7 @@ import { Form, Icon, Input, Button } from 'antd';
 import styled from 'styled-components';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { SET_CURRENT_USER } from '../actions/session';
+import { SET_CURRENT_USER, SET_TOKENS } from '../actions/session';
 import swal from 'sweetalert';
 
 const StyledInput = styled(Input)`
@@ -70,7 +70,14 @@ class RegisterForm extends React.Component {
       },
     })
     .then((response) => {
-      this.props.saveCurrentUser(response.data.data);
+      const { client, uid } = response.headers
+      const tokens = {
+        access_token: response.headers['access-token'],
+        client, uid
+      }
+      this.props.setCurrentUser(response.data.data);
+      this.props.setTokens(tokens);
+
       cb();
       swal("Register successfully", "", "success");
     })
@@ -155,7 +162,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  saveCurrentUser: SET_CURRENT_USER
+  setCurrentUser: SET_CURRENT_USER,
+  setTokens: SET_TOKENS
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )(WrappedRegisterForm);

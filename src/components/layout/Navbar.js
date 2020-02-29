@@ -6,7 +6,7 @@ import LoginForm from '../LoginForm';
 import RegisterForm from '../RegisterForm';
 import LogOutButton from '../LogOutButton';
 import { connect } from 'react-redux';
-import { REMOVE_CURRENT_USER } from '../../actions/session';
+import { DROP_CURRENT_USER } from '../../actions/session';
 
 class Navbar extends React.Component {
   state = {
@@ -40,10 +40,9 @@ class Navbar extends React.Component {
       showLogin,
       showRegister
     } = this.state;
-
     const {
       currentUser
-    } = this.props.session;
+    } = this.props;
     let form;
 
     if (showLogin) {
@@ -65,7 +64,7 @@ class Navbar extends React.Component {
                   <Link to={`/profile`}>{currentUser.email}</Link>
                 </li>
                 <li>
-                  <LogOutButton removeUser={this.props.REMOVE_CURRENT_USER}/>
+                  <LogOutButton removeUser={this.props.dropCurrentUser}/>
                 </li>
               </ul>
             ) : (
@@ -91,6 +90,6 @@ class Navbar extends React.Component {
   }
 }
 
-const mapDispatchToProps = { REMOVE_CURRENT_USER }
+const mapDispatchToProps = { dropCurrentUser: DROP_CURRENT_USER }
 
-export default connect((state) => state, mapDispatchToProps)(Navbar);
+export default connect(null, mapDispatchToProps)(Navbar);
