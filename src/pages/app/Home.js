@@ -1,5 +1,5 @@
 import React from 'react';
-import ProposalsList from '../components/ProposalsList';
+import ProposalsList from '../../components/app/ProposalsList';
 
 class Home extends React.Component {
   render() {

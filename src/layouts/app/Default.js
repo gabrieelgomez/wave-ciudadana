@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Layout } from 'antd';
-import Navbar from '../components/layout/Navbar';
+import Navbar from '../../components/app/layout/Navbar';
 import { connect } from 'react-redux';
-class DefaultLayout extends Component {
+
+class DefaultAppLayout extends Component {
 
   render() {
     return (
@@ -22,4 +23,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(DefaultLayout);
+export default connect(mapStateToProps)(DefaultAppLayout);
