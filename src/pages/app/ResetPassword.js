@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, Input, Card, Button, Col, Row } from 'antd';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { BASE_DOMAIN } from '../constants';
+import { BASE_DOMAIN } from '../../constants';
 import { withRouter } from "react-router-dom";
 import styled from 'styled-components';
 

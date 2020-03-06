@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import ProfileForm from '../components/User/profileForm';
+import ProfileForm from '../../components/app/User/profileForm';
 
 const StyledCard = styled(Card)`
   padding: 0 50px;

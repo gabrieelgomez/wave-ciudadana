@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Avatar, Input, Button, Form } from 'antd';
-import { BASE_DOMAIN } from '../../constants';
+import { BASE_DOMAIN } from '../../../constants';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { SET_CURRENT_USER, SET_TOKENS } from '../../actions/session';
+import { SET_CURRENT_USER, SET_TOKENS } from '../../../actions/session';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 

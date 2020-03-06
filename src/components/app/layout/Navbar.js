@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { Icon } from "antd";
-import CustomModal from '../ui/Modal';
-import LoginForm from '../LoginForm';
-import RegisterForm from '../RegisterForm';
-import LogOutButton from '../LogOutButton';
+import CustomModal from '../../common/ui/Modal';
+import LoginForm from '../Session/LoginForm';
+import RegisterForm from '../Session/RegisterForm';
+import LogOutButton from '../Session/LogOutButton';
 import { connect } from 'react-redux';
-import { DROP_CURRENT_USER } from '../../actions/session';
+import { DROP_CURRENT_USER } from '../../../actions/session';
 
 class Navbar extends React.Component {
   state = {

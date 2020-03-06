@@ -1,26 +1,26 @@
 // Layout Types
-import { DefaultLayout } from "../layouts";
+import { DefaultAppLayout } from "../layouts/app";
 
-// Route Views
-import Home from "../screens/Home";
-import UserProfile from "../screens/UserProfile";
-import ResetPassword from "../screens/ResetPassword";
+// Route Pages
+import Home from "../pages/app/Home";
+import UserProfile from "../pages/app/UserProfile";
+import ResetPassword from "../pages/app/ResetPassword";
 
 export default [
   {
     path: "/",
     exact: true,
-    layout: DefaultLayout,
+    layout: DefaultAppLayout,
     component: Home
   },
   {
     path: "/profile",
-    layout: DefaultLayout,
+    layout: DefaultAppLayout,
     component: UserProfile
   },
   {
     path: "/reset-password",
-    layout: DefaultLayout,
+    layout: DefaultAppLayout,
     component: ResetPassword
   }
 ];
