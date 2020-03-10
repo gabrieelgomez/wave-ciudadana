@@ -1,26 +1,7 @@
-// Layout Types
-import { DefaultAppLayout } from "../layouts/app";
+// Modules routes
+import appRoutes from "./app";
+import adminRoutes from "./admin";
 
-// Route Pages
-import Home from "../pages/app/Home";
-import UserProfile from "../pages/app/UserProfile";
-import ResetPassword from "../pages/app/ResetPassword";
+const routes = appRoutes.concat(adminRoutes)
 
-export default [
-  {
-    path: "/",
-    exact: true,
-    layout: DefaultAppLayout,
-    component: Home
-  },
-  {
-    path: "/profile",
-    layout: DefaultAppLayout,
-    component: UserProfile
-  },
-  {
-    path: "/reset-password",
-    layout: DefaultAppLayout,
-    component: ResetPassword
-  }
-];
+export default routes;

@@ -49,13 +49,16 @@ class LoginForm extends React.Component {
   loginUser = (e) => {
     e.preventDefault();
     const {
-      cb
+      cb,
+      setCurrentUser,
+      setTokens
     } = this.props;
 
     const headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
+
     axios({
       method: 'POST',
       url: `https://api.ibigwave.com/v1/auth/sign_in`,
@@ -77,10 +80,12 @@ class LoginForm extends React.Component {
         ...response.data.data
       }
 
-      this.props.setCurrentUser(currentUser)
-      this.props.setTokens(tokens)
+      setCurrentUser(currentUser)
+      setTokens(tokens)
 
+      // Callback received by props
       cb();
+
       if (response.status === 200) {
         swal("Inicio de sesión exitoso", "", "success");
       } else {
@@ -145,15 +150,9 @@ class LoginForm extends React.Component {
 
 const WrappedLoginForm = Form.create({ name: 'normal_login' })(LoginForm);
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.session.currentUser
-  }
-}
-
 const mapDispatchToProps = {
   setCurrentUser: SET_CURRENT_USER,
   setTokens: SET_TOKENS
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )(WrappedLoginForm);
+export default connect(null, mapDispatchToProps)(WrappedLoginForm);

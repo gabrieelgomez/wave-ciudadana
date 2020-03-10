@@ -6,10 +6,15 @@ import { connect } from 'react-redux';
 class DefaultAppLayout extends Component {
 
   render() {
+    const {
+      currentUser, tokens
+    } = this.props;
+
     return (
       <Layout className="layout">
         <Navbar
-          currentUser={this.props.currentUser}
+          currentUser={currentUser}
+          tokens={tokens}
         />
         {this.props.children}
       </Layout>
@@ -18,8 +23,12 @@ class DefaultAppLayout extends Component {
 };
 
 const mapStateToProps = (state) => {
+  const {
+    currentUser, tokens
+  } = state.session;
+
   return {
-    currentUser: state.session.currentUser
+    currentUser, tokens
   }
 }
 

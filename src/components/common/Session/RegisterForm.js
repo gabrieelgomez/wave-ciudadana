@@ -50,6 +50,7 @@ class RegisterForm extends React.Component {
 
   registerUser = (e) => {
     e.preventDefault();
+
     const {
       cb
     } = this.props;
@@ -181,4 +182,4 @@ const mapDispatchToProps = {
   setTokens: SET_TOKENS
 }
 
-export default connect( mapStateToProps, mapDispatchToProps )(WrappedRegisterForm);
+export default connect(null, mapDispatchToProps)(WrappedRegisterForm);
