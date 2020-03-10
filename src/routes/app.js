@@ -1,5 +1,5 @@
 // Layout Types
-import { DefaultAppLayout } from "../layouts/app";
+import DefaultAppLayout from "../layouts/app";
 
 // Route Pages
 import Home from "../pages/app/Home";
