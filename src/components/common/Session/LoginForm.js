@@ -87,6 +87,11 @@ class LoginForm extends React.Component {
       cb();
 
       if (response.status === 200) {
+
+        if (response.data.data.roles[0].name === 'superadmin') {
+          console.log('superadmin logged')
+        }
+
         swal("Inicio de sesión exitoso", "", "success");
       } else {
         swal("Ha ocurrido un error, intenta de nuevo", "", "warning");

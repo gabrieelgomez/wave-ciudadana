@@ -18,9 +18,7 @@ class DefaultAdminLayout extends Component {
             <AdminSider />
           </Col>
           <Col span={19}>
-            <div className="admin-container">
-              {this.props.children}
-            </div>
+            {this.props.children}
           </Col>
         </Row>
       </Layout>

@@ -5,5 +5,12 @@
 }
 
 .admin-container {
-  padding: 50px;
+  padding: 20px 40px;
+}
+
+.admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
 }

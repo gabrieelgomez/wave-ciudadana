@@ -1,8 +1,9 @@
 import React from 'react';
 // Layout Types
 import DefaultAdminLayout from "../layouts/admin";
-import AdminUsersList from "../components/admin/User/List";
 import AdminDashboard from "../components/admin/Dashboard";
+import AdminUsers from "../components/admin/User";
+import AdminUserNew from "../components/admin/User/New";
 
 export default [
   {
@@ -13,6 +14,11 @@ export default [
   {
     path: "/users",
     layout: DefaultAdminLayout,
-    component: AdminUsersList
+    component: AdminUsers
+  },
+  {
+    path: "/user/new",
+    layout: DefaultAdminLayout,
+    component: AdminUserNew
   }
 ];

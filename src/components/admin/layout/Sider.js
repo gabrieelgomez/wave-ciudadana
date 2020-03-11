@@ -6,11 +6,12 @@ import styled from 'styled-components';
 const { Sider } = Layout;
 
 const StyledSider = styled(Sider)`
-  max-width: 100% !important;
-  width: 100% !important;
   height: 100vh;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.2);
+  overflow: auto;
+  position: fixed;
+  left: 0;
 `
 
 const AdminSider = () => {
