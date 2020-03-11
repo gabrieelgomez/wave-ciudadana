@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Layout, Row, Col } from 'antd';
+import AdminSider from '../../components/admin/layout/Sider';
+import '../../assets/scss/Admin.scss';
 
-export const DefaultAdminLayout = () => {
-  return (
-    <h1>hola</h1>
-  )  
+class DefaultAdminLayout extends Component {
+
+  render() {
+    const {
+      currentUser, tokens
+    } = this.props;
+
+    return (
+      <Layout className='layout'>
+        <Row>
+          <Col span={5}>
+            <AdminSider />
+          </Col>
+          <Col span={19}>
+            <div className="admin-container">
+              {this.props.children}
+            </div>
+          </Col>
+        </Row>
+      </Layout>
+    )
+  }
+};
+
+const mapStateToProps = (state) => {
+  const {
+    currentUser, tokens
+  } = state.session;
+
+  return {
+    currentUser, tokens
+  }
 }
+
+export default connect(mapStateToProps)(DefaultAdminLayout);

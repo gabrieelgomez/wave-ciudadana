@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Layout } from 'antd';
 import Navbar from '../../components/app/layout/Navbar';
 import { connect } from 'react-redux';
+import '../../assets/scss/App.scss';
 
 class DefaultAppLayout extends Component {
 
