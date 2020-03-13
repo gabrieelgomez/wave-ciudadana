@@ -1,4 +1,3 @@
-import React from 'react';
 // Layout Types
 import DefaultAdminLayout from "../layouts/admin";
 import AdminDashboard from "../components/admin/Dashboard";

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar, Input, Button, Form } from 'antd';
+import { Input, Button, Form } from 'antd';
 import { BASE_DOMAIN } from '../../../constants';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -137,7 +137,6 @@ class ProfileForm extends Component {
       name,
       lastname,
       nickname,
-      avatar,
       email,
       phone_one,
       phone_two
@@ -152,10 +151,6 @@ class ProfileForm extends Component {
 
     return (
       <div>
-        {/* <Avatar
-          size={150}
-          src={avatar == null ? "https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/img/ryan.jpg" : avatar}
-        /> */}
         <Form name="nest-messages" onSubmit={handleSubmit}>
           <Item name={['user', 'nickname']} rules={[{ required: true }]}>
             <label>Usuario</label>

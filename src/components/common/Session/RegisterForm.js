@@ -171,12 +171,6 @@ class RegisterForm extends React.Component {
 
 const WrappedRegisterForm = Form.create({ name: 'normal_login' })(RegisterForm);
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.currentUser
-  }
-}
-
 const mapDispatchToProps = {
   setCurrentUser: SET_CURRENT_USER,
   setTokens: SET_TOKENS

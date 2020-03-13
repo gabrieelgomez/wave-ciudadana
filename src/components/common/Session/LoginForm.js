@@ -80,13 +80,13 @@ class LoginForm extends React.Component {
         ...response.data.data
       }
 
-      setCurrentUser(currentUser)
       setTokens(tokens)
 
       // Callback received by props
       cb();
 
       if (response.status === 200) {
+        setCurrentUser(currentUser)
 
         if (response.data.data.roles[0].name === 'superadmin') {
           console.log('superadmin logged')

@@ -7,9 +7,6 @@ import '../../assets/scss/Admin.scss';
 class DefaultAdminLayout extends Component {
 
   render() {
-    const {
-      currentUser, tokens
-    } = this.props;
 
     return (
       <Layout className='layout'>

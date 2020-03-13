@@ -7,7 +7,6 @@ import {
 } from 'antd';
 import axios from 'axios';
 import swal from 'sweetalert';
-import styled from 'styled-components';
 
 class AdminUserNew extends React.Component {
   state = {
