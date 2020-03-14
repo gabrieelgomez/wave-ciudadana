@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import {appRoutes, adminRoutes} from "./routes";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { isAdmin } from './helpers';
 
 function PrivateRoute({ comp: Component, isAdmin, ...rest }) {
   return (
@@ -24,18 +25,11 @@ function PrivateRoute({ comp: Component, isAdmin, ...rest }) {
 }
 class App extends React.Component {
   render() {
-    function isEmpty(obj) {
-      return Object.keys(obj).length === 0;
-    }
+    const {
+      currentUser
+    } = this.props;
 
-    const currentUser = this.props.currentUser;
-    var isAdmin;
-
-    if (currentUser == null || isEmpty(currentUser) ) {
-      isAdmin = false
-    } else {
-      isAdmin = (this.props.currentUser.roles[0].name === 'superadmin');
-    }
+    const currentUserIsAdmin = isAdmin(currentUser)
 
     return (
       <Router>
@@ -59,7 +53,7 @@ class App extends React.Component {
           {adminRoutes.map((route, index) => {
             return (
               <PrivateRoute
-                isAdmin={isAdmin}
+                isAdmin={currentUserIsAdmin}
                 key={index}
                 path={route.path}
                 exact={route.exact}

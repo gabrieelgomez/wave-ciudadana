@@ -11,10 +11,10 @@ class DefaultAdminLayout extends Component {
     return (
       <Layout className='layout'>
         <Row>
-          <Col span={5}>
+          <Col span={4}>
             <AdminSider />
           </Col>
-          <Col span={19}>
+          <Col span={20}>
             {this.props.children}
           </Col>
         </Row>
