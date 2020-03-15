@@ -1,15 +1,40 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import routes from "./routes";
-import './assets/scss/App.scss';
+import {appRoutes, adminRoutes} from "./routes";
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { isAdmin } from './helpers';
 
-export default class App extends React.Component {
-
+function PrivateRoute({ comp: Component, isAdmin, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        isAdmin ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/'
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+class App extends React.Component {
   render() {
+    const {
+      currentUser
+    } = this.props;
+
+    const currentUserIsAdmin = isAdmin(currentUser)
+
     return (
       <Router>
         <div>
-          {routes.map((route, index) => {
+          {appRoutes.map((route, index) => {
             return (
               <Route
                 key={index}
@@ -25,8 +50,34 @@ export default class App extends React.Component {
               />
             );
           })}
+          {adminRoutes.map((route, index) => {
+            return (
+              <PrivateRoute
+                isAdmin={currentUserIsAdmin}
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                comp={(props => {
+                  return (
+                    <route.layout {...props}>
+                      <route.component {...props} />
+                    </route.layout>
+                  );
+                })}
+              />
+            );
+          })}
         </div>
       </Router>
     )
   }
 }
+
+const mapStateToProps = (state) => {
+  const { currentUser } = state.session;
+  return {
+    currentUser: currentUser
+  }
+}
+
+export default connect(mapStateToProps)(App);

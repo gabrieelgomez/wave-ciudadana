@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import { Icon } from "antd";
 import CustomModal from '../../common/ui/Modal';
-import LoginForm from '../Session/LoginForm';
-import RegisterForm from '../Session/RegisterForm';
-import LogOutButton from '../Session/LogOutButton';
+import LoginForm from '../../common/Session/LoginForm';
+import RegisterForm from '../../common/Session/RegisterForm';
+import LogOutButton from '../../common/Session/LogOutButton';
 import { connect } from 'react-redux';
 import { DROP_CURRENT_USER } from '../../../actions/session';
 
