@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { SET_CURRENT_USER, SET_TOKENS } from '../../../actions/session';
 import styled from 'styled-components';
 import swal from 'sweetalert';
+import { api } from '../../../services/api';
 
 const StyledInput = styled(Input)`
   padding: 10px 20px;
@@ -72,34 +73,6 @@ class ProfileForm extends Component {
     });
   }
 
-  getUserData() {
-    const headers = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    };
-
-    axios({
-      method: 'GET',
-      url: `${BASE_DOMAIN}/v1/users/`,
-      headers: headers
-    })
-    .then((response) => {
-      const data = response.data.data.attributes;
-      this.setState({
-        user:{
-          name: data.name,
-          lastname: data.lastname,
-          avatar: data.avatar.url,
-          email: data.email,
-          nickname: data.nickname
-        }
-      })
-    })
-    .catch((error) => {
-      console.log(error, 'error being returned')
-    });
-  }
-
   updateUserData = () => {
     const { uid, client, access_token } = this.props.session.tokens;
     const headers = {
@@ -110,7 +83,7 @@ class ProfileForm extends Component {
     };
 
     const userData = this.state.user
-    console.log(userData)
+
     axios({
       method: 'PUT',
       url: `${BASE_DOMAIN}/v1/auth/`,
@@ -195,7 +168,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   setTokens: SET_TOKENS,
-  setCurrentUser: SET_CURRENT_USER
+  setCurrentUser: SET_CURRENT_USER,
+  api
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileForm);
