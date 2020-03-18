@@ -1,5 +1,4 @@
 import React from 'react';
-// import ProposalsList from '../../components/app/ProposalsList';
 import AdminUsers from "../../components/admin/User";
 import { connect } from 'react-redux';
 import { api } from '../../services/api';
