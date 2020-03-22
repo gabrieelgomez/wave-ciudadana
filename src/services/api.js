@@ -39,7 +39,7 @@ export const api = ({ endpoint, method, payload = {}, headers = {}, successCallb
 
       console.log(res)
 
-      if (res.status === 200) {
+      if (res.statusText === 'OK') {
         successCallback();
       }
 
