@@ -10,10 +10,10 @@ class AllUsers extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserData()
+    this.getUsersData()
   }
 
-  getUserData = async () => {
+  getUsersData = async () => {
     let data = [];
     const res = await this.props.api({
       method: 'GET',

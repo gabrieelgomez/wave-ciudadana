@@ -7,8 +7,6 @@ import {
   Row,
   Col
 } from 'antd';
-import axios from 'axios';
-import swal from 'sweetalert';
 
 class NewUserForm extends React.Component {
   state = {

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Descriptions, Card } from 'antd';
 import axios from 'axios';
-import swal from 'sweetalert';
 import {BASE_DOMAIN} from '../../../constants';
 
 class AdminUserShow extends React.Component {
@@ -17,7 +16,7 @@ class AdminUserShow extends React.Component {
   }
 
   componentDidMount() {
-    this.userID = this.props.location.pathname.split('/').pop();
+    this.userID = this.props.match.params.id
     console.log(this.userID)
     this.getUserData();
   }

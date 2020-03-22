@@ -3,33 +3,38 @@ import DefaultAdminLayout from "../layouts/admin";
 import AdminDashboard from "../components/admin/Dashboard";
 import AllUsers from "../pages/admin/AllUsers";
 import NewUser from "../pages/admin/NewUser";
-import AdminUserUpdate from "../components/admin/User/Update";
+import UpdateUser from "../pages/admin/UpdateUser";
 import AdminUserShow from "../components/admin/User/Show";
 
 export default [
   {
     path: "/admin",
     layout: DefaultAdminLayout,
-    component: AdminDashboard
+    component: AdminDashboard,
+    exact: true
   },
   {
-    path: "/users",
+    path: "/admin/users",
     layout: DefaultAdminLayout,
-    component: AllUsers
+    component: AllUsers,
+    exact: true
   },
   {
-    path: "/user/new",
+    path: "/admin/user/new",
     layout: DefaultAdminLayout,
-    component: NewUser
+    component: NewUser,
+    exact: true
   },
-  // {
-  //   path: "/user/:id",
-  //   layout: DefaultAdminLayout,
-  //   component: AdminUserShow
-  // },
-  // {
-  //   path: "/user/:id/update",
-  //   layout: DefaultAdminLayout,
-  //   component: AdminUserUpdate
-  // }
+  {
+    path: "/admin/user/:id",
+    layout: DefaultAdminLayout,
+    component: AdminUserShow,
+    exact: true
+  },
+  {
+    path: "/admin/user/:id/update",
+    layout: DefaultAdminLayout,
+    component: UpdateUser,
+    exact: true
+  }
 ];

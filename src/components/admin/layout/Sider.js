@@ -27,7 +27,7 @@ const AdminSider = () => {
           </NavLink>
         </Menu.Item>
         <Menu.Item key='2'>
-          <NavLink to='/users'>
+          <NavLink to='/admin/users'>
             <Icon type='user' />Usuarios
           </NavLink>
         </Menu.Item>

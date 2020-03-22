@@ -15,7 +15,7 @@ const AdminUsersList = (props) => {
       rowKey={record => record.id}
     >
       <Column title="Nombre" dataIndex="name" key="name" render={(text, record) => (
-        <Link to={`/user/${record.id}`}>{text}</Link>
+        <Link to={`/admin/user/${record.id}`}>{text}</Link>
       )}/>
       <Column title="Apellido" dataIndex="lastname" key="lastname" />
       <Column title="Email" dataIndex="email" key="email" />
@@ -25,8 +25,8 @@ const AdminUsersList = (props) => {
         key="actions"
         render={(record) => (
           <span>
-            {/* <Link to={`/user/update/${record.id}`}><Icon type="edit"/></Link> */}
-            <span><Icon type="delete"/></span>
+            <Link to={`/admin/user/${record.id}/update`}><Icon type="edit"/></Link>
+            {/* <span onClick={props.removeUser(record)}><Icon type="delete"/></span> */}
           </span>
         )}
       />
