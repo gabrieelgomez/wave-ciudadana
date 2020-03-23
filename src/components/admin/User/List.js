@@ -26,7 +26,6 @@ const AdminUsersList = (props) => {
         render={(record) => (
           <span>
             <Link to={`/admin/user/${record.id}/update`}><Icon type="edit"/></Link>
-            {/* <span onClick={props.removeUser(record)}><Icon type="delete"/></span> */}
           </span>
         )}
       />

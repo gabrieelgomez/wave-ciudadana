@@ -9,33 +9,42 @@ const StyledSider = styled(Sider)`
   height: 100vh;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.2);
-  overflow: auto;
-  position: fixed;
-  left: 0;
+  
 `
 
-const AdminSider = () => {
-  return (
-    <StyledSider>
-      <div className='logo'>
-        <h1>Bigwave Admin</h1>
-      </div>
-      <Menu>
-        <Menu.Item key='1'>
-          <NavLink to='/admin'>
-            <Icon type='appstore' />Dashboard
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key='2'>
-          <NavLink to='/admin/users'>
-            <Icon type='user' />Usuarios
-          </NavLink>
-        </Menu.Item>
-        <Menu.Item key='3'><Icon type='exclamation' />Opción 3</Menu.Item>
-        <Menu.Item key='4'><Icon type='exclamation' />Opción 4</Menu.Item>
-      </Menu>
-    </StyledSider>
-  )
+class AdminSider extends React.Component {
+  state = {
+    collapsed: false,
+  }
+
+  onCollapse = (collapsed) => {
+    this.setState({ collapsed });
+  }
+
+  render() {
+    return (
+      <StyledSider
+        breakpoint="lg"
+        collapsible
+        collapsed={this.state.collapsed}
+        onCollapse={this.onCollapse}
+      >
+        <div className='logo'>
+          <img src={'https://www.qbrobotics.com/wp-content/uploads/2018/03/sample-logo-470x235.png'} />
+        </div>
+        <Menu>
+          <Menu.Item key='1'>
+            <Icon type='appstore' />
+            <NavLink to='/admin'>Dashboard</NavLink>
+          </Menu.Item>
+          <Menu.Item key='2'>
+            <Icon type='user' />
+            <NavLink to='/admin/users'>Usuarios</NavLink>
+          </Menu.Item>
+        </Menu>
+      </StyledSider>
+    )
+  }
 };
 
 export default AdminSider;

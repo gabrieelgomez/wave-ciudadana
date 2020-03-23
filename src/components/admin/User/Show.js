@@ -1,5 +1,6 @@
 import React from 'react';
-import { Descriptions, Card } from 'antd';
+import { Descriptions, Card, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import {BASE_DOMAIN} from '../../../constants';
 
@@ -63,6 +64,7 @@ class AdminUserShow extends React.Component {
     return (
       <div className="admin-container">
         <Card>
+          <Link to={`/admin/user/${this.userID}/update`}><Icon type="edit"/></Link>
           <Descriptions title="Información del Usuario" layout="vertical">
             <Descriptions.Item label="Nombre">{name}</Descriptions.Item>
             <Descriptions.Item label="Apellido">{lastname}</Descriptions.Item>
