@@ -1,35 +1,40 @@
 // Layout Types
 import DefaultAdminLayout from "../layouts/admin";
-import AdminDashboard from "../components/admin/Dashboard";
+import AdminDashboard from "../pages/admin/Dashboard";
 import AllUsers from "../pages/admin/AllUsers";
-import AdminUserNew from "../components/admin/User/New";
-import AdminUserUpdate from "../components/admin/User/Update";
-import AdminUserShow from "../components/admin/User/Show";
+import NewUser from "../pages/admin/NewUser";
+import UpdateUser from "../pages/admin/UpdateUser";
+import ShowUser from "../pages/admin/ShowUser";
 
 export default [
   {
     path: "/admin",
     layout: DefaultAdminLayout,
-    component: AdminDashboard
+    component: AdminDashboard,
+    exact: true
   },
   {
-    path: "/users",
+    path: "/admin/users",
     layout: DefaultAdminLayout,
-    component: AllUsers
+    component: AllUsers,
+    exact: true
   },
   {
-    path: "/user/new",
+    path: "/admin/user/new",
     layout: DefaultAdminLayout,
-    component: AdminUserNew
+    component: NewUser,
+    exact: true
   },
   {
-    path: "/user/:id",
+    path: "/admin/user/:id",
     layout: DefaultAdminLayout,
-    component: AdminUserShow
+    component: ShowUser,
+    exact: true
   },
   {
-    path: "/user/:id/update",
+    path: "/admin/user/:id/update",
     layout: DefaultAdminLayout,
-    component: AdminUserUpdate
+    component: UpdateUser,
+    exact: true
   }
 ];

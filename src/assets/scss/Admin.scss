@@ -1,7 +1,13 @@
 .logo {
-  height: 32px;
+  height: 40px;
   margin: 16px;
   border-bottom: 1px solid #c0c0c0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .admin-container {
@@ -13,4 +19,18 @@
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.ant-menu-item a {
+  display: inline-block;
+}
+
+.ant-menu-inline-collapsed > .ant-menu-item .anticon + a {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+}
+
+.ant-menu-item .anticon + a {
+  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

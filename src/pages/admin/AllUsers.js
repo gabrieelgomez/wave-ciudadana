@@ -1,5 +1,4 @@
 import React from 'react';
-// import ProposalsList from '../../components/app/ProposalsList';
 import AdminUsers from "../../components/admin/User";
 import { connect } from 'react-redux';
 import { api } from '../../services/api';
@@ -11,10 +10,10 @@ class AllUsers extends React.Component {
   }
 
   componentDidMount() {
-    this.getUserData()
+    this.getUsersData()
   }
 
-  getUserData = async () => {
+  getUsersData = async () => {
     let data = [];
     const res = await this.props.api({
       method: 'GET',

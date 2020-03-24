@@ -8,7 +8,7 @@ const COMMON_HEADERS = {
   'accept': 'application/json',
 };
 
-export const api = ({ endpoint, method, payload = {}, headers = {} }) => {
+export const api = ({ endpoint, method, payload = {}, headers = {}, successCallback = () => {} }) => {
 
   const h = {
     ...COMMON_HEADERS,
@@ -35,6 +35,12 @@ export const api = ({ endpoint, method, payload = {}, headers = {} }) => {
         }
 
         dispatch(SET_TOKENS(tokens))
+      }
+
+      console.log(res)
+
+      if (res.statusText === 'OK') {
+        successCallback();
       }
 
       return res
