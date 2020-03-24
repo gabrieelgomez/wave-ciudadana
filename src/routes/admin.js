@@ -1,10 +1,10 @@
 // Layout Types
 import DefaultAdminLayout from "../layouts/admin";
-import AdminDashboard from "../components/admin/Dashboard";
+import AdminDashboard from "../pages/admin/Dashboard";
 import AllUsers from "../pages/admin/AllUsers";
 import NewUser from "../pages/admin/NewUser";
 import UpdateUser from "../pages/admin/UpdateUser";
-import AdminUserShow from "../components/admin/User/Show";
+import ShowUser from "../pages/admin/ShowUser";
 
 export default [
   {
@@ -28,7 +28,7 @@ export default [
   {
     path: "/admin/user/:id",
     layout: DefaultAdminLayout,
-    component: AdminUserShow,
+    component: ShowUser,
     exact: true
   },
   {
