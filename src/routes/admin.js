@@ -7,6 +7,7 @@ import UpdateUser from "../pages/admin/UpdateUser";
 import ShowUser from "../pages/admin/ShowUser";
 import AllCitizens from "../pages/admin/AllCitizens";
 import NewCitizen from "../pages/admin/NewCitizen";
+import ShowCitizen from "../pages/admin/ShowCitizen";
 
 export default [
   {
@@ -49,6 +50,12 @@ export default [
     path: "/admin/citizen/new",
     layout: DefaultAdminLayout,
     component: NewCitizen,
+    exact: true
+  },
+  {
+    path: "/admin/citizen/:id",
+    layout: DefaultAdminLayout,
+    component: ShowCitizen,
     exact: true
   }
 ];

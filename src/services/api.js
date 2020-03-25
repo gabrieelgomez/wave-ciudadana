@@ -33,6 +33,11 @@ export const api = ({ endpoint, method, payload = {}, headers = {}, successCallb
           uid: res.headers.uid
         }
 
+        // if (res.headers['access-token'] !== '') {
+        //   tokens.access_token = res.headers['access-token']
+        //   Object.assign(tokens, {access_token: res.headers['access-token']})
+        // }
+
         dispatch(SET_TOKENS(tokens))
       }
 
