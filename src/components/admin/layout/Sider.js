@@ -41,6 +41,10 @@ class AdminSider extends React.Component {
             <Icon type='user' />
             <NavLink to='/admin/users'>Usuarios</NavLink>
           </Menu.Item>
+          <Menu.Item key='3'>
+            <Icon type='user' />
+            <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
+          </Menu.Item>
         </Menu>
       </StyledSider>
     )

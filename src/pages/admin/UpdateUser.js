@@ -102,7 +102,6 @@ class UpdateUser extends React.Component {
 
 const mapStateToProps = (state) => {
   const { tokens } = state.session;
-  console.log({tokens})
   return { tokens };
 }
 
