@@ -107,6 +107,7 @@ class UpdateUser extends React.Component {
       userData={this.state.user}
       updateUser={this.handleUpdateUser}
       handleChange={this.handleChange}
+      handleSelect={this.handleSelect}
     />
   }
 }
