@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout, Row, Col } from 'antd';
+import { Layout } from 'antd';
 import AdminSider from '../../components/admin/layout/Sider';
 import '../../assets/scss/Admin.scss';
 

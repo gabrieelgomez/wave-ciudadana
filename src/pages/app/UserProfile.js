@@ -84,8 +84,8 @@ class UserProfile extends React.Component {
       }
     })
     console.log(res)
-    // this.props.setTokens(res.headers);
-    // this.props.setCurrentUser(res.data.data)
+    this.props.setTokens(res.headers);
+    this.props.setCurrentUser(res.data.data)
   }
 
   render() {

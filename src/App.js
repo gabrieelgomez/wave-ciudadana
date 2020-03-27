@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {appRoutes, adminRoutes} from "./routes";
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -33,7 +33,7 @@ class App extends React.Component {
 
     return (
       <Router>
-        <div>
+        <Switch>
           {appRoutes.map((route, index) => {
             return (
               <Route
@@ -67,7 +67,7 @@ class App extends React.Component {
               />
             );
           })}
-        </div>
+        </Switch>
       </Router>
     )
   }

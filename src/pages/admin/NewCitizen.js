@@ -1,32 +1,35 @@
 import React from 'react';
-import NewUserForm from "../../components/admin/User/New";
+import NewCitizenForm from "../../components/admin/Citizens/New";
 import { connect } from 'react-redux';
 import { api } from '../../services/api';
 import swal from 'sweetalert';
 
-class NewUser extends React.Component {
+class NewCitizen extends React.Component {
 
-  createUser = async (user) => {
+  createCitizen = async (citizen) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'POST',
-      endpoint: 'v1/users/create',
+      endpoint: 'v1/wave_citizen/citizens/create',
       payload: {
-        user
+        user: {
+          ...citizen
+        },
+        citizen
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => { 
-        swal('Usuario creado exitosamente', '', 'success')
+        swal('Usuario y ciudadano creados exitosamente', '', 'success')
       }
     })
   }
 
   render() {
-    return <NewUserForm
-      createUser={this.createUser}
+    return <NewCitizenForm
+      createCitizen={this.createCitizen}
     />
   }
 }
@@ -40,4 +43,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewUser);
+export default connect(mapStateToProps, mapDispatchToProps)(NewCitizen);

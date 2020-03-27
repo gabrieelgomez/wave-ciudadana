@@ -30,7 +30,7 @@ class AdminSider extends React.Component {
         onCollapse={this.onCollapse}
       >
         <div className='logo'>
-          <img src={'https://www.qbrobotics.com/wp-content/uploads/2018/03/sample-logo-470x235.png'} />
+          <img src={'https://www.qbrobotics.com/wp-content/uploads/2018/03/sample-logo-470x235.png'} alt="logo" />
         </div>
         <Menu>
           <Menu.Item key='1'>
@@ -40,6 +40,10 @@ class AdminSider extends React.Component {
           <Menu.Item key='2'>
             <Icon type='user' />
             <NavLink to='/admin/users'>Usuarios</NavLink>
+          </Menu.Item>
+          <Menu.Item key='3'>
+            <Icon type='user' />
+            <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
           </Menu.Item>
         </Menu>
       </StyledSider>

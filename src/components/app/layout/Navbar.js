@@ -63,6 +63,13 @@ class Navbar extends React.Component {
                 <li>
                   <Link to={`/profile`}>{currentUser.email}</Link>
                 </li>
+                { currentUser.roles[0].name === 'superadmin' &&
+                  <li>
+                    <Link to="/admin">
+                      <Icon type="appstore"/>
+                    </Link>
+                  </li>
+                }
                 <li>
                   <LogOutButton removeUser={this.props.dropCurrentUser}/>
                 </li>

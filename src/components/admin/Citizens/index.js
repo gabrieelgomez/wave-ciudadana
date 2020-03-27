@@ -1,22 +1,22 @@
 import React from 'react';
-import AdminUsersList from './List';
+import AdminCitizensList from './List';
 import LinkButton from '../../common/ui/LinkButton';
 
-class AdminUsers extends React.Component {
+class AdminCitizens extends React.Component {
 
   render() {
     const {
-      users
+      citizens
     } = this.props;
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear Usuario" action="/admin/user/new" />
+          <LinkButton name="Crear Ciudadano" action="/admin/citizen/new" />
         </div>
-        <AdminUsersList data={users}/>
+        <AdminCitizensList data={citizens}/>
       </div>
     )
   }
 }
 
-export default AdminUsers;
+export default AdminCitizens;

@@ -28,7 +28,6 @@ const StyledButton = styled(Button)`
 class ProfileForm extends Component { 
   render() {
     const {
-      id,
       name,
       lastname,
       nickname,

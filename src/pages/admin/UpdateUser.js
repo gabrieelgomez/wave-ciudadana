@@ -39,6 +39,17 @@ class UpdateUser extends React.Component {
     });
   }
 
+  handleSelect = (e) => {
+    this.setState(prevState=> {
+      return {
+        user: {
+          ...prevState.user,
+          gender: e
+        }
+      }
+    });
+  }
+
   handleUpdateUser = (e) => {
     e.preventDefault()
     const { password, password_confirmation } = this.state;
@@ -96,13 +107,13 @@ class UpdateUser extends React.Component {
       userData={this.state.user}
       updateUser={this.handleUpdateUser}
       handleChange={this.handleChange}
+      handleSelect={this.handleSelect}
     />
   }
 }
 
 const mapStateToProps = (state) => {
   const { tokens } = state.session;
-  console.log({tokens})
   return { tokens };
 }
 
