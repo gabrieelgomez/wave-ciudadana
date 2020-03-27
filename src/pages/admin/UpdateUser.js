@@ -39,6 +39,17 @@ class UpdateUser extends React.Component {
     });
   }
 
+  handleSelect = (e) => {
+    this.setState(prevState=> {
+      return {
+        user: {
+          ...prevState.user,
+          gender: e
+        }
+      }
+    });
+  }
+
   handleUpdateUser = (e) => {
     e.preventDefault()
     const { password, password_confirmation } = this.state;

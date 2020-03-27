@@ -26,14 +26,12 @@ class ShowCitizen extends React.Component {
     })
 
     const data = res.data.data
-    const userData = data.attributes.user
-    delete userData.id
+    const citizenData = data.attributes
 
     this.setState({
       citizen: {
         id: data.id,
-        status_citizen: data.attributes.status_citizen,
-        ...userData,
+        ...citizenData
       }
     })
   }

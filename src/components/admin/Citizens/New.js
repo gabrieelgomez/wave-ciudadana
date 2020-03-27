@@ -1,27 +1,21 @@
 import React from 'react';
-import {
-  Form,
-  Input,
-  Button,
-  Card,
-  Row,
-  Col,
-  Select,
-} from 'antd';
-const { Option } = Select;
-const { TextArea } = Input;
+import { Form, Input, Col, Card } from 'antd';
+import CitizenForm from './Form';
 
 class NewCitizenForm extends React.Component {
   state = {
-    user: {
+    citizen: {
       name: '',
-      email: '',
       nickname: '',
+      email: '',
       description: '',
       password: '',
-      password_confirmation: ''
-    },
-    citizen: {
+      password_confirmation: '',
+      roles_attributes: [
+        {
+          name: 'client'
+        }
+      ],
       status_citizen: 'citizen'      
     }
   }
@@ -30,17 +24,24 @@ class NewCitizenForm extends React.Component {
     const { name, value } = e.target;
     this.setState(prevState=> {
       return {
-        user: {
-          ...prevState.user,
+        citizen: {
+          ...prevState.citizen,
           [name]: value
         }
       }
     });
   }
 
-  handleSelect = (e) => {
+  handleSelectChange = (e) => {
     const value = e;
-    this.setState({citizen: {status_citizen: value}})
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          status_citizen: value
+        }
+      }
+    });
   }
 
   handleCreateCitizen = (e) => {
@@ -49,91 +50,49 @@ class NewCitizenForm extends React.Component {
     if (password !== password_confirmation) {
         alert("Contraseñas no coinciden");
     } else {
-      const {user, citizen} = this.state;
-      this.props.createCitizen(user, citizen)
+      const { citizen } = this.state;
+      this.props.createCitizen(citizen)
     }
   }
 
   render() {
+    const {
+      citizen
+    } = this.state;
 
     return (
       <div className="admin-container">
         <h1>Crear nuevo ciudadano</h1>
         <Card>
-          <Form onSubmit={this.handleCreateCitizen}>
-            <Row>
-              <Col span={12}>
-                <Form.Item>
-                  <Input 
-                    type="text"
-                    name="nickname"
-                    placeholder="Usuario"
-                    onChange={this.handleChange}
-                  />
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item>
-                  <Input
-                    type="text"
-                    name="name"
-                    placeholder="Nombre"
-                    onChange={this.handleChange}
-                  />
-                </Form.Item>                
-              </Col>
-              <Col span={12}>
-                <Form.Item>
-                  <Input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    onChange={this.handleChange}
-                  />
-                </Form.Item>                
-              </Col>
-              <Col span={12}>
-                <Form.Item>
-                  <TextArea
-                    name="description"
-                    placeholder="Descripción"
-                    onChange={this.handleChange}
-                  />
-                </Form.Item>                
-              </Col>
-              <Col span={12}>
-                <Form.Item>
-                  <Input
-                    type="password"
-                    name="password"
-                    placeholder="Contraseña"
-                    onChange={this.handleChange}
-                  />
-                </Form.Item>                
-              </Col>
-              <Col span={12}>
-                <Form.Item>
-                  <Input
-                    type="password"
-                    name="password_confirmation"
-                    placeholder="Confirmacion de contraseña"
-                    onChange={this.handleChange}
-                  />
-                </Form.Item>                
-              </Col>
-              <Col span={12}>
-                <Form.Item>
-                  <Select defaultValue="citizen" style={{ width: 120 }} onChange={this.handleSelect}>
-                    <Option name="citizen" value="citizen">Ciudadano</Option>
-                    <Option name="candidate" value="candidate">Candidato</Option>
-                  </Select>
-                </Form.Item>                
-              </Col>
-            </Row>
-            <Button htmlType="submit">
-              Crear
-            </Button>
-          </Form>
+          <CitizenForm
+            handleSelect={this.handleSelectChange}
+            handleSubmit={this.handleCreateCitizen}
+            handleChange={this.handleChange}
+            data={citizen}
+          >
+            <Col span={12}>
+              <Form.Item style={{padding: '0 15px'}}>
+                <Input
+                  type="password"
+                  name="password"
+                  value={citizen.password}
+                  placeholder="Contraseña"
+                  onChange={this.handleChange}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item style={{padding: '0 15px'}}>
+                <Input
+                  type="password"
+                  name="password_confirmation"
+                  value={citizen.password_confirmation}
+                  placeholder="Confirmacion de contraseña"
+                  onChange={this.handleChange}
+                />
+              </Form.Item>
+            </Col>
+          </CitizenForm>
         </Card>
       </div>
     )

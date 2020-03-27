@@ -8,18 +8,20 @@ const CitizenShowCard = (props) => {
     name,
     nickname,
     email,
+    description,
     status_citizen
   } = props.citizen;
 
   return (
     <div className="admin-container">
       <Card>
-        {/* <Link to={`/admin/citizen/${id}/update`}><Icon type="edit"/></Link> */}
+        <Link to={`/admin/citizen/${id}/update`}><Icon type="edit"/></Link>
         <Descriptions title="Información del Ciudadano" layout="vertical">
-          <Descriptions.Item label="Nombre">{name}</Descriptions.Item>
-          <Descriptions.Item label="Usuario">{nickname}</Descriptions.Item>
-          <Descriptions.Item label="Email">{email}</Descriptions.Item>
           <Descriptions.Item label="Status de ciudadano">{status_citizen}</Descriptions.Item>
+          <Descriptions.Item label="Usuario">{nickname}</Descriptions.Item>
+          <Descriptions.Item label="Nombre">{name}</Descriptions.Item>
+          <Descriptions.Item label="Email">{email}</Descriptions.Item>
+          <Descriptions.Item label="Descripción">{description}</Descriptions.Item>
         </Descriptions>
       </Card>
     </div>

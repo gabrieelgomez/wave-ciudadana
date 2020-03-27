@@ -5,8 +5,10 @@ import {
   Button,
   Card,
   Row,
-  Col
+  Col,
+  Select
 } from 'antd';
+const { Option } = Select;
 
 class NewUserForm extends React.Component {
   state = {
@@ -41,6 +43,17 @@ class NewUserForm extends React.Component {
     });
   }
 
+  handleSelect = (e) => {
+    this.setState(prevState=> {
+      return {
+        user: {
+          ...prevState.user,
+          gender: e
+        }
+      }
+    });
+  }
+
   handleCreateUser = (e) => {
     e.preventDefault()
     const { password, password_confirmation } = this.state;
@@ -59,8 +72,9 @@ class NewUserForm extends React.Component {
         <Card>
           <Form onSubmit={this.handleCreateUser}>
             <Row>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Usuario</label>
                   <Input 
                     type="text"
                     name="nickname"
@@ -69,8 +83,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Nombre</label>
                   <Input
                     type="text"
                     name="name"
@@ -79,8 +94,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Apellido</label>
                   <Input
                     type="text"
                     name="lastname"
@@ -89,8 +105,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Email</label>
                   <Input
                     type="email"
                     name="email"
@@ -99,8 +116,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Contraseña</label>
                   <Input
                     type="password"
                     name="password"
@@ -109,8 +127,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Confirmacion de contraseña</label>
                   <Input
                     type="password"
                     name="password_confirmation"
@@ -119,8 +138,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Telefono 1</label>
                   <Input
                     type="text"
                     name="phone_one"
@@ -129,8 +149,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Telefono 2</label>
                   <Input
                     type="text"
                     name="phone_two"
@@ -139,8 +160,9 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>DNI</label>
                   <Input
                     type="text"
                     name="dni"
@@ -149,14 +171,13 @@ class NewUserForm extends React.Component {
                   />
                 </Form.Item>                
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
-                  <Input
-                    type="text"
-                    name="gender"
-                    placeholder="Genero"
-                    onChange={this.handleChange}
-                  />
+                  <label>Género</label>
+                  <Select defaultValue="male" style={{ width: 120 }} onChange={this.handleSelect}>
+                    <Option value="male">Masculino</Option>
+                    <Option value="female">Femenino</Option>
+                  </Select>
                 </Form.Item>                
               </Col>
             </Row>

@@ -28,13 +28,10 @@ class AllCitizens extends React.Component {
     if (res.data) {
       data = res.data.data.map((item, idx) => {
         const attrs = item.attributes;
-        const userAttrs = attrs.user;
-        delete userAttrs.id
 
         return {
-          id: parseInt(item.id),
-          status_citizen: attrs.status_citizen,
-          ...userAttrs
+          id: item.id,
+          ...attrs
         }
       });
     }

@@ -4,8 +4,10 @@ import {
   Input,
   Button,
   Card,
-  Row, Col
+  Row, Col,
+  Select
 } from 'antd';
+const { Option } = Select;
 
 class UpdateUserForm extends React.Component {
 
@@ -29,8 +31,9 @@ class UpdateUserForm extends React.Component {
         <Card>
           <Form onSubmit={this.props.updateUser}>
           <Row>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Usuario</label>
                   <Input 
                     type="text"
                     name="nickname"
@@ -40,8 +43,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Nombre</label>
                   <Input
                     type="text"
                     name="name"
@@ -51,8 +55,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Apellido</label>
                   <Input
                     type="text"
                     name="lastname"
@@ -62,8 +67,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Email</label>
                   <Input
                     type="email"
                     name="email"
@@ -73,8 +79,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Contraseña</label>
                   <Input
                     type="password"
                     name="password"
@@ -84,8 +91,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Confirmacion de contraseña</label>
                   <Input
                     type="password"
                     name="password_confirmation"
@@ -95,8 +103,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Telefono 1</label>
                   <Input
                     type="text"
                     name="phone_one"
@@ -106,8 +115,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>Telefono 2</label>
                   <Input
                     type="text"
                     name="phone_two"
@@ -117,8 +127,9 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
+                  <label>DNI</label>
                   <Input
                     type="text"
                     name="dni"
@@ -128,15 +139,13 @@ class UpdateUserForm extends React.Component {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={12} lg={12} xs={24}>
                 <Form.Item>
-                  <Input
-                    type="text"
-                    name="gender"
-                    value={gender}
-                    placeholder="Genero"
-                    onChange={this.props.handleChange}
-                  />
+                  <label>Género</label>
+                  <Select defaultValue={gender} style={{ width: 120 }} onChange={this.props.handleSelect}>
+                    <Option value="male">Masculino</Option>
+                    <Option value="female">Femenino</Option>
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>
