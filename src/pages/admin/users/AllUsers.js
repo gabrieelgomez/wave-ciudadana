@@ -1,7 +1,7 @@
 import React from 'react';
-import AdminUsers from "../../components/admin/User";
+import AdminUsers from "../../../components/admin/User";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 
 class AllUsers extends React.Component {
 
@@ -19,7 +19,7 @@ class AllUsers extends React.Component {
       method: 'GET',
       endpoint: 'v1/users',
     })
-    
+
     if (res.data) {
       data = res.data.data.map((item, idx) => {
         return {

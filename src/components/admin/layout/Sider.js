@@ -9,7 +9,7 @@ const StyledSider = styled(Sider)`
   height: 100vh;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0,0,0,.2);
-  
+
 `
 
 class AdminSider extends React.Component {
@@ -45,6 +45,22 @@ class AdminSider extends React.Component {
             <Icon type='user' />
             <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
           </Menu.Item>
+
+          <Menu.Item key='4'>
+            <Icon type='user' />
+            <NavLink to='/admin/countries'>Paises</NavLink>
+          </Menu.Item>
+
+          <Menu.Item key='5'>
+            <Icon type='user' />
+            <NavLink to='/admin/proposal_categories'>Categorías de Propuestas</NavLink>
+          </Menu.Item>
+
+          <Menu.Item key='6'>
+            <Icon type='user' />
+            <NavLink to='/admin/proposals'>Propuestas</NavLink>
+          </Menu.Item>
+
         </Menu>
       </StyledSider>
     )

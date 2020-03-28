@@ -1,7 +1,7 @@
 import React from 'react';
-import NewCitizenForm from "../../components/admin/Citizens/New";
+import NewCitizenForm from "../../../components/admin/Citizens/New";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
 class NewCitizen extends React.Component {
@@ -21,7 +21,7 @@ class NewCitizen extends React.Component {
         'access-token': access_token,
         client, uid
       },
-      successCallback: () => { 
+      successCallback: () => {
         swal('Usuario y ciudadano creados exitosamente', '', 'success')
       }
     })

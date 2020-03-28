@@ -1,26 +1,26 @@
 import React from 'react';
-import UpdateCitizenForm from "../../components/admin/Citizens/Update";
+import UpdateCountryForm from "../../../components/admin/Countries/Update";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class UpdateCitizen extends React.Component {
+class UpdateCountry extends React.Component {
 
   state = {
-    citizen: {}
+    country: {}
   }
 
   componentDidMount() {
-    const citizenID = this.props.match.params.id;
-    this.getCitizenData(citizenID)
+    const countryID = this.props.match.params.id;
+    this.getCountryData(countryID)
   }
 
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState=> {
       return {
-        citizen: {
-          ...prevState.citizen,
+        country: {
+          ...prevState.country,
           [name]: value
         }
       }
@@ -31,25 +31,24 @@ class UpdateCitizen extends React.Component {
     const value = e;
     this.setState(prevState=> {
       return {
-        citizen: {
-          ...prevState.citizen,
-          status_citizen: value
+        country: {
+          ...prevState.country,
         }
       }
     });
   }
 
-  handleUpdateCitizen = (e) => {
+  handleUpdateCountry = (e) => {
     e.preventDefault()
-    const { citizen } = this.state;
-    this.updateCitizen(citizen)
+    const { country } = this.state;
+    this.updateCountry(country)
   }
 
-  getCitizenData = async (id) => {
+  getCountryData = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: `v1/wave_citizen/citizens/${id}`,
+      endpoint: `v1/wave_citizen/countries/${id}`,
       headers: {
         'access-token': access_token,
         client, uid
@@ -59,36 +58,36 @@ class UpdateCitizen extends React.Component {
     const data = res.data.data
 
     this.setState({
-      citizen: {
+      country: {
         id: data.id,
         ...data.attributes
       }
     })
   }
 
-  updateCitizen = async (citizen) => {
+  updateCountry = async (country) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'PUT',
-      endpoint: `v1/wave_citizen/citizens/${citizen.id}/update`,
+      endpoint: `v1/wave_citizen/countries/${country.id}/update`,
       payload: {
-        citizen
+        country
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
-      successCallback: () => { 
-        swal('Datos actualizados exitosamente', '', 'success')
+      successCallback: () => {
+        swal('País actualizado exitosamente', '', 'success')
       }
     })
     console.log(res)
   }
 
   render() {
-    return <UpdateCitizenForm
-      citizenData={this.state}
-      handleUpdateCitizen={this.handleUpdateCitizen}
+    return <UpdateCountryForm
+      countryData={this.state}
+      handleUpdateCountry={this.handleUpdateCountry}
       handleSelectChange={this.handleSelectChange}
       handleChange={this.handleChange}
     />
@@ -104,4 +103,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateCitizen);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateCountry);

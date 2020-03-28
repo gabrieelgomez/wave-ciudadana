@@ -1,7 +1,7 @@
 import React from 'react';
-import UpdateUserForm from "../../components/admin/User/Update";
+import UpdateUserForm from "../../../components/admin/User/Update";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
 class UpdateUser extends React.Component {
@@ -96,7 +96,7 @@ class UpdateUser extends React.Component {
         'access-token': access_token,
         client, uid
       },
-      successCallback: () => { 
+      successCallback: () => {
         swal('Datos actualizados exitosamente', '', 'success')
       }
     })

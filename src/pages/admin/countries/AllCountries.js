@@ -1,24 +1,24 @@
 import React from 'react';
-import AdminCitizens from "../../components/admin/Citizens";
+import AdminCountries from "../../../components/admin/Countries";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 
-class AllCitizens extends React.Component {
+class AllCountries extends React.Component {
 
   state = {
-    citizens: []
+    countries: []
   }
 
   componentDidMount() {
-    this.getCitizensData()
+    this.getCountriesData()
   }
 
-  getCitizensData = async () => {
+  getCountriesData = async () => {
     let data = [];
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: 'v1/wave_citizen/citizens',
+      endpoint: 'v1/wave_citizen/countries',
       headers: {
         'access-token': access_token,
         client, uid
@@ -26,7 +26,7 @@ class AllCitizens extends React.Component {
     })
 
     if (res.data) {
-      data = res.data.data.map((item, idx) => {
+      data = res.data.data.map((item, iAdminCountriesdx) => {
         const attrs = item.attributes;
 
         return {
@@ -37,13 +37,13 @@ class AllCitizens extends React.Component {
     }
 
     this.setState({
-      citizens: data
+      countries: data
     })
   }
 
   render() {
-    return <AdminCitizens
-      citizens={this.state.citizens}
+    return <AdminCountries
+      countries={this.state.countries}
     />
   }
 }
@@ -57,4 +57,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllCitizens);
+export default connect(mapStateToProps, mapDispatchToProps)(AllCountries);

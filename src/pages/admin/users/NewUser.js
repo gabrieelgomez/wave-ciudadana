@@ -1,7 +1,7 @@
 import React from 'react';
-import NewUserForm from "../../components/admin/User/New";
+import NewUserForm from "../../../components/admin/User/New";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
 class NewUser extends React.Component {
@@ -18,7 +18,7 @@ class NewUser extends React.Component {
         'access-token': access_token,
         client, uid
       },
-      successCallback: () => { 
+      successCallback: () => {
         swal('Usuario creado exitosamente', '', 'success')
       }
     })

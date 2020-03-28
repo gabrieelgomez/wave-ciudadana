@@ -1,7 +1,7 @@
 import React from 'react';
-import UserShowCard from "../../components/admin/User/Show";
+import UserShowCard from "../../../components/admin/User/Show";
 import { connect } from 'react-redux';
-import { api } from '../../services/api';
+import { api } from '../../../services/api';
 
 class ShowUser extends React.Component {
 
