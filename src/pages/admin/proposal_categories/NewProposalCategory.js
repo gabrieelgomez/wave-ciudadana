@@ -1,32 +1,32 @@
 import React from 'react';
-import NewUserForm from "../../../components/admin/User/New";
+import NewProposalCategoryForm from "../../../components/admin/ProposalCategories/New";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class NewUser extends React.Component {
+class NewProposalCategory extends React.Component {
 
-  createUser = async (user) => {
+  createProposalCategory = async (proposal_category) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'POST',
-      endpoint: 'v1/users/create',
+      endpoint: 'v1/wave_citizen/proposal_categories/create',
       payload: {
-        user
+        proposal_category
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal('Usuario creado exitosamente', '', 'success')
+        swal('Categoría de Propuesta creada exitosamente', '', 'success')
       }
     })
   }
 
   render() {
-    return <NewUserForm
-      createUser={this.createUser}
+    return <NewProposalCategoryForm
+      createProposalCategory={this.createProposalCategory}
     />
   }
 }
@@ -40,4 +40,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewUser);
+export default connect(mapStateToProps, mapDispatchToProps)(NewProposalCategory);

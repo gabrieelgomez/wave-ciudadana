@@ -8,7 +8,7 @@ class NewCountry extends React.Component {
 
   createCountry = async (country) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'POST',
       endpoint: 'v1/wave_citizen/countries/create',
       payload: {

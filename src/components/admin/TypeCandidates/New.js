@@ -11,7 +11,6 @@ class NewTypeCandidateForm extends React.Component {
   }
 
   handleSelectChange = (e) => {
-    const value = e;
     this.setState(prevState => {
       return {
         type_candidate: {

@@ -86,7 +86,7 @@ class UpdateUser extends React.Component {
 
   updateUser = async (user) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'PUT',
       endpoint: `v1/users/${user.id}/update`,
       payload: {

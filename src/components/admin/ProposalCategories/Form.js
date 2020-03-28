@@ -7,7 +7,7 @@ import {
   Col,
 } from 'antd';
 
-const TypeCandidateForm = (props) => {
+const ProposalCategoryForm = (props) => {
   const {
     name,
     country_id
@@ -18,7 +18,7 @@ const TypeCandidateForm = (props) => {
       <Row>
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
-            <label>Tipo de candidatura</label>
+            <label>Categoría de Propuesta (ej: Sector Salud)</label>
             <Input
               type="text"
               name="name"
@@ -49,4 +49,4 @@ const TypeCandidateForm = (props) => {
   )
 }
 
-export default TypeCandidateForm;
+export default ProposalCategoryForm;
