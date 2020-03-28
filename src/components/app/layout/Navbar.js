@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Icon } from "antd";
 import CustomModal from '../../common/ui/Modal';
 import LoginForm from '../../common/Session/LoginForm';
-import RegisterForm from '../../common/Session/RegisterForm';
+import RegisterForm from '../../common/Register';
 import LogOutButton from '../../common/Session/LogOutButton';
 import { connect } from 'react-redux';
 import { DROP_CURRENT_USER } from '../../../actions/session';
@@ -63,7 +63,7 @@ class Navbar extends React.Component {
                 <li>
                   <Link to={`/profile`}>{currentUser.email}</Link>
                 </li>
-                { currentUser.roles[0].name === 'superadmin' &&
+                { currentUser.roles && currentUser.roles.length !== 0 && currentUser.roles[0].name === 'superadmin' &&
                   <li>
                     <Link to="/admin">
                       <Icon type="appstore"/>

@@ -12,6 +12,10 @@
 
 .admin-container {
   padding: 20px 40px;
+
+  @media screen and (min-width:0) and (max-width:767px) {
+    padding: 20px;
+  }
 }
 
 .admin-actions {
@@ -19,6 +23,10 @@
   justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
+
+  @media screen and (min-width:0) and (max-width:500px) {
+    justify-content: center;
+  }
 }
 
 .ant-menu-item a {

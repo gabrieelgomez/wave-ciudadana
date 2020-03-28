@@ -16,7 +16,7 @@ class NewCitizenForm extends React.Component {
           name: 'client'
         }
       ],
-      status_citizen: 'citizen'      
+      status_citizen: 'citizen'
     }
   }
 

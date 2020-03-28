@@ -6,6 +6,9 @@ const { Column } = Table;
 
 const StyledTable = styled(Table)`
   background-color: #fff;
+  width: 100%;
+  overflow-x: scroll;
+  display: inline-block;
 `
 
 const AdminUsersList = (props) => {
