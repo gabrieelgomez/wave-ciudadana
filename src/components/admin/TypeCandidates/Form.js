@@ -46,7 +46,7 @@ const TypeCandidateForm = (props) => {
       </Row>
       { props.children }
       <Button htmlType="submit">
-        Crear
+        Guardar
       </Button>
     </Form>
   )

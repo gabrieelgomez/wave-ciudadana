@@ -29,14 +29,14 @@ const CitizenForm = (props) => {
               <Option value="citizen">Ciudadano</Option>
               <Option value="candidate">Candidato</Option>
             </Select>
-          </Form.Item>                
+          </Form.Item>
         </Col>
       </Row>
       <Row>
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
             <label>Usuario</label>
-            <Input 
+            <Input
               type="text"
               name="nickname"
               value={nickname}
@@ -55,7 +55,7 @@ const CitizenForm = (props) => {
               placeholder="Nombre"
               onChange={props.handleChange}
             />
-          </Form.Item>                
+          </Form.Item>
         </Col>
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
@@ -67,7 +67,7 @@ const CitizenForm = (props) => {
               placeholder="Email"
               onChange={props.handleChange}
             />
-          </Form.Item>                
+          </Form.Item>
         </Col>
         <Col span={24} lg={24} md={24} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
@@ -78,12 +78,12 @@ const CitizenForm = (props) => {
               placeholder="Descripción"
               onChange={props.handleChange}
             />
-          </Form.Item>                
+          </Form.Item>
         </Col>
       </Row>
       { props.children }
       <Button htmlType="submit">
-        Crear
+        Guardar
       </Button>
     </Form>
   )
