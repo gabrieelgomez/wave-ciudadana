@@ -6,7 +6,8 @@ import { api } from '../../../services/api';
 class ShowTypeCandidate extends React.Component {
 
   state = {
-    type_candidate: {}
+    type_candidate: {},
+    country: {}
   }
 
   componentDidMount() {
@@ -32,6 +33,9 @@ class ShowTypeCandidate extends React.Component {
       type_candidate: {
         id: data.id,
         ...type_candidateData
+      },
+      country: {
+        name: type_candidateData.country.name
       }
     })
   }
@@ -39,6 +43,7 @@ class ShowTypeCandidate extends React.Component {
   render() {
     return <TypeCandidateShowCard
       type_candidate={this.state.type_candidate}
+      country={this.state.country}
     />
   }
 }

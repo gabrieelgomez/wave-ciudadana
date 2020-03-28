@@ -23,7 +23,7 @@ const AdminTypeCandidatesList = (props) => {
       <Column title="Tipo de candidatura" dataIndex="name" key="name" render={(text, record) => (
         <Link to={`/admin/type_candidate/${record.id}`}>{text}</Link>
       )}/>
-      <Column title="ID País" dataIndex="country_id" key="country_id" />
+      <Column title="País" dataIndex="country.name" key="country.name" />
     </StyledTable>
   )
 }

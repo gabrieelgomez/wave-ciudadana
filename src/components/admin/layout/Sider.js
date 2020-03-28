@@ -39,7 +39,7 @@ class AdminSider extends React.Component {
           </Menu.Item>
 
           <Menu.Item key='2'>
-            <Icon type='user' />
+            <Icon type='flag' />
             <NavLink to='/admin/countries'>Paises</NavLink>
           </Menu.Item>
 
@@ -49,13 +49,13 @@ class AdminSider extends React.Component {
           </Menu.Item>
 
           <Menu.Item key='4'>
-            <Icon type='user' />
+            <Icon type='idcard' />
             <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
           </Menu.Item>
 
           <Menu.Item key='5'>
-            <Icon type='user' />
-            <NavLink to='/admin/type_candidates'>Tipos de Candidaturas</NavLink>
+            <Icon type='solution' />
+            <NavLink to='/admin/type_candidates'>Tipos de Candidatos</NavLink>
           </Menu.Item>
 
           <Menu.Item key='6'>
@@ -63,7 +63,7 @@ class AdminSider extends React.Component {
             <NavLink to='/admin/proposal_categories'>Categorías de Propuestas</NavLink>
           </Menu.Item>
 
-          <Menu.Item key='7'>
+          {/* <Menu.Item key='7'>
             <Icon type='user' />
             <NavLink to='#'>Categorías de Encuestas</NavLink>
           </Menu.Item>
@@ -76,7 +76,7 @@ class AdminSider extends React.Component {
           <Menu.Item key='9'>
             <Icon type='user' />
             <NavLink to='#'>Encuestas</NavLink>
-          </Menu.Item>
+          </Menu.Item> */}
 
         </Menu>
       </StyledSider>

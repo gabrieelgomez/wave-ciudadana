@@ -6,6 +6,42 @@ import swal from 'sweetalert';
 
 class NewTypeCandidate extends React.Component {
 
+  state = {
+    countries: []
+  }
+
+  componentDidMount() {
+    this.getCountriesData()
+  }
+
+  getCountriesData = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/countries',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      countries: data
+    })
+  }
+
   createTypeCandidate = async (type_candidate) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
@@ -30,6 +66,7 @@ class NewTypeCandidate extends React.Component {
   render() {
     return <NewTypeCandidateForm
       createTypeCandidate={this.createTypeCandidate}
+      countriesData={this.state.countries}
     />
   }
 }

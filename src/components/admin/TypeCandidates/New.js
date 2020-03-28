@@ -11,10 +11,12 @@ class NewTypeCandidateForm extends React.Component {
   }
 
   handleSelectChange = (e) => {
+    const value = e;
     this.setState(prevState => {
       return {
         type_candidate: {
-          ...prevState.type_candidate
+          ...prevState.type_candidate,
+          country_id: value
         }
       }
     });
@@ -43,6 +45,8 @@ class NewTypeCandidateForm extends React.Component {
       type_candidate
     } = this.state;
 
+    const {countriesData} = this.props;
+
     return (
       <div className="admin-container">
         <h1>Crear nuevo tipo de candidatura</h1>
@@ -52,6 +56,7 @@ class NewTypeCandidateForm extends React.Component {
             handleSubmit={this.handleCreateTypeCandidate}
             handleChange={this.handleChange}
             data={type_candidate}
+            countriesData={countriesData}
           >
           </TypeCandidateForm>
         </Card>
