@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Col, Card } from 'antd';
+import { Card } from 'antd';
 import TypeCandidateForm from './Form';
 
 class NewTypeCandidateForm extends React.Component {

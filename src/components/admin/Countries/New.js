@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Col, Card } from 'antd';
+import { Card } from 'antd';
 import CountryForm from './Form';
 
 class NewCountryForm extends React.Component {
@@ -9,17 +9,6 @@ class NewCountryForm extends React.Component {
       country_code: '',
       currency: ''
     }
-  }
-
-  handleSelectChange = (e) => {
-    const value = e;
-    this.setState(prevState => {
-      return {
-        country: {
-          ...prevState.country
-        }
-      }
-    });
   }
 
   handleCreateCountry = (e) => {
@@ -50,7 +39,6 @@ class NewCountryForm extends React.Component {
         <h1>Crear nuevo país</h1>
         <Card>
           <CountryForm
-            handleSelect={this.handleSelectChange}
             handleSubmit={this.handleCreateCountry}
             handleChange={this.handleChange}
             data={country}

@@ -4,11 +4,8 @@ import {
   Input,
   Button,
   Row,
-  Col,
-  Select,
+  Col
 } from 'antd';
-const { Option } = Select;
-const { TextArea } = Input;
 
 const CountryForm = (props) => {
   const {

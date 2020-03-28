@@ -27,17 +27,6 @@ class UpdateCountry extends React.Component {
     });
   }
 
-  handleSelectChange = (e) => {
-    const value = e;
-    this.setState(prevState=> {
-      return {
-        country: {
-          ...prevState.country,
-        }
-      }
-    });
-  }
-
   handleUpdateCountry = (e) => {
     e.preventDefault()
     const { country } = this.state;
@@ -88,7 +77,6 @@ class UpdateCountry extends React.Component {
     return <UpdateCountryForm
       countryData={this.state}
       handleUpdateCountry={this.handleUpdateCountry}
-      handleSelectChange={this.handleSelectChange}
       handleChange={this.handleChange}
     />
   }

@@ -8,7 +8,6 @@ import {
   Select,
 } from 'antd';
 const { Option } = Select;
-const { TextArea } = Input;
 
 const TypeCandidateForm = (props) => {
   const {
