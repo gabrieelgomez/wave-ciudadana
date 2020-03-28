@@ -7,12 +7,14 @@ import swal from 'sweetalert';
 class UpdateProposalCategory extends React.Component {
 
   state = {
-    proposal_category: {}
+    proposal_category: {},
+    countries: []
   }
 
   componentDidMount() {
     const proposal_categoryID = this.props.match.params.id;
     this.getProposalCategoryData(proposal_categoryID)
+    this.getCountriesData()
   }
 
   handleChange = (e) => {
@@ -27,10 +29,50 @@ class UpdateProposalCategory extends React.Component {
     });
   }
 
+  handleSelectChange = (e) => {
+    const value = e;
+    this.setState(prevState=> {
+      return {
+        proposal_category: {
+          ...prevState.proposal_category,
+          country_id: value
+        }
+      }
+    });
+  }
+
   handleUpdateProposalCategory = (e) => {
     e.preventDefault()
     const { proposal_category } = this.state;
     this.updateProposalCategory(proposal_category)
+  }
+
+  getCountriesData = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/countries',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      countries: data
+    })
   }
 
   getProposalCategoryData = async (id) => {
@@ -75,9 +117,11 @@ class UpdateProposalCategory extends React.Component {
 
   render() {
     return <UpdateProposalCategoryForm
-      proposal_categoryData={this.state}
+      proposal_categoryData={this.state.proposal_category}
+      countriesData={this.state.countries}
       handleUpdateProposalCategory={this.handleUpdateProposalCategory}
       handleChange={this.handleChange}
+      handleSelectChange={this.handleSelectChange}
     />
   }
 }

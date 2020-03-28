@@ -5,6 +5,41 @@ import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
 class NewProposalCategory extends React.Component {
+  state = {
+    countries: []
+  }
+
+  componentDidMount() {
+    this.getCountriesData()
+  }
+
+  getCountriesData = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/countries',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      countries: data
+    })
+  }
 
   createProposalCategory = async (proposal_category) => {
     const { uid, client, access_token } = this.props.tokens;
@@ -27,6 +62,7 @@ class NewProposalCategory extends React.Component {
   render() {
     return <NewProposalCategoryForm
       createProposalCategory={this.createProposalCategory}
+      countriesData={this.state.countries}
     />
   }
 }

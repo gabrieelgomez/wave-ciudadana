@@ -11,7 +11,8 @@ class UpdateProposalCategoryForm extends React.Component {
         <h1>Actualizar categoría de propuesta</h1>
         <Card>
           <ProposalCategoryForm
-            data={this.props.countryData.country}
+            data={this.props.proposal_categoryData}
+            countriesData={this.props.countriesData}
             handleSubmit={this.props.handleUpdateProposalCategory}
             handleSelect={this.props.handleSelectChange}
             handleChange={this.props.handleChange}

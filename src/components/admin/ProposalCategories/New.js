@@ -33,6 +33,8 @@ class NewProposalCategoryForm extends React.Component {
       proposal_category
     } = this.state;
 
+    const { countriesData } = this.props;
+
     return (
       <div className="admin-container">
         <h1>Crear nuevo país</h1>
@@ -41,6 +43,7 @@ class NewProposalCategoryForm extends React.Component {
             handleSubmit={this.handleCreateProposalCategory}
             handleChange={this.handleChange}
             data={proposal_category}
+            countriesData={countriesData}
           >
           </ProposalCategoryForm>
         </Card>

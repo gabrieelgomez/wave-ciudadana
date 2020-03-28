@@ -17,7 +17,7 @@ const AdminTypeCandidatesList = (props) => {
       dataSource={props.data}
       rowKey={record => record.id}
     >
-      <Column title="ID Tipo Candidatura" dataIndex="id" key="id" render={(text, record) => (
+      <Column title="ID" dataIndex="id" key="id" render={(text, record) => (
         <Link to={`/admin/type_candidate/${record.id}`}>{text}</Link>
       )}/>
       <Column title="Tipo de candidatura" dataIndex="name" key="name" render={(text, record) => (

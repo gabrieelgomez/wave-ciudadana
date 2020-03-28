@@ -15,7 +15,9 @@ const CitizenShowCard = (props) => {
   return (
     <div className="admin-container">
       <Card>
-        <Link to={`/admin/citizen/${id}/update`}><Icon type="edit"/></Link>
+        <div className="card-actions">
+          <Link to={`/admin/citizen/${id}/update`}>Editar<Icon type="edit"/></Link>
+        </div>
         <Descriptions title="Información del Ciudadano" layout="vertical">
           <Descriptions.Item label="Status de ciudadano">{status_citizen}</Descriptions.Item>
           <Descriptions.Item label="Usuario">{nickname}</Descriptions.Item>

@@ -36,7 +36,7 @@ const TypeCandidateForm = (props) => {
         </Col>
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
-            <label>País</label>
+            <label>País</label><br></br>
             <Select placeholder={placeholderSelect} defaultValue={country_id} style={{ width: 120 }} onChange={props.handleSelect}>
               { props.countriesData !== undefined ? props.countriesData.map((item) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>

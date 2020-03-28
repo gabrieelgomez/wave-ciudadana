@@ -6,7 +6,8 @@ import { api } from '../../../services/api';
 class ShowProposalCategory extends React.Component {
 
   state = {
-    proposal_category: {}
+    proposal_category: {},
+    country: {}
   }
 
   componentDidMount() {
@@ -32,6 +33,9 @@ class ShowProposalCategory extends React.Component {
       proposal_category: {
         id: data.id,
         ...proposal_categoryData
+      },
+      country: {
+        name: proposal_categoryData.country.name
       }
     })
   }
@@ -39,6 +43,7 @@ class ShowProposalCategory extends React.Component {
   render() {
     return <ProposalCategoryShowCard
       proposal_category={this.state.proposal_category}
+      country={this.state.country}
     />
   }
 }

@@ -18,7 +18,9 @@ const UserShowCard = (props) => {
   return (
     <div className="admin-container">
       <Card>
-        <Link to={`/admin/user/${id}/update`}><Icon type="edit"/></Link>
+        <div className="card-actions">
+          <Link to={`/admin/user/${id}/update`}>Editar<Icon type="edit"/></Link>            
+        </div>
         <Descriptions title="Información del Usuario" layout="vertical">
           <Descriptions.Item label="Nombre">{name}</Descriptions.Item>
           <Descriptions.Item label="Apellido">{lastname}</Descriptions.Item>
