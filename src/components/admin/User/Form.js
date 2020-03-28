@@ -29,7 +29,7 @@ const UserForm = (props) => {
         <Col span={12} lg={12} xs={24}>
           <Form.Item>
             <label>Usuario</label>
-            <Input 
+            <Input
               type="text"
               name="nickname"
               value={nickname}
@@ -145,7 +145,7 @@ const UserForm = (props) => {
         </Col>
       </Row>
       <Button htmlType="submit">
-        Crear
+        Guardar
       </Button>
     </Form>
   )

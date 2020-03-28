@@ -11,23 +11,21 @@ const StyledTable = styled(Table)`
   display: inline-block;
 `
 
-const AdminCountriesList = (props) => {
+const AdminProposalCategoriesList = (props) => {
   return (
     <StyledTable
       dataSource={props.data}
       rowKey={record => record.id}
     >
-      <Column title="ID País" dataIndex="id" key="id" render={(text, record) => (
-        <Link to={`/admin/country/${record.id}`}>{text}</Link>
+      <Column title="ID Categoría de Propuesta" dataIndex="id" key="id" render={(text, record) => (
+        <Link to={`/admin/proposal_category/${record.id}`}>{text}</Link>
       )}/>
       <Column title="Nombre" dataIndex="name" key="name" render={(text, record) => (
-        <Link to={`/admin/country/${record.id}`}>{text}</Link>
+        <Link to={`/admin/proposal_category/${record.id}`}>{text}</Link>
       )}/>
-      <Column title="Código" dataIndex="country_code" key="country_code" />
-      <Column title="Moneda" dataIndex="currency" key="currency" />
-
+      <Column title="ID País" dataIndex="country_id" key="country_id" />
     </StyledTable>
   )
 }
 
-export default AdminCountriesList;
+export default AdminProposalCategoriesList;

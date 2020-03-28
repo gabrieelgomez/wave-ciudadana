@@ -44,7 +44,7 @@ class NewTypeCandidate extends React.Component {
 
   createTypeCandidate = async (type_candidate) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'POST',
       endpoint: 'v1/wave_citizen/type_candidacies/create',
       payload: {

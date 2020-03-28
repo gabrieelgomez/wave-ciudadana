@@ -17,7 +17,9 @@ const AdminCitizensList = (props) => {
       dataSource={props.data}
       rowKey={record => record.id}
     >
-      <Column title="ID Ciudadano" dataIndex="id" key="id" />
+      <Column title="ID Ciudadano" dataIndex="id" key="id" render={(text, record) => (
+        <Link to={`/admin/citizen/${record.id}`}>{text}</Link>
+      )}/>
       <Column title="Nombre" dataIndex="name" key="name" render={(text, record) => (
         <Link to={`/admin/citizen/${record.id}`}>{text}</Link>
       )}/>

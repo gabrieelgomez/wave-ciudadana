@@ -7,22 +7,18 @@ import {
   Col,
 } from 'antd';
 
-const TypeCandidateForm = (props) => {
+const ProposalCategoryForm = (props) => {
   const {
     name,
     country_id
   } = props.data;
-
-  const country = props.data.country
-  const currentCountryName = country !== undefined ? country.name : 'Cargando...';
-  const placeholderSelect = country_id === '' ? 'Seleccionar pais' : currentCountryName;
 
   return (
     <Form onSubmit={props.handleSubmit}>
       <Row>
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
-            <label>Tipo de candidatura</label>
+            <label>Categoría de Propuesta (ej: Sector Salud)</label>
             <Input
               type="text"
               name="name"
@@ -34,15 +30,14 @@ const TypeCandidateForm = (props) => {
         </Col>
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
-            <label>País</label>
-            <Select placeholder={placeholderSelect} defaultValue={country_id} style={{ width: 120 }} onChange={props.handleSelect}>
-              { props.countriesData !== undefined ? props.countriesData.map((item) => {
-                  return <Option key={item.id} value={item.id}>{item.name}</Option>
-                })
-                :
-                <Option disabled value="">No hay países</Option>
-              }
-            </Select>
+            <label>ID del país</label>
+            <Input
+              type="text"
+              name="country_id"
+              value={country_id}
+              placeholder="País"
+              onChange={props.handleChange}
+            />
           </Form.Item>
         </Col>
       </Row>
@@ -54,4 +49,4 @@ const TypeCandidateForm = (props) => {
   )
 }
 
-export default TypeCandidateForm;
+export default ProposalCategoryForm;

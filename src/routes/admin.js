@@ -26,6 +26,12 @@ import NewTypeCandidate from "../pages/admin/type_candidates/NewTypeCandidate";
 import ShowTypeCandidate from "../pages/admin/type_candidates/ShowTypeCandidate";
 import UpdateTypeCandidate from "../pages/admin/type_candidates/UpdateTypeCandidate";
 
+// ProposalCategories
+import AllProposalCategories from "../pages/admin/proposal_categories/AllProposalCategories";
+import NewProposalCategory from "../pages/admin/proposal_categories/NewProposalCategory";
+import ShowProposalCategory from "../pages/admin/proposal_categories/ShowProposalCategory";
+import UpdateProposalCategory from "../pages/admin/proposal_categories/UpdateProposalCategory";
+
 export default [
   {
     path: "/admin",
@@ -138,4 +144,28 @@ export default [
     exact: true
   },
 
+  {
+    path: "/admin/proposal_categories",
+    layout: DefaultAdminLayout,
+    component: AllProposalCategories,
+    exact: true
+  },
+  {
+    path: "/admin/proposal_category/new",
+    layout: DefaultAdminLayout,
+    component: NewProposalCategory,
+    exact: true
+  },
+  {
+    path: "/admin/proposal_category/:id",
+    layout: DefaultAdminLayout,
+    component: ShowProposalCategory,
+    exact: true
+  },
+  {
+    path: "/admin/proposal_category/:id/update",
+    layout: DefaultAdminLayout,
+    component: UpdateProposalCategory,
+    exact: true
+  },
 ];
