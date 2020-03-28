@@ -39,7 +39,7 @@ class AdminSider extends React.Component {
           </Menu.Item>
 
           <Menu.Item key='2'>
-            <Icon type='user' />
+            <Icon type='flag' />
             <NavLink to='/admin/countries'>Paises</NavLink>
           </Menu.Item>
 
@@ -49,12 +49,12 @@ class AdminSider extends React.Component {
           </Menu.Item>
 
           <Menu.Item key='4'>
-            <Icon type='user' />
+            <Icon type='idcard' />
             <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
           </Menu.Item>
 
           <Menu.Item key='5'>
-            <Icon type='user' />
+            <Icon type='solution' />
             <NavLink to='/admin/type_candidates'>Tipos de Candidatos</NavLink>
           </Menu.Item>
 

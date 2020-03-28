@@ -7,12 +7,14 @@ import swal from 'sweetalert';
 class UpdateTypeCandidate extends React.Component {
 
   state = {
-    type_candidate: {}
+    type_candidate: {},
+    countries: []
   }
 
   componentDidMount() {
     const type_candidateID = this.props.match.params.id;
     this.getTypeCandidateData(type_candidateID)
+    this.getCountriesData()
   }
 
   handleChange = (e) => {
@@ -33,7 +35,7 @@ class UpdateTypeCandidate extends React.Component {
       return {
         type_candidate: {
           ...prevState.type_candidate,
-          status_type_candidate: value
+          country_id: value
         }
       }
     });
@@ -43,6 +45,34 @@ class UpdateTypeCandidate extends React.Component {
     e.preventDefault()
     const { type_candidate } = this.state;
     this.updateTypeCandidate(type_candidate)
+  }
+
+  getCountriesData = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/countries',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      countries: data
+    })
   }
 
   getTypeCandidateData = async (id) => {
@@ -82,12 +112,12 @@ class UpdateTypeCandidate extends React.Component {
         swal('Datos actualizados exitosamente', '', 'success')
       }
     })
-    console.log(res)
   }
 
   render() {
     return <UpdateTypeCandidateForm
-      type_candidateData={this.state}
+      type_candidateData={this.state.type_candidate}
+      countriesData={this.state.countries}
       handleUpdateTypeCandidate={this.handleUpdateTypeCandidate}
       handleSelectChange={this.handleSelectChange}
       handleChange={this.handleChange}
