@@ -11,21 +11,19 @@ const StyledTable = styled(Table)`
   display: inline-block;
 `
 
-const AdminCountriesList = (props) => {
+const AdminTypeCandidatesList = (props) => {
   return (
     <StyledTable
       dataSource={props.data}
       rowKey={record => record.id}
     >
-      <Column title="ID País" dataIndex="id" key="id" />
-      <Column title="Nombre" dataIndex="name" key="name" render={(text, record) => (
-        <Link to={`/admin/country/${record.id}`}>{text}</Link>
+      <Column title="ID Tipo Candidatura" dataIndex="id" key="id" />
+      <Column title="Tipo de candidatura" dataIndex="name" key="name" render={(text, record) => (
+        <Link to={`/admin/type_candidate/${record.id}`}>{text}</Link>
       )}/>
-      <Column title="Código" dataIndex="country_code" key="country_code" />
-      <Column title="Moneda" dataIndex="currency" key="currency" />
-
+      <Column title="ID País" dataIndex="country_id" key="country_id" />
     </StyledTable>
   )
 }
 
-export default AdminCountriesList;
+export default AdminTypeCandidatesList;

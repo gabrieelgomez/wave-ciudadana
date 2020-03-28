@@ -17,6 +17,7 @@ const AdminUsersList = (props) => {
       dataSource={props.data}
       rowKey={record => record.id}
     >
+      <Column title="ID User" dataIndex="id" key="id" />
       <Column title="Nombre" dataIndex="name" key="name" render={(text, record) => (
         <Link to={`/admin/user/${record.id}`}>{text}</Link>
       )}/>

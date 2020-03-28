@@ -8,17 +8,23 @@ import NewUser from "../pages/admin/users/NewUser";
 import UpdateUser from "../pages/admin/users/UpdateUser";
 import ShowUser from "../pages/admin/users/ShowUser";
 
-// Users
+// Citizens
 import AllCitizens from "../pages/admin/citizens/AllCitizens";
 import NewCitizen from "../pages/admin/citizens/NewCitizen";
 import ShowCitizen from "../pages/admin/citizens/ShowCitizen";
 import UpdateCitizen from "../pages/admin/citizens/UpdateCitizen";
 
-// Users
+// Countries
 import AllCountries from "../pages/admin/countries/AllCountries";
 import NewCountry from "../pages/admin/countries/NewCountry";
 import ShowCountry from "../pages/admin/countries/ShowCountry";
 import UpdateCountry from "../pages/admin/countries/UpdateCountry";
+
+// Candidates
+import AllTypeCandidates from "../pages/admin/type_candidates/AllTypeCandidates";
+import NewTypeCandidate from "../pages/admin/type_candidates/NewTypeCandidate";
+import ShowTypeCandidate from "../pages/admin/type_candidates/ShowTypeCandidate";
+import UpdateTypeCandidate from "../pages/admin/type_candidates/UpdateTypeCandidate";
 
 export default [
   {
@@ -27,6 +33,8 @@ export default [
     component: AdminDashboard,
     exact: true
   },
+
+
   {
     path: "/admin/users",
     layout: DefaultAdminLayout,
@@ -51,6 +59,8 @@ export default [
     component: UpdateUser,
     exact: true
   },
+
+
   {
     path: "/admin/citizens",
     layout: DefaultAdminLayout,
@@ -75,6 +85,8 @@ export default [
     component: UpdateCitizen,
     exact: true
   },
+
+
   {
     path: "/admin/countries",
     layout: DefaultAdminLayout,
@@ -99,4 +111,31 @@ export default [
     component: UpdateCountry,
     exact: true
   },
+
+
+  {
+    path: "/admin/type_candidates",
+    layout: DefaultAdminLayout,
+    component: AllTypeCandidates,
+    exact: true
+  },
+  {
+    path: "/admin/type_candidate/new",
+    layout: DefaultAdminLayout,
+    component: NewTypeCandidate,
+    exact: true
+  },
+  {
+    path: "/admin/type_candidate/:id",
+    layout: DefaultAdminLayout,
+    component: ShowTypeCandidate,
+    exact: true
+  },
+  {
+    path: "/admin/type_candidate/:id/update",
+    layout: DefaultAdminLayout,
+    component: UpdateTypeCandidate,
+    exact: true
+  },
+
 ];

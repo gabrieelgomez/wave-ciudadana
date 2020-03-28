@@ -37,28 +37,25 @@ class AdminSider extends React.Component {
             <Icon type='appstore' />
             <NavLink to='/admin'>Dashboard</NavLink>
           </Menu.Item>
-          <Menu.Item key='2'>
-            <Icon type='user' />
-            <NavLink to='/admin/users'>Usuarios</NavLink>
-          </Menu.Item>
-          <Menu.Item key='3'>
-            <Icon type='user' />
-            <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
-          </Menu.Item>
 
-          <Menu.Item key='4'>
+          <Menu.Item key='2'>
             <Icon type='user' />
             <NavLink to='/admin/countries'>Paises</NavLink>
           </Menu.Item>
 
-          <Menu.Item key='5'>
+          <Menu.Item key='3'>
             <Icon type='user' />
-            <NavLink to='/admin/proposal_categories'>Categorías de Propuestas</NavLink>
+            <NavLink to='/admin/users'>Usuarios</NavLink>
           </Menu.Item>
 
-          <Menu.Item key='6'>
+          <Menu.Item key='4'>
             <Icon type='user' />
-            <NavLink to='/admin/proposals'>Propuestas</NavLink>
+            <NavLink to='/admin/citizens'>Ciudadanos</NavLink>
+          </Menu.Item>
+
+          <Menu.Item key='5'>
+            <Icon type='user' />
+            <NavLink to='/admin/type_candidates'>Tipos de Candidatos</NavLink>
           </Menu.Item>
 
         </Menu>
