@@ -33,7 +33,6 @@ const StyledButton = styled(Button)`
     color: #0c2e60;
   }
 `
-
 class LoginForm extends React.Component {
   state = {
     email: '',
@@ -85,11 +84,15 @@ class LoginForm extends React.Component {
       // Callback received by props
       cb();
 
-      if (response.status === 200) {
+      if (response.statusText === "OK") {
         setCurrentUser(currentUser)
 
-        if (response.data.data.roles[0].name === 'superadmin') {
-          console.log('superadmin logged')
+        if (currentUser.roles && currentUser.roles.length !== 0) {
+          if (currentUser.roles[0].name === 'superadmin') { 
+            console.log('superadmin logged')
+          }
+        } else {
+          console.log('User with no role')
         }
 
         swal("Inicio de sesión exitoso", "", "success");
@@ -98,7 +101,9 @@ class LoginForm extends React.Component {
       }
     })
     .catch((error) => {
-      swal(`${error.response.data.errors}`, "", "error");
+      console.error('error: ', error)
+      let errorMessage = error.response ? error.response.data.errors.full_messages : 'Algo salió mal!!!'
+      swal(`${errorMessage}`, "", "error");
     });
   }
 

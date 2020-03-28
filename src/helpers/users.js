@@ -5,10 +5,10 @@ const isEmpty = function(obj) {
 export const isAdmin = function(user) {
   var isAdmin;
   
-  if (user == null || isEmpty(user)) {
+  if (!user || isEmpty(user)) {
     isAdmin = false
   } else {
-    if (user.roles) {
+    if (user.roles && user.roles.length !== 0) {
       isAdmin = (user.roles[0].name === 'superadmin');
     } else {
       isAdmin = false
