@@ -5,7 +5,9 @@ import {
   Button,
   Row,
   Col,
+  Select
 } from 'antd';
+const {Option} = Select;
 
 const TypeCandidateForm = (props) => {
   const {
