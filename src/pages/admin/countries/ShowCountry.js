@@ -65,7 +65,7 @@ class ShowCountry extends React.Component {
     e.preventDefault();
     swal({
       title: "¿Estás seguro de eliminar?",
-      text: "Una vez eliminado, no se puede volver atrás",
+      text: "Si elimina este record, afectará todos los subrecords que han sido creados a partir de él, siendo eliminados también",
       icon: "warning",
       buttons: true,
       dangerMode: true,
