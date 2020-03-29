@@ -17,6 +17,7 @@ const CitizenShowCard = (props) => {
       <Card>
         <div className="card-actions">
           <Link to={`/admin/citizen/${id}/update`}>Editar<Icon type="edit"/></Link>
+          <span onClick={props.handleDelete}>Eliminar<Icon type="edit"/></span>
         </div>
         <Descriptions title="Información del Ciudadano" layout="vertical">
           <Descriptions.Item label="Status de ciudadano">{status_citizen}</Descriptions.Item>

@@ -2,7 +2,7 @@ import React from 'react';
 import CitizenShowCard from "../../../components/admin/Citizens/Show";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
-
+import swal from 'sweetalert';
 class ShowCitizen extends React.Component {
 
   state = {
@@ -36,9 +36,52 @@ class ShowCitizen extends React.Component {
     })
   }
 
+  deleteCitizen = async (id) => {
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'DELETE',
+      endpoint: `v1/wave_citizen/citizens/${id}/destroy`,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback: () => {
+        swal(`Ciudadano eliminado con exito`, {
+          icon: "success",
+        }).then(()=> {
+          this.props.history.push('/admin/citizens');
+        });
+      },
+      errorCallback: () => {
+        swal(`Hubo un error, no se ha podido eliminar`, {
+          icon: "error",
+        })
+      }
+    })
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    swal({
+      title: "¿Estás seguro de eliminar?",
+      text: "Una vez eliminado, no se puede volver atrás",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.deleteCitizen(this.citizenID)
+      } else {
+        swal(`Ciudadano está a salvo`);
+      }
+    });
+  }
+
   render() {
     return <CitizenShowCard
       citizen={this.state.citizen}
+      handleDelete={this.handleDelete}
     />
   }
 }
