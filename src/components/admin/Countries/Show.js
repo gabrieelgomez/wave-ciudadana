@@ -15,6 +15,7 @@ const CountryShowCard = (props) => {
       <Card>
         <div className="card-actions">
           <Link to={`/admin/country/${id}/update`}>Editar<Icon type="edit"/></Link>
+          <span onClick={props.handleDelete}>Eliminar<Icon type="edit"/></span>
         </div>
         <Descriptions title="Información del País" layout="vertical">
           <Descriptions.Item label="Nombre">{name}</Descriptions.Item>

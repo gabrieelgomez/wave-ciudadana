@@ -13,6 +13,7 @@ const TypeCandidateShowCard = (props) => {
       <Card>
         <div className="card-actions">
           <Link to={`/admin/type_candidate/${id}/update`}>Editar<Icon type="edit"/></Link>
+          <span onClick={props.handleDelete}>Eliminar<Icon type="edit"/></span>
         </div>
         <Descriptions title="Información del tipo de candidatura" layout="vertical">
           <Descriptions.Item label="Nombre">{name}</Descriptions.Item>
