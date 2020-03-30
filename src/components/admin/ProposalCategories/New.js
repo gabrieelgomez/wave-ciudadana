@@ -16,6 +16,18 @@ class NewProposalCategoryForm extends React.Component {
     this.props.createProposalCategory(proposal_category)
   }
 
+  handleSelectChange = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        proposal_category: {
+          ...prevState.proposal_category,
+          country_id: value
+        }
+      }
+    });
+  }
+
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState=> {
@@ -42,6 +54,7 @@ class NewProposalCategoryForm extends React.Component {
           <ProposalCategoryForm
             handleSubmit={this.handleCreateProposalCategory}
             handleChange={this.handleChange}
+            handleSelect={this.handleSelectChange}
             data={proposal_category}
             countriesData={countriesData}
           >

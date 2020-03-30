@@ -2,6 +2,7 @@ import React from 'react';
 import ProposalCategoryShowCard from "../../../components/admin/ProposalCategories/Show";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
+import swal from 'sweetalert';
 
 class ShowProposalCategory extends React.Component {
 
@@ -40,10 +41,53 @@ class ShowProposalCategory extends React.Component {
     })
   }
 
+  deleteProposalCategory = async (id) => {
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'DELETE',
+      endpoint: `v1/wave_citizen/proposal_categories/${id}/destroy`,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback: () => {
+        swal(`Categoría de propuesta eliminada con exito`, {
+          icon: "success",
+        }).then(()=> {
+          this.props.history.push('/admin/proposal_categories');
+        });
+      },
+      errorCallback: () => {
+        swal(`Hubo un error, no se ha podido eliminar`, {
+          icon: "error",
+        })
+      }
+    })
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    swal({
+      title: "¿Estás seguro de eliminar?",
+      text: "Si elimina este record, afectará todos los subrecords que han sido creados a partir de él, siendo eliminados también",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.deleteProposalCategory(this.proposal_categoryID)
+      } else {
+        swal(`Categoría de propuesta está a salvo`);
+      }
+    });
+  }
+
   render() {
     return <ProposalCategoryShowCard
       proposal_category={this.state.proposal_category}
       country={this.state.country}
+      handleDelete={this.handleDelete}
     />
   }
 }

@@ -98,6 +98,13 @@ class UpdateUser extends React.Component {
       },
       successCallback: () => {
         swal('Datos actualizados exitosamente', '', 'success')
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }

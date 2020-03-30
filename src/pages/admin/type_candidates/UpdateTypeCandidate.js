@@ -110,6 +110,14 @@ class UpdateTypeCandidate extends React.Component {
       },
       successCallback: () => {
         swal('Datos actualizados exitosamente', '', 'success')
+        this.props.history.push(`/admin/type_candidate/${type_candidacy.id}`)
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }

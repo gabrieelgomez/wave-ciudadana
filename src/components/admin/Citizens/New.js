@@ -16,7 +16,8 @@ class NewCitizenForm extends React.Component {
           name: 'client'
         }
       ],
-      status_citizen: 'citizen'
+      status_citizen: 'citizen',
+      type_candidacy_id: ''
     }
   }
 
@@ -32,13 +33,25 @@ class NewCitizenForm extends React.Component {
     });
   }
 
-  handleSelectChange = (e) => {
+  handleSelectStatus = (e) => {
     const value = e;
     this.setState(prevState => {
       return {
         citizen: {
           ...prevState.citizen,
           status_citizen: value
+        }
+      }
+    });
+  }
+
+  handleSelectType = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          type_candidacy_id: value
         }
       }
     });
@@ -65,10 +78,12 @@ class NewCitizenForm extends React.Component {
         <h1>Crear nuevo ciudadano</h1>
         <Card>
           <CitizenForm
-            handleSelect={this.handleSelectChange}
+            handleSelectType={this.handleSelectType}
+            handleSelectStatus={this.handleSelectStatus}
             handleSubmit={this.handleCreateCitizen}
             handleChange={this.handleChange}
             data={citizen}
+            typeCandidatesData={this.props.typeCandidatesData}
           >
             <Col span={12}>
               <Form.Item style={{padding: '0 15px'}}>

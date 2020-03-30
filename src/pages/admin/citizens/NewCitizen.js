@@ -5,10 +5,45 @@ import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
 class NewCitizen extends React.Component {
+  state = {
+    type_candidates: []
+  }
+
+  componentDidMount() {
+    this.getTypeCandidatesData()
+  }
+
+  getTypeCandidatesData = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/type_candidacies',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      type_candidates: data
+    })
+  }
 
   createCitizen = async (citizen) => {
     const { uid, client, access_token } = this.props.tokens;
-    await this.props.api({
+    const res = await this.props.api({
       method: 'POST',
       endpoint: 'v1/wave_citizen/citizens/create',
       payload: {
@@ -23,6 +58,14 @@ class NewCitizen extends React.Component {
       },
       successCallback: () => {
         swal('Usuario y ciudadano creados exitosamente', '', 'success')
+        this.props.history.push(`/admin/citizens`)
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }
@@ -30,6 +73,7 @@ class NewCitizen extends React.Component {
   render() {
     return <NewCitizenForm
       createCitizen={this.createCitizen}
+      typeCandidatesData={this.state.type_candidates}
     />
   }
 }

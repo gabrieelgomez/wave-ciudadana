@@ -8,7 +8,7 @@ const COMMON_HEADERS = {
   'accept': 'application/json',
 };
 
-export const api = ({ endpoint, method, payload = {}, headers = {}, successCallback = () => {} }) => {
+export const api = ({ endpoint, method, payload = {}, headers = {}, successCallback = () => {}, errorCallback = () => {} }) => {
 
   const h = {
     ...COMMON_HEADERS,
@@ -33,11 +33,6 @@ export const api = ({ endpoint, method, payload = {}, headers = {}, successCallb
           uid: res.headers.uid
         }
 
-        // if (res.headers['access-token'] !== '') {
-        //   tokens.access_token = res.headers['access-token']
-        //   Object.assign(tokens, {access_token: res.headers['access-token']})
-        // }
-
         dispatch(SET_TOKENS(tokens))
       }
 
@@ -48,6 +43,7 @@ export const api = ({ endpoint, method, payload = {}, headers = {}, successCallb
       return res
     } catch (err) {
       console.error("Something went wrong ", err);
+      errorCallback(err);
     }
   }
 };

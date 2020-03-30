@@ -2,6 +2,7 @@ import React from 'react';
 import CountryShowCard from "../../../components/admin/Countries/Show";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
+import swal from 'sweetalert';
 
 class ShowCountry extends React.Component {
 
@@ -36,9 +37,52 @@ class ShowCountry extends React.Component {
     })
   }
 
+  deleteCountry = async (id) => {
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'DELETE',
+      endpoint: `v1/wave_citizen/countries/${id}/destroy`,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback: () => {
+        swal(`País eliminado con exito`, {
+          icon: "success",
+        }).then(()=> {
+          this.props.history.push('/admin/countries');
+        });
+      },
+      errorCallback: () => {
+        swal(`Hubo un error, no se ha podido eliminar`, {
+          icon: "error",
+        })
+      }
+    })
+  }
+
+  handleDelete = (e) => {
+    e.preventDefault();
+    swal({
+      title: "¿Estás seguro de eliminar?",
+      text: "Si elimina este record, afectará todos los subrecords que han sido creados a partir de él, siendo eliminados también",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.deleteCountry(this.countryID)
+      } else {
+        swal(`País está a salvo`);
+      }
+    });
+  }
+
   render() {
     return <CountryShowCard
       country={this.state.country}
+      handleDelete={this.handleDelete}
     />
   }
 }
