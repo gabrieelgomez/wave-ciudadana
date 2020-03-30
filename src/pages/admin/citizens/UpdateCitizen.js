@@ -7,12 +7,14 @@ import swal from 'sweetalert';
 class UpdateCitizen extends React.Component {
 
   state = {
-    citizen: {}
+    citizen: {},
+    type_candidates: []
   }
 
   componentDidMount() {
     const citizenID = this.props.match.params.id;
     this.getCitizenData(citizenID)
+    this.getTypeCandidatesData()
   }
 
   handleChange = (e) => {
@@ -27,9 +29,9 @@ class UpdateCitizen extends React.Component {
     });
   }
 
-  handleSelectChange = (e) => {
+  handleSelectStatus = (e) => {
     const value = e;
-    this.setState(prevState=> {
+    this.setState(prevState => {
       return {
         citizen: {
           ...prevState.citizen,
@@ -39,10 +41,50 @@ class UpdateCitizen extends React.Component {
     });
   }
 
+  handleSelectType = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          type_candidacy_id: value
+        }
+      }
+    });
+  }
+
   handleUpdateCitizen = (e) => {
     e.preventDefault()
     const { citizen } = this.state;
     this.updateCitizen(citizen)
+  }
+
+  getTypeCandidatesData = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/type_candidacies',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      type_candidates: data
+    })
   }
 
   getCitizenData = async (id) => {
@@ -80,6 +122,7 @@ class UpdateCitizen extends React.Component {
       },
       successCallback: () => {
         swal('Datos actualizados exitosamente', '', 'success')
+        this.props.history.push(`/admin/citizen/${citizen.id}`)
       },
       errorCallback: (err) => {
         swal({
@@ -89,14 +132,15 @@ class UpdateCitizen extends React.Component {
         })
       }
     })
-    console.log(res)
   }
 
   render() {
     return <UpdateCitizenForm
       citizenData={this.state}
+      typeCandidatesData={this.state.type_candidates}
       handleUpdateCitizen={this.handleUpdateCitizen}
-      handleSelectChange={this.handleSelectChange}
+      handleSelectType={this.handleSelectType}
+      handleSelectStatus={this.handleSelectStatus}
       handleChange={this.handleChange}
     />
   }

@@ -55,6 +55,7 @@ class NewProposalCategory extends React.Component {
       },
       successCallback: () => {
         swal('Categoría de Propuesta creada exitosamente', '', 'success')
+        this.props.history.push(`/admin/proposal_categories`)
       },
       errorCallback: (err) => {
         swal({

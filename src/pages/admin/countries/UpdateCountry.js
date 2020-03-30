@@ -68,6 +68,7 @@ class UpdateCountry extends React.Component {
       },
       successCallback: () => {
         swal('País actualizado exitosamente', '', 'success')
+        this.props.history.push(`/admin/country/${country.id}`)
       },
       errorCallback: (err) => {
         swal({

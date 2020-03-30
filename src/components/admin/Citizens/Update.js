@@ -12,9 +12,11 @@ class UpdateCitizenForm extends React.Component {
         <Card>
           <CitizenForm
             data={this.props.citizenData.citizen}
+            typeCandidatesData={this.props.typeCandidatesData}
             handleSubmit={this.props.handleUpdateCitizen}
-            handleSelect={this.props.handleSelectChange}
             handleChange={this.props.handleChange}
+            handleSelectType={this.props.handleSelectType}
+            handleSelectStatus={this.props.handleSelectStatus}
           />
         </Card>
       </div>

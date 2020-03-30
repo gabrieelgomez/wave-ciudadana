@@ -20,6 +20,7 @@ class NewCountry extends React.Component {
       },
       successCallback: () => {
         swal('País creado exitosamente', '', 'success')
+        this.props.history.push(`/admin/countries`)
       },
       errorCallback: (err) => {
         swal({

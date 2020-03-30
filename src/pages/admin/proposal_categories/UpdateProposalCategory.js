@@ -110,6 +110,7 @@ class UpdateProposalCategory extends React.Component {
       },
       successCallback: () => {
         swal('País actualizado exitosamente', '', 'success')
+        this.props.history.push(`/admin/proposal_category/${proposal_category.id}`)
       },
       errorCallback: (err) => {
         swal({

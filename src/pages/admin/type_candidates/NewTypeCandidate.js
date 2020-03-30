@@ -59,6 +59,7 @@ class NewTypeCandidate extends React.Component {
       },
       successCallback: () => {
         swal('Tipo de candidatura creada exitosamente', '', 'success')
+        this.props.history.push(`/admin/type_candidates`)
       },
       errorCallback: (err) => {
         swal({

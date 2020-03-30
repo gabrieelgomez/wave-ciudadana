@@ -9,8 +9,11 @@ const CitizenShowCard = (props) => {
     nickname,
     email,
     description,
-    status_citizen
+    status_citizen,
+    type_candidacy
   } = props.citizen;
+
+  const isCandidate = status_citizen === 'candidate'
 
   return (
     <div className="admin-container">
@@ -21,6 +24,10 @@ const CitizenShowCard = (props) => {
         </div>
         <Descriptions title="Información del Ciudadano" layout="vertical">
           <Descriptions.Item label="Status de ciudadano">{status_citizen}</Descriptions.Item>
+          { isCandidate ? (
+            <Descriptions.Item label="Tipo de Candidatura">{type_candidacy !== null ? type_candidacy.name : 'No tiene tipo de candidatura'}</Descriptions.Item>
+            ) : ( '' )
+          }
           <Descriptions.Item label="Usuario">{nickname}</Descriptions.Item>
           <Descriptions.Item label="Nombre">{name}</Descriptions.Item>
           <Descriptions.Item label="Email">{email}</Descriptions.Item>
