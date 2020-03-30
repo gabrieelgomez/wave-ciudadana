@@ -1,31 +1,6 @@
 import React from 'react';
-import { Form, Icon, Button, Input } from 'antd';
-import styled from 'styled-components';
-
-const StyledInput = styled(Input)`
-  input {
-    padding: 10px 20px;
-    height: auto;
-    border-radius: 25px;
-  }
-`
-const StyledButton = styled(Button)`
-  border-radius: 25px;
-  padding: 15px 20px;
-  height: auto;
-  width: 100%;
-  box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.1);
-  background-color: #ff663b;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  font-weight: 700;
-  margin-bottom: 30px;
-
-  &:hover {
-    color: #0c2e60;
-  }
-`
+import { Form, Icon } from 'antd';
+import { StyledInputIcon, StyledButton } from '../../styled';
 
 const Item = Form.Item;
 const RegisterForm = (props) => {
@@ -42,7 +17,7 @@ const RegisterForm = (props) => {
         {getFieldDecorator('name', {
           rules: [{ required: true, message: 'Ingresa tu nombre!' }],
         })(
-          <StyledInput
+          <StyledInputIcon
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="text"
             name="name"
@@ -55,7 +30,7 @@ const RegisterForm = (props) => {
         {getFieldDecorator('lastname', {
           rules: [{ required: true, message: 'Ingresa tu apellido!' }],
         })(
-          <StyledInput
+          <StyledInputIcon
             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="text"
             name="lastname"
@@ -68,7 +43,7 @@ const RegisterForm = (props) => {
         {getFieldDecorator('nickname', {
           rules: [{ required: true, message: 'Ingresa tu usuario!' }],
         })(
-          <StyledInput
+          <StyledInputIcon
             prefix={<Icon type="tag" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="text"
             name="nickname"
@@ -81,7 +56,7 @@ const RegisterForm = (props) => {
         {getFieldDecorator('email', {
           rules: [{ required: true, message: 'Ingresa tu email!' }],
         })(
-          <StyledInput
+          <StyledInputIcon
             prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="email"
             name="email"
@@ -94,7 +69,7 @@ const RegisterForm = (props) => {
         {getFieldDecorator('password', {
           rules: [{ required: true, message: 'Ingresa tu contraseña!' }],
         })(
-          <StyledInput
+          <StyledInputIcon
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="password"
             name="password"
@@ -107,7 +82,7 @@ const RegisterForm = (props) => {
         {getFieldDecorator('password_confirmation', {
           rules: [{ required: true, message: 'Ingresa tu confirmación de contraseña!' }],
         })(
-          <StyledInput
+          <StyledInputIcon
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
             type="password"
             name="password_confirmation"

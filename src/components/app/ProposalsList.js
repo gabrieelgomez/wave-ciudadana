@@ -1,14 +1,7 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
-import styled from 'styled-components';
-
+import { StyledCard } from '../styled';
 const { Meta } = Card;
-
-const StyledCard = styled(Card)`
-  width: calc(100% - 20px) !important;
-  margin: 10px 10px;
-  height: 350px;
-`
 
 const ProposalsList = () => {
   return (
