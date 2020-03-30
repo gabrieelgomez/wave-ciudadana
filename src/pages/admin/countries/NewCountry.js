@@ -20,6 +20,13 @@ class NewCountry extends React.Component {
       },
       successCallback: () => {
         swal('País creado exitosamente', '', 'success')
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }

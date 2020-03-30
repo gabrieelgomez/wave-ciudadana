@@ -43,7 +43,7 @@ export const api = ({ endpoint, method, payload = {}, headers = {}, successCallb
       return res
     } catch (err) {
       console.error("Something went wrong ", err);
-      errorCallback();
+      errorCallback(err);
     }
   }
 };

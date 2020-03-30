@@ -55,6 +55,13 @@ class NewProposalCategory extends React.Component {
       },
       successCallback: () => {
         swal('Categoría de Propuesta creada exitosamente', '', 'success')
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }

@@ -23,6 +23,13 @@ class NewCitizen extends React.Component {
       },
       successCallback: () => {
         swal('Usuario y ciudadano creados exitosamente', '', 'success')
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }

@@ -20,6 +20,13 @@ class NewUser extends React.Component {
       },
       successCallback: () => {
         swal('Usuario creado exitosamente', '', 'success')
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
   }

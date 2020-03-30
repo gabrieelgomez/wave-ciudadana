@@ -68,6 +68,13 @@ class UpdateCountry extends React.Component {
       },
       successCallback: () => {
         swal('País actualizado exitosamente', '', 'success')
+      },
+      errorCallback: (err) => {
+        swal({
+          title: "Hubo un eror",
+          text: err.toString(),
+          icon: 'error'
+        })
       }
     })
     console.log(res)
