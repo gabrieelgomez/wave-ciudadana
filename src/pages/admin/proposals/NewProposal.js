@@ -1,24 +1,25 @@
 import React from 'react';
-import NewProposalCategoryForm from "../../../components/admin/ProposalCategories/New";
+import NewProposalForm from "../../../components/admin/Proposals/New";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class NewProposalCategory extends React.Component {
+class NewProposal extends React.Component {
+
   state = {
-    countries: []
+    proposal_categories: []
   }
 
   componentDidMount() {
-    this.getCountriesData()
+    this.getProposalCategoriesData()
   }
 
-  getCountriesData = async () => {
+  getProposalCategoriesData = async () => {
     let data = [];
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: 'v1/wave_citizen/countries',
+      endpoint: 'v1/wave_citizen/proposal_categories',
       headers: {
         'access-token': access_token,
         client, uid
@@ -37,25 +38,27 @@ class NewProposalCategory extends React.Component {
     }
 
     this.setState({
-      countries: data
+      proposal_categories: data
     })
   }
 
-  createProposalCategory = async (proposal_category) => {
+  createProposal = async (proposal) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'POST',
-      endpoint: 'v1/wave_citizen/proposal_categories/create',
+      endpoint: 'v1/wave_citizen/proposals/create',
       payload: {
-        proposal_category
+        proposal: {
+          ...proposal
+        }
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal('Categoría de Propuesta creada exitosamente', '', 'success')
-        this.props.history.push(`/admin/proposal_categories`)
+        swal('Propuesta creada exitosamente', '', 'success')
+        this.props.history.push(`/admin/proposals`)
       },
       errorCallback: (err) => {
         swal({
@@ -68,20 +71,22 @@ class NewProposalCategory extends React.Component {
   }
 
   render() {
-    return <NewProposalCategoryForm
-      createProposalCategory={this.createProposalCategory}
-      countriesData={this.state.countries}
+    return <NewProposalForm
+      createProposal={this.createProposal}
+      proposalCategoriesData={this.state.proposal_categories}
+      currentUser={this.props.currentUser}
     />
   }
 }
 
 const mapStateToProps = (state) => {
   const { tokens } = state.session;
-  return { tokens };
+  const { currentUser } = state.session;
+  return { tokens, currentUser };
 }
 
 const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewProposalCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(NewProposal);

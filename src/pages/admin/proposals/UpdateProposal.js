@@ -1,70 +1,58 @@
 import React from 'react';
-import UpdateCitizenForm from "../../../components/admin/Citizens/Update";
+import UpdateProposalForm from "../../../components/admin/Proposals/Update";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class UpdateCitizen extends React.Component {
+class UpdateProposal extends React.Component {
 
   state = {
-    citizen: {},
-    type_candidates: []
+    proposal: {},
+    proposal_categories: []
   }
 
   componentDidMount() {
-    const citizenID = this.props.match.params.id;
-    this.getCitizenData(citizenID)
-    this.getTypeCandidatesData()
+    const proposalID = this.props.match.params.id;
+    this.getProposalData(proposalID)
+    this.getProposalCategoriesData()
   }
 
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState=> {
       return {
-        citizen: {
-          ...prevState.citizen,
+        proposal: {
+          ...prevState.proposal,
           [name]: value
         }
       }
     });
   }
 
-  handleSelectStatus = (e) => {
+  handleSelectChange = (e) => {
     const value = e;
-    this.setState(prevState => {
+    this.setState(prevState=> {
       return {
-        citizen: {
-          ...prevState.citizen,
-          status_citizen: value
+        proposal: {
+          ...prevState.proposal,
+          proposal_category_id: value
         }
       }
     });
   }
 
-  handleSelectType = (e) => {
-    const value = e;
-    this.setState(prevState => {
-      return {
-        citizen: {
-          ...prevState.citizen,
-          type_candidacy_id: value
-        }
-      }
-    });
-  }
-
-  handleUpdateCitizen = (e) => {
+  handleUpdateProposal = (e) => {
     e.preventDefault()
-    const { citizen } = this.state;
-    this.updateCitizen(citizen)
+    const { proposal } = this.state;
+    this.updateProposal(proposal)
   }
 
-  getTypeCandidatesData = async () => {
+  getProposalCategoriesData = async () => {
     let data = [];
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: 'v1/wave_citizen/type_candidacies',
+      endpoint: 'v1/wave_citizen/proposal_categories',
       headers: {
         'access-token': access_token,
         client, uid
@@ -83,15 +71,15 @@ class UpdateCitizen extends React.Component {
     }
 
     this.setState({
-      type_candidates: data
+      proposal_categories: data
     })
   }
 
-  getCitizenData = async (id) => {
+  getProposalData = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: `v1/wave_citizen/citizens/${id}`,
+      endpoint: `v1/wave_citizen/proposals/${id}`,
       headers: {
         'access-token': access_token,
         client, uid
@@ -101,20 +89,20 @@ class UpdateCitizen extends React.Component {
     const data = res.data.data
 
     this.setState({
-      citizen: {
+      proposal: {
         id: data.id,
         ...data.attributes
       }
     })
   }
 
-  updateCitizen = async (citizen) => {
+  updateProposal = async (proposal) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'PUT',
-      endpoint: `v1/wave_citizen/citizens/${citizen.id}/update`,
+      endpoint: `v1/wave_citizen/proposals/${proposal.id}/update`,
       payload: {
-        citizen
+        proposal
       },
       headers: {
         'access-token': access_token,
@@ -122,7 +110,7 @@ class UpdateCitizen extends React.Component {
       },
       successCallback: () => {
         swal('Datos actualizados exitosamente', '', 'success')
-        this.props.history.push(`/admin/citizen/${citizen.id}`)
+        this.props.history.push(`/admin/proposal/${proposal.id}`)
       },
       errorCallback: (err) => {
         swal({
@@ -135,12 +123,12 @@ class UpdateCitizen extends React.Component {
   }
 
   render() {
-    return <UpdateCitizenForm
-      citizenData={this.state}
-      typeCandidatesData={this.state.type_candidates}
-      handleUpdateCitizen={this.handleUpdateCitizen}
-      handleSelectType={this.handleSelectType}
-      handleSelectStatus={this.handleSelectStatus}
+    return <UpdateProposalForm
+      proposalData={this.state.proposal}
+      proposalCategoriesData={this.state.proposal_categories}
+      currentUser={this.props.currentUser}
+      handleUpdateProposal={this.handleUpdateProposal}
+      handleSelectChange={this.handleSelectChange}
       handleChange={this.handleChange}
     />
   }
@@ -148,11 +136,12 @@ class UpdateCitizen extends React.Component {
 
 const mapStateToProps = (state) => {
   const { tokens } = state.session;
-  return { tokens };
+  const { currentUser } = state.session;
+  return { tokens, currentUser };
 }
 
 const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateCitizen);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateProposal);
