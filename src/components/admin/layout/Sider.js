@@ -63,12 +63,13 @@ class AdminSider extends React.Component {
             <NavLink to='/admin/proposal_categories'>Categorías de Propuestas</NavLink>
           </Menu.Item>
 
-          {/* <Menu.Item key='7'>
+          <Menu.Item key='8'>
             <Icon type='user' />
-            <NavLink to='#'>Categorías de Encuestas</NavLink>
+            <NavLink to='/admin/poll_categories'>Categorías de Encuestas</NavLink>
           </Menu.Item>
 
-          <Menu.Item key='8'>
+
+          {/* <Menu.Item key='8'>
             <Icon type='user' />
             <NavLink to='#'>Propuestas</NavLink>
           </Menu.Item>

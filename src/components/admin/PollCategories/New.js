@@ -1,27 +1,27 @@
 import React from 'react';
 import { Card } from 'antd';
-import ProposalCategoryForm from './Form';
+import PollCategoryForm from './Form';
 
-class NewProposalCategoryForm extends React.Component {
+class NewPollCategoryForm extends React.Component {
   state = {
-    proposal_category: {
+    poll_category: {
       name: '',
       country_id: ''
     }
   }
 
-  handleCreateProposalCategory = (e) => {
+  handleCreatePollCategory = (e) => {
     e.preventDefault()
-    const { proposal_category } = this.state;
-    this.props.createProposalCategory(proposal_category)
+    const { poll_category } = this.state;
+    this.props.createPollCategory(poll_category)
   }
 
   handleSelectChange = (e) => {
     const value = e;
     this.setState(prevState => {
       return {
-        proposal_category: {
-          ...prevState.proposal_category,
+        poll_category: {
+          ...prevState.poll_category,
           country_id: value
         }
       }
@@ -32,8 +32,8 @@ class NewProposalCategoryForm extends React.Component {
     const { name, value } = e.target;
     this.setState(prevState=> {
       return {
-        proposal_category: {
-          ...prevState.proposal_category,
+        poll_category: {
+          ...prevState.poll_category,
           [name]: value
         }
       }
@@ -42,27 +42,27 @@ class NewProposalCategoryForm extends React.Component {
 
   render() {
     const {
-      proposal_category
+      poll_category
     } = this.state;
 
     const { countriesData } = this.props;
 
     return (
       <div className="admin-container">
-        <h1>Crear nueva categoría de propuesta</h1>
+        <h1>Crear nueva categoría de encuesta</h1>
         <Card>
-          <ProposalCategoryForm
-            handleSubmit={this.handleCreateProposalCategory}
+          <PollCategoryForm
+            handleSubmit={this.handleCreatePollCategory}
             handleChange={this.handleChange}
             handleSelect={this.handleSelectChange}
-            data={proposal_category}
+            data={poll_category}
             countriesData={countriesData}
           >
-          </ProposalCategoryForm>
+          </PollCategoryForm>
         </Card>
       </div>
     )
   }
 }
 
-export default NewProposalCategoryForm;
+export default NewPollCategoryForm;
