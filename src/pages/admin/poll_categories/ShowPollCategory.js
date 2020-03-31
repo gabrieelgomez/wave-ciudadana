@@ -43,7 +43,7 @@ class ShowPollCategory extends React.Component {
 
   deletePollCategory = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'DELETE',
       endpoint: `v1/wave_citizen/poll_categories/${id}/destroy`,
       headers: {

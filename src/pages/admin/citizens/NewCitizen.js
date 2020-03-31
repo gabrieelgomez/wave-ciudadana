@@ -43,7 +43,7 @@ class NewCitizen extends React.Component {
 
   createCitizen = async (citizen) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'POST',
       endpoint: 'v1/wave_citizen/citizens/create',
       payload: {
