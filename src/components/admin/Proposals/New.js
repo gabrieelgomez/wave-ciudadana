@@ -7,7 +7,6 @@ class NewProposalForm extends React.Component {
     proposal: {
       title: '',
       description: '',
-      user_id: '',
       proposal_category_id: '',
     }
   }
@@ -47,7 +46,7 @@ class NewProposalForm extends React.Component {
       proposal
     } = this.state;
 
-    const {proposalCategoriesData, currentUser} = this.props;
+    const {proposalCategoriesData} = this.props;
     return (
       <div className="admin-container">
         <h1>Crear nueva propuesta</h1>
@@ -58,7 +57,6 @@ class NewProposalForm extends React.Component {
             handleChange={this.handleChange}
             data={proposal}
             proposalCategoriesData={proposalCategoriesData}
-            currentUser={currentUser}
           >
           </ProposalForm>
         </Card>

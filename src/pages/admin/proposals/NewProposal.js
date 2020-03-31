@@ -49,6 +49,7 @@ class NewProposal extends React.Component {
       endpoint: 'v1/wave_citizen/proposals/create',
       payload: {
         proposal: {
+          user_id: this.props.currentUser.id,
           ...proposal
         }
       },

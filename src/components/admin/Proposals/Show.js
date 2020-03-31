@@ -8,7 +8,7 @@ const ProposalShowCard = (props) => {
     title,
     description
   } = props.proposal;
-  debugger
+
   return (
     <div className="admin-container">
       <Card>
@@ -17,7 +17,6 @@ const ProposalShowCard = (props) => {
           <span onClick={props.handleDelete}>Eliminar<Icon type="delete"/></span>
         </div>
         <Descriptions title="Información de la propuesta" layout="vertical">
-          <Descriptions.Item label="ID">{id}</Descriptions.Item>
           <Descriptions.Item label="Título">{title}</Descriptions.Item>
           <Descriptions.Item label="Descripción">{description}</Descriptions.Item>
           <Descriptions.Item label="Usuario">{props.proposal_user.name}</Descriptions.Item>

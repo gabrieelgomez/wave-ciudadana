@@ -98,7 +98,7 @@ class UpdateProposal extends React.Component {
 
   updateProposal = async (proposal) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'PUT',
       endpoint: `v1/wave_citizen/proposals/${proposal.id}/update`,
       payload: {

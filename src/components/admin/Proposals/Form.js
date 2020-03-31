@@ -14,15 +14,8 @@ const ProposalForm = (props) => {
   const {
     title,
     description,
-    proposal_category_id,
-    user_id
+    proposal_category_id
   } = props.data;
-
-  if ((user_id == undefined) || (user_id == null) || (user_id == '')){
-    var current_user_id = props.currentUser.id
-  } else {
-    var current_user_id = user_id
-  }
 
   const proposal_category = props.data.proposal_category
   const currentProposalCategoryName = proposal_category !== undefined ? proposal_category.name : 'Cargando...';
@@ -64,25 +57,11 @@ const ProposalForm = (props) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })
                 :
-                <Option disabled value="">No hay países</Option>
+                <Option disabled value="">No hay categorías</Option>
               }
             </Select>
           </Form.Item>
         </Col>
-
-        <Col span={12} lg={8} md={12} xs={24}>
-          <Form.Item style={{padding: '0 15px'}}>
-            <label>ID Current User</label>
-            <Input
-              type="text"
-              name="user_id"
-              value={current_user_id}
-              placeholder="Current User ID"
-              onChange={props.handleChange}
-            />
-          </Form.Item>
-        </Col>
-
       </Row>
       { props.children }
       <Button htmlType="submit">
