@@ -35,7 +35,6 @@ h1, h2, h3, h4 {
   text-align: center;
   background-color: #fff;
   height: 100vh;
-  background-image: url('../img/bg.png');
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: contain;
@@ -140,8 +139,12 @@ h1, h2, h3, h4 {
       font-size: 14px;
       font-weight: 600;
       display: inline-block;
-      padding: 15px;
+      padding: 10px;
       transition: .5s;
+
+      &.currentUser {
+        text-transform: lowercase;
+      }
 
       i {
         margin-right: 5px;
@@ -150,12 +153,72 @@ h1, h2, h3, h4 {
   }
 }
 
-.ant-card {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  font-family: 'Martel Sans';
-}
+.banner {
+  height: calc(100vh - 65px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 
-.ant-card-cover img {
-  border-radius: 10px 10px 0 0;
+  @media screen and (min-width:0) and (max-width:600px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% + 10px);
+  }
+
+  .illustration {
+    width: 500px;
+    left: 10%;
+    position: absolute;
+    bottom: 10vh;
+    z-index: 1;
+
+    @media screen and (min-width:0) and (max-width:600px) {
+      width: 220px;
+      bottom: 15vh;
+      z-index: 0;
+    }
+
+    @media screen and (min-width:600px) and (max-width:991px) {
+      width: 300px;
+    }
+  }
+
+  .banner-text {
+    position: absolute;
+    right: 10%;
+    top: 15%;
+    width: 40%;
+    text-align: right;
+
+    @media screen and (min-width:0) and (max-width:600px) {
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+      padding: 20px;
+      position: relative;
+      right: unset;
+      top: unset;
+    }
+
+    h1 {
+      font-size: 50px;
+      font-weight: bold;
+      margin-bottom: 0;
+      color: $secondary;
+
+      @media screen and (min-width:0) and (max-width:600px) { font-size: 36px; }
+    }
+
+    p {
+      font-size: 16px;
+      font-family: 'Martel Sans';
+      color: $primary;
+    }
+  }
 }

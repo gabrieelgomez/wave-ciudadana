@@ -1,15 +1,8 @@
 import React from 'react';
 import { Table } from 'antd';
+import { StyledTable } from '../../styled';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 const { Column } = Table;
-
-const StyledTable = styled(Table)`
-  background-color: #fff;
-  width: 100%;
-  overflow-x: scroll;
-  display: inline-block;
-`
 
 const AdminCitizensList = (props) => {
   return (

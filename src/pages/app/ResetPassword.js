@@ -1,33 +1,11 @@
 import React, { Component } from 'react';
-import { Form, Input, Card, Button, Col, Row } from 'antd';
+import { Form, Card, Col, Row } from 'antd';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { BASE_DOMAIN } from '../../constants';
 import { withRouter } from "react-router-dom";
 import styled from 'styled-components';
-
-const StyledInput = styled(Input)`
-  padding: 10px 20px;
-  height: auto;
-  border-radius: 25px;
-`
-
-const StyledButton = styled(Button)`
-  border-radius: 25px;
-  padding: 15px 20px;
-  height: auto;
-  width: 50%;
-  box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.1);
-  background-color: #ff663b;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  font-weight: 700;
-
-  &:hover {
-    color: #0c2e60;
-  }
-`
+import { StyledButton, StyledInput } from '../../components/styled';
 
 const StyledCard = styled(Card)`
   text-align:center;

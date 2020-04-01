@@ -1,12 +1,10 @@
 import React from 'react';
-import ProposalsList from '../../components/app/ProposalsList';
+import Banner from '../../components/app/Banner';
 
 class Home extends React.Component {
   render() {
     return (
-      <div className="container">
-        <ProposalsList />
-      </div>
+      <Banner />
     );
   }
 }
