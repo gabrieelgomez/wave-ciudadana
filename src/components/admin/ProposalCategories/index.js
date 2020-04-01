@@ -11,7 +11,8 @@ class AdminProposalCategories extends React.Component {
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear Categoría de Propuesta" action="/admin/proposal_category/new" />
+          <h3>Categorías de Propuestas</h3>
+          <LinkButton name="Crear nueva" action="/admin/proposal_category/new" />
         </div>
         <AdminProposalCategoriesList data={proposal_categories}/>
       </div>

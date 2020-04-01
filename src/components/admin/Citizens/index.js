@@ -11,7 +11,8 @@ class AdminCitizens extends React.Component {
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear Ciudadano" action="/admin/citizen/new" />
+          <h3>Ciudadanos</h3>
+          <LinkButton name="Crear nuevo" action="/admin/citizen/new" />
         </div>
         <AdminCitizensList data={citizens}/>
       </div>

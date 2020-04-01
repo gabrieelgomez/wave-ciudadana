@@ -5,7 +5,6 @@ import CitizenForm from './Form';
 class UpdateCitizenForm extends React.Component {
 
   render() {
-
     return (
       <div className="admin-container">
         <h1>Actualizar ciudadano</h1>

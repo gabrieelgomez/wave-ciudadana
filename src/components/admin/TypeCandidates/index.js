@@ -11,7 +11,8 @@ class AdminTypeCandidates extends React.Component {
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear tipo de candidatura" action="/admin/type_candidate/new" />
+          <h3>Tipos de Candidaturas</h3>
+          <LinkButton name="Crear nuevo" action="/admin/type_candidate/new" />
         </div>
         <AdminTypeCandidatesList data={type_candidates}/>
       </div>

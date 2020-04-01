@@ -11,7 +11,8 @@ class AdminPollCategories extends React.Component {
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear Categoría de Encuesta" action="/admin/poll_category/new" />
+          <h3>Categorías de Encuestas</h3>
+          <LinkButton name="Crear nueva" action="/admin/poll_category/new" />
         </div>
         <AdminPollCategoriesList data={poll_categories}/>
       </div>

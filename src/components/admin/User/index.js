@@ -11,7 +11,8 @@ class AdminUsers extends React.Component {
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear Usuario" action="/admin/user/new" />
+          <h3>Usuarios</h3>
+          <LinkButton name="Crear nuevo" action="/admin/user/new" />
         </div>
         <AdminUsersList data={users}/>
       </div>
