@@ -1,4 +1,4 @@
-import { Input, Button, Card } from 'antd';
+import { Input, Button, Card, Table } from 'antd';
 import styled from 'styled-components';
 
 export const StyledCard = styled(Card)`
@@ -43,5 +43,15 @@ export const StyledButton = styled(Button)`
 
   &:hover {
     color: #0c2e60;
+  }
+`
+
+export const StyledTable = styled(Table)`
+  background-color: #fff;
+  width: 100%;
+
+  @media screen and (min-width:0px) and (max-width:991px) {
+    overflow-x: scroll;
+    display: inline-block;
   }
 `
