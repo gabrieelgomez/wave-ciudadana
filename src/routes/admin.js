@@ -32,6 +32,18 @@ import NewProposalCategory from "../pages/admin/proposal_categories/NewProposalC
 import ShowProposalCategory from "../pages/admin/proposal_categories/ShowProposalCategory";
 import UpdateProposalCategory from "../pages/admin/proposal_categories/UpdateProposalCategory";
 
+// ProposalCategories
+import AllPollCategories from "../pages/admin/poll_categories/AllPollCategories";
+import NewPollCategory from "../pages/admin/poll_categories/NewPollCategory";
+import ShowPollCategory from "../pages/admin/poll_categories/ShowPollCategory";
+import UpdatePollCategory from "../pages/admin/poll_categories/UpdatePollCategory";
+
+// Proposal
+import AllProposals from "../pages/admin/proposals/AllProposals";
+import NewProposal from "../pages/admin/proposals/NewProposal";
+import ShowProposal from "../pages/admin/proposals/ShowProposal";
+import UpdateProposal from "../pages/admin/proposals/UpdateProposal";
+
 export default [
   {
     path: "/admin",
@@ -166,6 +178,57 @@ export default [
     path: "/admin/proposal_category/:id/update",
     layout: DefaultAdminLayout,
     component: UpdateProposalCategory,
+    exact: true
+  },
+
+
+  {
+    path: "/admin/poll_categories",
+    layout: DefaultAdminLayout,
+    component: AllPollCategories,
+    exact: true
+  },
+  {
+    path: "/admin/poll_category/new",
+    layout: DefaultAdminLayout,
+    component: NewPollCategory,
+    exact: true
+  },
+  {
+    path: "/admin/poll_category/:id",
+    layout: DefaultAdminLayout,
+    component: ShowPollCategory,
+    exact: true
+  },
+  {
+    path: "/admin/poll_category/:id/update",
+    layout: DefaultAdminLayout,
+    component: UpdatePollCategory,
+    exact: true
+  },
+
+  {
+    path: "/admin/proposals",
+    layout: DefaultAdminLayout,
+    component: AllProposals,
+    exact: true
+  },
+  {
+    path: "/admin/proposal/new",
+    layout: DefaultAdminLayout,
+    component: NewProposal,
+    exact: true
+  },
+  {
+    path: "/admin/proposal/:id",
+    layout: DefaultAdminLayout,
+    component: ShowProposal,
+    exact: true
+  },
+  {
+    path: "/admin/proposal/:id/update",
+    layout: DefaultAdminLayout,
+    component: UpdateProposal,
     exact: true
   },
 ];

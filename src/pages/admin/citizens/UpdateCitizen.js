@@ -110,7 +110,7 @@ class UpdateCitizen extends React.Component {
 
   updateCitizen = async (citizen) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'PUT',
       endpoint: `v1/wave_citizen/citizens/${citizen.id}/update`,
       payload: {
@@ -126,7 +126,7 @@ class UpdateCitizen extends React.Component {
       },
       errorCallback: (err) => {
         swal({
-          title: "Hubo un eror",
+          title: "Hubo un error",
           text: err.toString(),
           icon: 'error'
         })

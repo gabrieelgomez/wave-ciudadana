@@ -1,24 +1,25 @@
 import React from 'react';
-import NewCitizenForm from "../../../components/admin/Citizens/New";
+import NewProposalForm from "../../../components/admin/Proposals/New";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class NewCitizen extends React.Component {
+class NewProposal extends React.Component {
+
   state = {
-    type_candidates: []
+    proposal_categories: []
   }
 
   componentDidMount() {
-    this.getTypeCandidatesData()
+    this.getProposalCategoriesData()
   }
 
-  getTypeCandidatesData = async () => {
+  getProposalCategoriesData = async () => {
     let data = [];
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: 'v1/wave_citizen/type_candidacies',
+      endpoint: 'v1/wave_citizen/proposal_categories',
       headers: {
         'access-token': access_token,
         client, uid
@@ -37,28 +38,28 @@ class NewCitizen extends React.Component {
     }
 
     this.setState({
-      type_candidates: data
+      proposal_categories: data
     })
   }
 
-  createCitizen = async (citizen) => {
+  createProposal = async (proposal) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'POST',
-      endpoint: 'v1/wave_citizen/citizens/create',
+      endpoint: 'v1/wave_citizen/proposals/create',
       payload: {
-        user: {
-          ...citizen
-        },
-        citizen
+        proposal: {
+          user_id: this.props.currentUser.id,
+          ...proposal
+        }
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal('Usuario y ciudadano creados exitosamente', '', 'success')
-        this.props.history.push(`/admin/citizens`)
+        swal('Propuesta creada exitosamente', '', 'success')
+        this.props.history.push(`/admin/proposals`)
       },
       errorCallback: (err) => {
         swal({
@@ -71,20 +72,22 @@ class NewCitizen extends React.Component {
   }
 
   render() {
-    return <NewCitizenForm
-      createCitizen={this.createCitizen}
-      typeCandidatesData={this.state.type_candidates}
+    return <NewProposalForm
+      createProposal={this.createProposal}
+      proposalCategoriesData={this.state.proposal_categories}
+      currentUser={this.props.currentUser}
     />
   }
 }
 
 const mapStateToProps = (state) => {
   const { tokens } = state.session;
-  return { tokens };
+  const { currentUser } = state.session;
+  return { tokens, currentUser };
 }
 
 const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewCitizen);
+export default connect(mapStateToProps, mapDispatchToProps)(NewProposal);

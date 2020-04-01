@@ -1,25 +1,27 @@
 import React from 'react';
-import CountryShowCard from "../../../components/admin/Countries/Show";
+import ProposalShowCard from "../../../components/admin/Proposals/Show";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class ShowCountry extends React.Component {
+class ShowProposal extends React.Component {
 
   state = {
-    country: {}
+    proposal: {},
+    proposal_category: {},
+    proposal_user: {}
   }
 
   componentDidMount() {
-    this.countryID = this.props.match.params.id
-    this.getCountryData(this.countryID)
+    this.proposalID = this.props.match.params.id
+    this.getProposalData(this.proposalID)
   }
 
-  getCountryData = async (id) => {
+  getProposalData = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: `v1/wave_citizen/countries/${id}`,
+      endpoint: `v1/wave_citizen/proposals/${id}`,
       headers: {
         'access-token': access_token,
         client, uid
@@ -27,30 +29,36 @@ class ShowCountry extends React.Component {
     })
 
     const data = res.data.data
-    const countryData = data.attributes
+    const proposalData = data.attributes
 
     this.setState({
-      country: {
+      proposal: {
         id: data.id,
-        ...countryData
+        ...proposalData
+      },
+      proposal_category: {
+        name: proposalData.proposal_category.name
+      },
+      proposal_user: {
+        ...proposalData.user
       }
     })
   }
 
-  deleteCountry = async (id) => {
+  deleteProposal = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'DELETE',
-      endpoint: `v1/wave_citizen/countries/${id}/destroy`,
+      endpoint: `v1/wave_citizen/proposals/${id}/destroy`,
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal(`País eliminado con exito`, {
+        swal(`Tipo de candidatura eliminada con exito`, {
           icon: "success",
         }).then(()=> {
-          this.props.history.push('/admin/countries');
+          this.props.history.push('/admin/proposals');
         });
       },
       errorCallback: () => {
@@ -72,16 +80,19 @@ class ShowCountry extends React.Component {
     })
     .then((willDelete) => {
       if (willDelete) {
-        this.deleteCountry(this.countryID)
+        this.deleteProposal(this.proposalID)
       } else {
-        swal(`País está a salvo`);
+        swal(`Propuesta está a salvo`);
       }
     });
   }
 
   render() {
-    return <CountryShowCard
-      country={this.state.country}
+    return <ProposalShowCard
+      proposal={this.state.proposal}
+      proposal_category={this.state.proposal_category}
+      proposal_user={this.state.proposal_user}
+
       handleDelete={this.handleDelete}
     />
   }
@@ -96,4 +107,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowCountry);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowProposal);

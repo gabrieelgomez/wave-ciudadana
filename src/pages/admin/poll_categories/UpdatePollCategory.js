@@ -1,19 +1,19 @@
 import React from 'react';
-import UpdateTypeCandidateForm from "../../../components/admin/TypeCandidates/Update";
+import UpdatePollCategoryForm from "../../../components/admin/PollCategories/Update";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class UpdateTypeCandidate extends React.Component {
+class UpdatePollCategory extends React.Component {
 
   state = {
-    type_candidate: {},
+    poll_category: {},
     countries: []
   }
 
   componentDidMount() {
-    const type_candidateID = this.props.match.params.id;
-    this.getTypeCandidateData(type_candidateID)
+    const poll_categoryID = this.props.match.params.id;
+    this.getPollCategoryData(poll_categoryID)
     this.getCountriesData()
   }
 
@@ -21,8 +21,8 @@ class UpdateTypeCandidate extends React.Component {
     const { name, value } = e.target;
     this.setState(prevState=> {
       return {
-        type_candidate: {
-          ...prevState.type_candidate,
+        poll_category: {
+          ...prevState.poll_category,
           [name]: value
         }
       }
@@ -33,18 +33,18 @@ class UpdateTypeCandidate extends React.Component {
     const value = e;
     this.setState(prevState=> {
       return {
-        type_candidate: {
-          ...prevState.type_candidate,
+        poll_category: {
+          ...prevState.poll_category,
           country_id: value
         }
       }
     });
   }
 
-  handleUpdateTypeCandidate = (e) => {
+  handleUpdatePollCategory = (e) => {
     e.preventDefault()
-    const { type_candidate } = this.state;
-    this.updateTypeCandidate(type_candidate)
+    const { poll_category } = this.state;
+    this.updatePollCategory(poll_category)
   }
 
   getCountriesData = async () => {
@@ -75,11 +75,11 @@ class UpdateTypeCandidate extends React.Component {
     })
   }
 
-  getTypeCandidateData = async (id) => {
+  getPollCategoryData = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: `v1/wave_citizen/type_candidacies/${id}`,
+      endpoint: `v1/wave_citizen/poll_categories/${id}`,
       headers: {
         'access-token': access_token,
         client, uid
@@ -89,28 +89,28 @@ class UpdateTypeCandidate extends React.Component {
     const data = res.data.data
 
     this.setState({
-      type_candidate: {
+      poll_category: {
         id: data.id,
         ...data.attributes
       }
     })
   }
 
-  updateTypeCandidate = async (type_candidacy) => {
+  updatePollCategory = async (poll_category) => {
     const { uid, client, access_token } = this.props.tokens;
-    await this.props.api({
+    const res = await this.props.api({
       method: 'PUT',
-      endpoint: `v1/wave_citizen/type_candidacies/${type_candidacy.id}/update`,
+      endpoint: `v1/wave_citizen/poll_categories/${poll_category.id}/update`,
       payload: {
-        type_candidacy
+        poll_category
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal('Datos actualizados exitosamente', '', 'success')
-        this.props.history.push(`/admin/type_candidate/${type_candidacy.id}`)
+        swal('País actualizado exitosamente', '', 'success')
+        this.props.history.push(`/admin/poll_category/${poll_category.id}`)
       },
       errorCallback: (err) => {
         swal({
@@ -120,15 +120,16 @@ class UpdateTypeCandidate extends React.Component {
         })
       }
     })
+    console.log(res)
   }
 
   render() {
-    return <UpdateTypeCandidateForm
-      type_candidateData={this.state.type_candidate}
+    return <UpdatePollCategoryForm
+      poll_categoryData={this.state.poll_category}
       countriesData={this.state.countries}
-      handleUpdateTypeCandidate={this.handleUpdateTypeCandidate}
-      handleSelectChange={this.handleSelectChange}
+      handleUpdatePollCategory={this.handleUpdatePollCategory}
       handleChange={this.handleChange}
+      handleSelectChange={this.handleSelectChange}
     />
   }
 }
@@ -142,4 +143,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateTypeCandidate);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdatePollCategory);

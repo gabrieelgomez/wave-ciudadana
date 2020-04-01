@@ -1,25 +1,26 @@
 import React from 'react';
-import CountryShowCard from "../../../components/admin/Countries/Show";
+import PollCategoryShowCard from "../../../components/admin/PollCategories/Show";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class ShowCountry extends React.Component {
+class ShowPollCategory extends React.Component {
 
   state = {
+    poll_category: {},
     country: {}
   }
 
   componentDidMount() {
-    this.countryID = this.props.match.params.id
-    this.getCountryData(this.countryID)
+    this.poll_categoryID = this.props.match.params.id
+    this.getPollCategoryData(this.poll_categoryID)
   }
 
-  getCountryData = async (id) => {
+  getPollCategoryData = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: `v1/wave_citizen/countries/${id}`,
+      endpoint: `v1/wave_citizen/poll_categories/${id}`,
       headers: {
         'access-token': access_token,
         client, uid
@@ -27,30 +28,33 @@ class ShowCountry extends React.Component {
     })
 
     const data = res.data.data
-    const countryData = data.attributes
+    const poll_categoryData = data.attributes
 
     this.setState({
-      country: {
+      poll_category: {
         id: data.id,
-        ...countryData
+        ...poll_categoryData
+      },
+      country: {
+        name: poll_categoryData.country.name
       }
     })
   }
 
-  deleteCountry = async (id) => {
+  deletePollCategory = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'DELETE',
-      endpoint: `v1/wave_citizen/countries/${id}/destroy`,
+      endpoint: `v1/wave_citizen/poll_categories/${id}/destroy`,
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal(`País eliminado con exito`, {
+        swal(`Categoría de encuesta eliminada con exito`, {
           icon: "success",
         }).then(()=> {
-          this.props.history.push('/admin/countries');
+          this.props.history.push('/admin/poll_categories');
         });
       },
       errorCallback: () => {
@@ -72,15 +76,16 @@ class ShowCountry extends React.Component {
     })
     .then((willDelete) => {
       if (willDelete) {
-        this.deleteCountry(this.countryID)
+        this.deletePollCategory(this.poll_categoryID)
       } else {
-        swal(`País está a salvo`);
+        swal(`Categoría de encuesta está a salvo`);
       }
     });
   }
 
   render() {
-    return <CountryShowCard
+    return <PollCategoryShowCard
+      poll_category={this.state.poll_category}
       country={this.state.country}
       handleDelete={this.handleDelete}
     />
@@ -96,4 +101,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowCountry);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPollCategory);

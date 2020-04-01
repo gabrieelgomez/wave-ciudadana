@@ -11,7 +11,8 @@ class AdminCountries extends React.Component {
     return (
       <div className="admin-container">
         <div className="admin-actions">
-          <LinkButton name="Crear País" action="/admin/country/new" />
+          <h3>Países</h3>
+          <LinkButton name="Crear nuevo" action="/admin/country/new" />
         </div>
         <AdminCountriesList data={countries}/>
       </div>

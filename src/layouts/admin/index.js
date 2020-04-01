@@ -10,7 +10,7 @@ class DefaultAdminLayout extends Component {
 
     return (
       <Layout>
-        <AdminSider />
+        <AdminSider path={this.props.location}/>
         <Layout className='layout'>
           {this.props.children}
         </Layout>

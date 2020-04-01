@@ -23,7 +23,7 @@ class NewUser extends React.Component {
       },
       errorCallback: (err) => {
         swal({
-          title: "Hubo un eror",
+          title: "Hubo un error",
           text: err.toString(),
           icon: 'error'
         })

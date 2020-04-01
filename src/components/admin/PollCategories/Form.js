@@ -9,7 +9,7 @@ import {
 } from 'antd';
 const {Option} = Select;
 
-const ProposalCategoryForm = (props) => {
+const PollCategoryForm = (props) => {
   const {
     name,
     country_id
@@ -24,7 +24,7 @@ const ProposalCategoryForm = (props) => {
       <Row>
         <Col span={12} lg={12} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
-            <label>Categoría de Propuesta (ej: Sector Salud)</label>
+            <label>Categoría de Encuesta (ej: Sector Salud)</label>
             <Input
               type="text"
               name="name"
@@ -56,4 +56,4 @@ const ProposalCategoryForm = (props) => {
   )
 }
 
-export default ProposalCategoryForm;
+export default PollCategoryForm;

@@ -1,24 +1,24 @@
 import React from 'react';
-import NewCitizenForm from "../../../components/admin/Citizens/New";
+import NewPollCategoryForm from "../../../components/admin/PollCategories/New";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class NewCitizen extends React.Component {
+class NewPollCategory extends React.Component {
   state = {
-    type_candidates: []
+    countries: []
   }
 
   componentDidMount() {
-    this.getTypeCandidatesData()
+    this.getCountriesData()
   }
 
-  getTypeCandidatesData = async () => {
+  getCountriesData = async () => {
     let data = [];
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: 'v1/wave_citizen/type_candidacies',
+      endpoint: 'v1/wave_citizen/countries',
       headers: {
         'access-token': access_token,
         client, uid
@@ -37,28 +37,25 @@ class NewCitizen extends React.Component {
     }
 
     this.setState({
-      type_candidates: data
+      countries: data
     })
   }
 
-  createCitizen = async (citizen) => {
+  createPollCategory = async (poll_category) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'POST',
-      endpoint: 'v1/wave_citizen/citizens/create',
+      endpoint: 'v1/wave_citizen/poll_categories/create',
       payload: {
-        user: {
-          ...citizen
-        },
-        citizen
+        poll_category
       },
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal('Usuario y ciudadano creados exitosamente', '', 'success')
-        this.props.history.push(`/admin/citizens`)
+        swal('Categoría de Propuesta creada exitosamente', '', 'success')
+        this.props.history.push(`/admin/poll_categories`)
       },
       errorCallback: (err) => {
         swal({
@@ -71,9 +68,9 @@ class NewCitizen extends React.Component {
   }
 
   render() {
-    return <NewCitizenForm
-      createCitizen={this.createCitizen}
-      typeCandidatesData={this.state.type_candidates}
+    return <NewPollCategoryForm
+      createPollCategory={this.createPollCategory}
+      countriesData={this.state.countries}
     />
   }
 }
@@ -87,4 +84,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewCitizen);
+export default connect(mapStateToProps, mapDispatchToProps)(NewPollCategory);
