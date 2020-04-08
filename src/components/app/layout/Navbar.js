@@ -60,7 +60,7 @@ class Navbar extends React.Component {
           </ul>
           { currentUser ? (
               <ul>
-                <li class="currentUser">
+                <li className="currentUser">
                   <Link to={`/profile`}>{currentUser.email}</Link>
                 </li>
                 { currentUser.roles && currentUser.roles.length !== 0 && currentUser.roles[0].name === 'superadmin' &&
