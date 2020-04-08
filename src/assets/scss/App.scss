@@ -2,14 +2,15 @@
 
 $primary: #0c2e60;
 $secondary: #ff663b;
+$fontPrimary: 'Martel Sans';
 
 a {
   color: $primary !important;
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 }
 
 .title {
@@ -73,7 +74,7 @@ h1, h2, h3, h4 {
 }
 
 .login-form-register {
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
   font-weight: 700;
   margin-bottom: 20px;
 }
@@ -86,7 +87,7 @@ h1, h2, h3, h4 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 
   ul {
     list-style: none;
@@ -134,7 +135,7 @@ h1, h2, h3, h4 {
     }
 
     li {
-      font-family: 'Martel Sans';
+      font-family: $fontPrimary;
       text-transform: uppercase;
       font-size: 14px;
       font-weight: 600;
@@ -217,8 +218,49 @@ h1, h2, h3, h4 {
 
     p {
       font-size: 16px;
-      font-family: 'Martel Sans';
+      font-family: $fontPrimary;
       color: $primary;
+    }
+  }
+}
+
+.feed {
+  padding: 20px 0;
+}
+
+.quick-post {
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
+
+  .quick-post-header {
+    border-bottom: 1px solid #eaeaf5;
+
+    .ant-tabs-nav {
+      width: 100%;
+      font-family: $fontPrimary;
+    }
+
+    .ant-tabs-nav .ant-tabs-tab {
+      width: 50%;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  .quick-post-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 14px 28px;
+    border-top: 1px solid #eaeaf5;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+
+    button {
+      width: 100px;
+      height: 40px;
+      padding: 0;
     }
   }
 }
