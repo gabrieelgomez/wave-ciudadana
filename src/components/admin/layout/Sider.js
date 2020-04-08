@@ -85,10 +85,10 @@ class AdminSider extends React.Component {
             <NavLink to='/admin/proposals'>Propuestas</NavLink>
           </Menu.Item>
 
-          {/* <Menu.Item key='9'>
-            <Icon type='user' />
-            <NavLink to='#'>Encuestas</NavLink>
-          </Menu.Item> */}
+          <Menu.Item key='/admin/polls'>
+            <Icon type='check' />
+            <NavLink to='/admin/polls'>Encuestas</NavLink>
+          </Menu.Item>
 
         </Menu>
       </StyledSider>

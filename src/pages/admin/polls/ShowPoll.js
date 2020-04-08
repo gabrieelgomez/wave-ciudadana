@@ -1,27 +1,27 @@
 import React from 'react';
-import ProposalShowCard from "../../../components/admin/Proposals/Show";
+import PollShowCard from "../../../components/admin/Polls/Show";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 import swal from 'sweetalert';
 
-class ShowProposal extends React.Component {
+class ShowPoll extends React.Component {
 
   state = {
-    proposal: {},
-    proposal_category: {},
-    proposal_user: {}
+    poll: {},
+    poll_category: {},
+    poll_user: {}
   }
 
   componentDidMount() {
-    this.proposalID = this.props.match.params.id
-    this.getProposalData(this.proposalID)
+    this.pollID = this.props.match.params.id
+    this.getPollData(this.pollID)
   }
 
-  getProposalData = async (id) => {
+  getPollData = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     const res = await this.props.api({
       method: 'GET',
-      endpoint: `v1/wave_citizen/proposals/${id}`,
+      endpoint: `v1/wave_citizen/polls/${id}`,
       headers: {
         'access-token': access_token,
         client, uid
@@ -29,36 +29,36 @@ class ShowProposal extends React.Component {
     })
 
     const data = res.data.data
-    const proposalData = data.attributes
+    const pollData = data.attributes
 
     this.setState({
-      proposal: {
+      poll: {
         id: data.id,
-        ...proposalData
+        ...pollData
       },
-      proposal_category: {
-        name: proposalData.proposal_category.name
+      poll_category: {
+        name: pollData.poll_category.name
       },
-      proposal_user: {
-        ...proposalData.user
+      poll_user: {
+        ...pollData.user
       }
     })
   }
 
-  deleteProposal = async (id) => {
+  deletePoll = async (id) => {
     const { uid, client, access_token } = this.props.tokens;
     await this.props.api({
       method: 'DELETE',
-      endpoint: `v1/wave_citizen/proposals/${id}/destroy`,
+      endpoint: `v1/wave_citizen/polls/${id}/destroy`,
       headers: {
         'access-token': access_token,
         client, uid
       },
       successCallback: () => {
-        swal(`Propuesta eliminada`, {
+        swal(`Encuesta eliminada`, {
           icon: "warning",
         }).then(()=> {
-          this.props.history.push('/admin/proposals');
+          this.props.history.push('/admin/polls');
         });
       },
       errorCallback: () => {
@@ -80,19 +80,18 @@ class ShowProposal extends React.Component {
     })
     .then((willDelete) => {
       if (willDelete) {
-        this.deleteProposal(this.proposalID)
+        this.deletePoll(this.pollID)
       } else {
-        swal(`Propuesta está a salvo`);
+        swal(`Encuesta está a salvo`);
       }
     });
   }
 
   render() {
-    return <ProposalShowCard
-      proposal={this.state.proposal}
-      proposal_category={this.state.proposal_category}
-      proposal_user={this.state.proposal_user}
-
+    return <PollShowCard
+      poll={this.state.poll}
+      poll_category={this.state.poll_category}
+      poll_user={this.state.poll_user}
       handleDelete={this.handleDelete}
     />
   }
@@ -107,4 +106,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShowProposal);
+export default connect(mapStateToProps, mapDispatchToProps)(ShowPoll);
