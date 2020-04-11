@@ -4,17 +4,19 @@ import styled from 'styled-components';
 const fontPrimary = 'Martel Sans';
 const primary = "#0c2e60";
 const secondary = "#ff663b";
+const radius = '12px';
 
 export const StyledCard = styled(Card)`
   width: calc(100% - 20px) !important;
   margin: 10px 10px;
-  height: 350px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
+  border-radius: ${radius};
   font-family: ${fontPrimary};
+  margin: 0;
+  border: none;
 
   .ant-card-cover img {
-    border-radius: 10px 10px 0 0;
+    border-radius: 12px 12px 0 0;
   }
 `
 
@@ -22,12 +24,12 @@ export const StyledPollCard = styled(Card)`
   width: calc(100% - 20px) !important;
   margin: 10px 10px;
   height: 350px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
+  border-radius: ${radius};
   font-family: ${fontPrimary};
 
   .ant-card-cover img {
-    border-radius: 10px 10px 0 0;
+    border-radius: 12px 12px 0 0;
   }
 `
 
@@ -35,7 +37,7 @@ export const StyledInput = styled(Input)`
   padding: 8px 16px;
   font-size: 13px;
   height: auto;
-  border-radius: 10px;
+  border-radius: ${radius};
   font-family: ${fontPrimary};
 
   &:focus, &:hover {
@@ -50,7 +52,7 @@ export const StyledInputIcon = styled(Input)`
     padding: 8px 16px;
     font-size: 13px;
     height: auto;
-    border-radius: 10px;
+    border-radius: ${radius};
     font-family: ${fontPrimary};
 
     &:focus, &:hover {
@@ -62,19 +64,20 @@ export const StyledInputIcon = styled(Input)`
 `
 
 export const StyledButton = styled(Button)`
-  border-radius: 10px;
-  padding: 10px 20px;
+  border-radius: ${radius};
+  padding: 8px 20px;
   height: auto;
-  width: 100%;
   box-shadow: 4px 7px 12px 0 rgba(255, 102, 59, 0.2);
   background-color: #ff663b;
   color: white;
   border: none;
   font-weight: 700;
+  font-size: 12px;
   font-family: ${fontPrimary};
 
   &:hover {
-    color: #0c2e60;
+    color: #fff;
+    background-color: #ff663b;
   }
 `
 
@@ -95,7 +98,7 @@ export const StyledTextAreaFeed = styled(Input.TextArea)`
   font-size: 14px;
   resize: none;
   font-family: ${fontPrimary};
-  border-radius: 10px;
+  border-radius: ${radius};
 
   &:focus, &:hover {
     outline: none;
@@ -110,7 +113,7 @@ export const StyledTextAreaFeed = styled(Input.TextArea)`
 
 export const StyledPollModal = styled(Modal)`
   .ant-modal-content {
-    border-radius: 10px;
+    border-radius: ${radius};
     font-family: ${fontPrimary};
   }
 

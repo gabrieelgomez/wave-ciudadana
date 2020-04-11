@@ -2,6 +2,7 @@
 
 $primary: #0c2e60;
 $secondary: #ff663b;
+$fontPrimary: 'Martel Sans';
 
 .logo {
   height: 40px;
@@ -67,7 +68,7 @@ $secondary: #ff663b;
 
 .ant-menu-submenu-title span {
   color: $primary;
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 }
 
 .ant-menu-item a {

@@ -1,21 +1,36 @@
 import React from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Avatar, List } from 'antd';
 import { connect } from 'react-redux';
+import { StyledCard } from '../../components/styled';
+import LinkButton from '../../components/common/ui/LinkButton';
 import Banner from '../../components/app/Banner';
-import PollBox from '../../components/app/Box';
+import Box from '../../components/app/Box';
 
 class Home extends React.Component {
   render() {
     const currentUser = this.props.currentUser;
+    const { name, lastname, email, nickname } = currentUser;
 
     return (
       <div>
         { currentUser ? (
           <div className="feed">
             <Row>
-              <Col offset={1} span={6}>Profile</Col>
+              <Col offset={1} span={6}>
+                <StyledCard>
+                  <div class="feed-profile-header">
+                    <Avatar size={30} src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
+                    <span className="nickname">{ nickname }</span>
+                  </div>
+                  <List>
+                    <List.Item><strong>Nombre:</strong> {name} {lastname}</List.Item>
+                    <List.Item><strong>Email:</strong> {email}</List.Item>
+                  </List>
+                  <LinkButton action="/profile" name="Ver perfil"/>
+                </StyledCard>
+              </Col>
               <Col span={10}>
-                <PollBox />
+                <Box />
               </Col>
               <Col span={6}></Col>
             </Row>
