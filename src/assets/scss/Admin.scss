@@ -84,3 +84,8 @@ $fontPrimary: 'Martel Sans';
 .ant-menu-item .anticon + a {
   transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
+
+.swal-modal {
+  border-radius: 12px;
+  font-family: $fontPrimary;
+}

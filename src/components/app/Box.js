@@ -3,7 +3,8 @@ import { Form, Tabs } from 'antd';
 import { StyledTextAreaFeed, StyledInput, StyledButton } from '../styled';
 import CustomModal from '../../components/common/ui/Modal';
 import PollForm from '../app/Polls/Form';
-
+import PollService from '../../services/api/poll';
+import swal from 'sweetalert';
 const { TabPane }  = Tabs;
 
 class Box extends React.Component {
@@ -13,11 +14,12 @@ class Box extends React.Component {
     }
   }
 
-  callback = (key) =>{
-    console.log(key);
+  componentDidMount() {
+    this.service = new PollService(this.props.api)
+    this.pollFormRef = React.createRef();
   }
 
-  handleClose = e => {
+  handleClose = () => {
     this.setState(prevState =>{
       return {
         poll: {
@@ -37,13 +39,42 @@ class Box extends React.Component {
     });
   };
 
+  createPoll = (poll) => {
+    const {tokens, currentUser} = this.props;
+    const payload = {
+      poll: {
+        citizen_id: currentUser.id,
+        ...poll
+      }
+    }
+
+    const successCallback = () => {
+      this.handleClose()
+      swal('Encuesta creada exitosamente', '', 'success')
+    }
+
+    const errorCallback = (err) => {
+      this.handleClose()
+      swal({
+        title: "Hubo un error",
+        text: err.toString(),
+        icon: 'error'
+      })
+    }
+
+    this.service.create({payload, tokens, successCallback, errorCallback})
+  }
   
+  handleSubmit = () => {
+    this.pollFormRef.current.click()
+  }
+
   render() {
     return (
       <div>
         <div className="quick-post">
           <div className="quick-post-header">
-            <Tabs defaultActiveKey="1" onChange={this.callback}>
+            <Tabs defaultActiveKey="1">
               <TabPane tab="Encuestas" key="1">
                 <Form.Item>
                   <StyledInput
@@ -68,12 +99,16 @@ class Box extends React.Component {
           isScrollable
           styles={{maxHeight: '60vh'}}
           footer={[
-            <div key="1" className="quick-post-footer">
-              <StyledButton>Publicar</StyledButton>
+            <div key="submit" className="quick-post-footer">
+              <StyledButton onClick={this.handleSubmit}>Publicar</StyledButton>
             </div>
           ]}
         >
-          <PollForm />
+          <PollForm
+            pollFormRef={this.pollFormRef}
+            handleSubmit={this.createPoll}
+            categories={this.props.pollCategories}
+          />
         </CustomModal>
       </div>
     )

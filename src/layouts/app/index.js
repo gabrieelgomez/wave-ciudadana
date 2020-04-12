@@ -16,6 +16,7 @@ class DefaultAppLayout extends Component {
         <Navbar
           currentUser={currentUser}
           tokens={tokens}
+          history={this.props.history}
         />
         {this.props.children}
       </Layout>

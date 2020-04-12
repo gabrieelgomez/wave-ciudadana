@@ -46,7 +46,7 @@ class Navbar extends React.Component {
     let form;
 
     if (showLogin) {
-      form = <LoginForm cb={this.handleCancel}/>
+      form = <LoginForm cb={this.handleCancel} history={this.props.history} />
     } else if (showRegister) {
       form = <RegisterForm cb={this.handleCancel}/>
     }

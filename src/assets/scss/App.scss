@@ -109,8 +109,6 @@ h1, h2, h3, h4 {
 
 .header {
   background: #fff;
-  border-radius: 5px;
-  margin: 0 5%;
   position: relative;
   z-index: 2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -224,7 +222,7 @@ h1, h2, h3, h4 {
   }
 }
 
-.feed {
+.page-home {
   padding: 20px 0;
 }
 
@@ -254,7 +252,6 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 14px 28px;
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 
@@ -469,4 +466,9 @@ h1, h2, h3, h4 {
     margin-left: 10px;
     font-weight: 700;
   }
+}
+
+.swal-modal {
+  border-radius: 12px;
+  font-family: $fontPrimary;
 }

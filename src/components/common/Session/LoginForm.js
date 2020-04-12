@@ -20,6 +20,10 @@ class LoginForm extends React.Component {
     });
   }
 
+  redirectToAdmin = () => {
+    this.props.history.push('/admin');
+  }
+
   loginUser = (e) => {
     e.preventDefault();
     const {
@@ -64,7 +68,7 @@ class LoginForm extends React.Component {
 
         if (currentUser.roles && currentUser.roles.length !== 0) {
           if (currentUser.roles[0].name === 'superadmin') { 
-            console.log('superadmin logged')
+            this.redirectToAdmin()
           }
         } else {
           console.log('User with no role')

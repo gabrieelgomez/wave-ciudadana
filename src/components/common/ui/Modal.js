@@ -24,6 +24,10 @@ class CustomModal extends React.Component {
       max-height: ${ isScrollable ? styles.maxHeight : 'unset'};
       overflow-y: ${ isScrollable ? 'scroll' : 'unset'};
     }
+
+    .ant-modal-footer {
+      padding: 10px 15px 0 15px
+    }
   `
 
     return (
