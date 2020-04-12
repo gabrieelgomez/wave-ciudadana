@@ -86,7 +86,12 @@ class LoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login-box">
-        <h1>Inicio de sesión</h1>
+        <h1 style={{
+          textTransform: 'uppercase',
+          color: '#ff663b',
+          fontWeight: 700,
+          marginBottom: '30px'
+        }}>Inicio de sesión</h1>
         <Form className="login-form" onSubmit={this.loginUser}>
           <Form.Item>
             {getFieldDecorator('email', {

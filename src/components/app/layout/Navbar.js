@@ -88,7 +88,8 @@ class Navbar extends React.Component {
         </nav>
         <CustomModal
           visible={this.state.visible}
-          handleCancel={this.handleCancel}
+          handleClose={this.handleCancel}
+          footer={false}
         >
           {form}
         </CustomModal>

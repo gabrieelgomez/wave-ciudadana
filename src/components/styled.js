@@ -1,9 +1,8 @@
-import { Input, Button, Card, Table, Modal } from 'antd';
+import { Input, Button, Card, Table } from 'antd';
 import styled from 'styled-components';
 
 const fontPrimary = 'Martel Sans';
 const primary = "#0c2e60";
-const secondary = "#ff663b";
 const radius = '12px';
 
 export const StyledCard = styled(Card)`
@@ -108,17 +107,5 @@ export const StyledTextAreaFeed = styled(Input.TextArea)`
 
   &.ant-input {
     height: 120px;
-  }
-`
-
-export const StyledPollModal = styled(Modal)`
-  .ant-modal-content {
-    border-radius: ${radius};
-    font-family: ${fontPrimary};
-  }
-
-  .ant-modal-body {
-    max-height: 60vh;
-    overflow-y: scroll;
   }
 `

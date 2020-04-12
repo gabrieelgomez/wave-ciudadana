@@ -73,25 +73,6 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
-.modal-box {
-  background-color: white;
-  padding: 50px;
-  border-radius: 25px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  text-align: center;
-
-  h1 {
-    text-transform: uppercase;
-    color: $secondary;
-    font-weight: 700;
-    margin-bottom: 30px;
-  }
-
-  @media screen and (min-width: 0px) and (max-width: 720px) {
-    padding: 30px 20px;
-  }
-}
-
 .login-form-register {
   font-family: $fontPrimary;
   font-weight: 700;

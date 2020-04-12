@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Tabs } from 'antd';
-import { StyledTextAreaFeed, StyledInput } from '../styled';
-import PollModal from '../app/Polls/Modal';
+import { StyledTextAreaFeed, StyledInput, StyledButton } from '../styled';
+import CustomModal from '../../components/common/ui/Modal';
+import PollForm from '../app/Polls/Form';
+
 const { TabPane }  = Tabs;
 
 class Box extends React.Component {
@@ -35,6 +37,7 @@ class Box extends React.Component {
     });
   };
 
+  
   render() {
     return (
       <div>
@@ -59,10 +62,19 @@ class Box extends React.Component {
             </Tabs>
           </div>
         </div>
-        <PollModal 
+        <CustomModal
           visible={this.state.poll.visible}
           handleClose={this.handleClose}
-        />
+          isScrollable
+          styles={{maxHeight: '60vh'}}
+          footer={[
+            <div key="1" className="quick-post-footer">
+              <StyledButton>Publicar</StyledButton>
+            </div>
+          ]}
+        >
+          <PollForm />
+        </CustomModal>
       </div>
     )
   }
