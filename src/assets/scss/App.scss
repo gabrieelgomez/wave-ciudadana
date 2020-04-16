@@ -472,3 +472,40 @@ h1, h2, h3, h4 {
   border-radius: 12px;
   font-family: $fontPrimary;
 }
+
+.feed-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .feed-card-name {
+    display: flex;
+    align-items: center;
+
+    .name {
+      margin-left: 5px;
+      font-size: 12px;
+    }
+  }
+
+  .ant-badge sup {
+    font-size: 10px;
+  }
+}
+
+.feed-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 15px;
+
+  .due-date {
+    font-size: 10px;
+  }
+
+  i {
+    margin-left: 10px;
+  }
+}

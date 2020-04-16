@@ -40,10 +40,9 @@ class Box extends React.Component {
   };
 
   createPoll = (poll) => {
-    const {tokens, currentUser} = this.props;
+    const {tokens} = this.props;
     const payload = {
       poll: {
-        citizen_id: currentUser.id,
         ...poll
       }
     }
@@ -71,7 +70,7 @@ class Box extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginBottom: '15px'}}>
         <div className="quick-post">
           <div className="quick-post-header">
             <Tabs defaultActiveKey="1">

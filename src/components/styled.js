@@ -6,26 +6,13 @@ const primary = "#0c2e60";
 const radius = '12px';
 
 export const StyledCard = styled(Card)`
-  width: calc(100% - 20px) !important;
-  margin: 10px 10px;
+  width: 100% !important;
   box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
   border-radius: ${radius};
   font-family: ${fontPrimary};
   margin: 0;
+  margin-bottom: 15px;
   border: none;
-
-  .ant-card-cover img {
-    border-radius: 12px 12px 0 0;
-  }
-`
-
-export const StyledPollCard = styled(Card)`
-  width: calc(100% - 20px) !important;
-  margin: 10px 10px;
-  height: 350px;
-  box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
-  border-radius: ${radius};
-  font-family: ${fontPrimary};
 
   .ant-card-cover img {
     border-radius: 12px 12px 0 0;

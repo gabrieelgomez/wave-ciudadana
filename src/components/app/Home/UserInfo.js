@@ -19,7 +19,7 @@ class UserInfo extends React.Component {
           <List.Item><strong>Nombre:</strong> {name} {lastname}</List.Item>
           <List.Item><strong>Email:</strong> {email}</List.Item>
         </List>
-        <LinkButton action="/profile" name="Ver perfil"/>
+        <LinkButton action="/my-profile" name="Ver perfil"/>
       </StyledCard>
     );
   }
