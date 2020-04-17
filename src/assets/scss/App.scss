@@ -16,7 +16,7 @@ $fontPrimary: 'Martel Sans';
 }
 
 a {
-  color: $primary !important;
+  color: $primary;
   font-family: $fontPrimary;
 }
 
@@ -32,6 +32,10 @@ h1, h2, h3, h4 {
   font-size: 30px;
   border-bottom: 2px solid #c8c8c8;
   margin-bottom: 30px;
+}
+
+.spacing-top {
+  padding: 15px 0;
 }
 
 .ant-form-item {
@@ -79,6 +83,22 @@ h1, h2, h3, h4 {
   margin-bottom: 20px;
 }
 
+.login-box {
+  text-align: center;
+}
+
+.login-box-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+
+  a {
+    margin-top: 20px;
+    font-size: 12px;
+  }
+}
+
 .login-box-footer {
   border-top: 1px solid #e9e9e9;
   padding-top: 20px;
@@ -108,7 +128,7 @@ h1, h2, h3, h4 {
 }
 
 .header {
-  background: #fff;
+  background: $primary;
   position: relative;
   z-index: 2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -141,12 +161,17 @@ h1, h2, h3, h4 {
       padding: 10px;
       transition: .5s;
 
+      a, span {
+        color: #fff;
+      }
+
       &.currentUser {
         text-transform: lowercase;
       }
 
       i {
         margin-right: 5px;
+        color: #fff;
       }
     }
   }
@@ -222,7 +247,7 @@ h1, h2, h3, h4 {
   }
 }
 
-.page-home {
+.page {
   padding: 20px 0;
 }
 
@@ -501,11 +526,25 @@ h1, h2, h3, h4 {
   border-top: 1px solid #e8e8e8;
   padding-top: 15px;
 
-  .due-date {
-    font-size: 10px;
+  .feed-card-footer-info {
+    font-size: 12px;
   }
 
   i {
     margin-left: 10px;
+    font-size: 15px;
   }
+
+  .ant-badge-count {
+    min-width: 15px;
+    height: 15px;
+    background-color: white;
+    font-size: 10px;
+    padding: 0;
+    color: $primary;
+  }
+}
+
+.ant-radio-group {
+  width: 100%;
 }

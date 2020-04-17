@@ -1,5 +1,5 @@
 import React from 'react';
-import Box from '../../Box';
+import QuickPostBox from './QuickPostBox';
 import List from './List';
 
 const Feed = (props) => {
@@ -7,7 +7,7 @@ const Feed = (props) => {
 
   return (
     <div>
-      <Box
+      <QuickPostBox
         api={api}
         tokens={tokens}
         currentUser={currentUser}

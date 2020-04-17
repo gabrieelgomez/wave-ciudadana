@@ -25,6 +25,7 @@ export const StyledInput = styled(Input)`
   height: auto;
   border-radius: ${radius};
   font-family: ${fontPrimary};
+  background-color: ${props => props.bgcolor ? props.bgcolor : '#fff'};
 
   &:focus, &:hover {
     box-shadow: none;

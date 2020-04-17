@@ -89,3 +89,11 @@ $fontPrimary: 'Martel Sans';
   border-radius: 12px;
   font-family: $fontPrimary;
 }
+
+.ant-table-pagination.ant-pagination {
+  margin: 16px;
+}
+
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+  font-family: $fontPrimary;
+}

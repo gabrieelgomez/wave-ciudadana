@@ -1,13 +1,13 @@
 import React from 'react';
 import { Form, Tabs } from 'antd';
-import { StyledTextAreaFeed, StyledInput, StyledButton } from '../styled';
-import CustomModal from '../../components/common/ui/Modal';
-import PollForm from '../app/Polls/Form';
-import PollService from '../../services/api/poll';
+import { StyledTextAreaFeed, StyledInput, StyledButton } from '../../../styled';
+import CustomModal from '../../../common/ui/Modal';
+import PollForm from '../../Polls/Form';
+import PollService from '../../../../services/api/poll';
 import swal from 'sweetalert';
 const { TabPane }  = Tabs;
 
-class Box extends React.Component {
+class QuickPostBox extends React.Component {
   state = {
     poll: {
       visible: false
@@ -79,6 +79,7 @@ class Box extends React.Component {
                   <StyledInput
                     onClick={this.showModal}
                     placeholder="Haz una pregunta"
+                    bgcolor="#fcfcfd"
                   ></StyledInput>
                 </Form.Item>
               </TabPane>
@@ -114,4 +115,4 @@ class Box extends React.Component {
   }
 }
 
-export default Box;
+export default QuickPostBox;

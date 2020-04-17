@@ -3,7 +3,7 @@ import UserInfo from '../../components/app/Home/UserInfo';
 import Banner from '../../components/app/Banner';
 import Feed from '../../components/app/Home/Feed';
 import PollService from '../../services/api/poll';
-import { Row, Col } from 'antd';
+import { Row, Col, Affix } from 'antd';
 import { connect } from 'react-redux';
 import { api } from '../../services/api';
 
@@ -38,13 +38,15 @@ class Home extends React.Component {
     return (
       <div>
         { currentUser ? (
-          <div className="page-home">
+          <div className="page">
             <Row gutter={16}>
               <Col offset={1} span={6} lg={6} md={6} xs={24}>
-                <UserInfo />
+                <Affix offsetTop={15}>
+                  <UserInfo />
+                </Affix>
               </Col>
               <Col span={10} lg={10} md={10} xs={24}>
-                <Feed 
+                <Feed
                   api={api}
                   tokens={tokens}
                   currentUser={currentUser}

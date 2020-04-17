@@ -1,7 +1,8 @@
 import React from 'react';
-import FeedCard from '../../../components/app/Home/Feed/Card';
+import PollInfo from '../../../components/app/Polls/Info';
 import PollService from '../../../services/api/poll';
-import { Row, Col } from 'antd';
+import { Row, Col, Form } from 'antd';
+import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 
@@ -34,15 +35,27 @@ class Show extends React.Component {
 
   render() {
     const { poll } = this.state;
+    const { api, tokens } = this.props;
+
     return (
-      <Row>
-        <Col span={12} offset={6}>
-          <FeedCard
-            item={poll}
-            type={poll.type}
-          />
-        </Col>
-      </Row>
+      <div className="page">
+        <Row>
+          <Col span={12} offset={6}>
+            <PollInfo
+              api={api}
+              tokens={tokens}
+              item={poll}
+              type={poll.type}
+            />
+            <StyledCard>
+              <Form.Item>
+                <StyledTextAreaFeed placeholder="Comenta..."/>
+                <StyledButton>Comentar</StyledButton>
+              </Form.Item>
+            </StyledCard>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

@@ -88,6 +88,22 @@ class PollService {
 
     return data;
   }
+
+  createVote = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
+    const { uid, client, access_token } = tokens;
+    const res = await this.api({
+      method: 'POST',
+      endpoint: 'v1/wave_citizen/votes/create',
+      payload,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback,
+      errorCallback
+    })
+    console.log(res)
+  }
 }
 
 export default PollService

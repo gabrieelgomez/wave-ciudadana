@@ -123,12 +123,14 @@ class LoginForm extends React.Component {
               />,
             )}
           </Form.Item>
-          <StyledButton htmlType="submit">
-            Iniciar sesión
-          </StyledButton>
-          <Link to={`/reset-password`}>
-            Reset password
-          </Link>
+          <div className="login-box-buttons">
+            <StyledButton htmlType="submit">
+              Iniciar sesión
+            </StyledButton>
+            <Link to={`/reset-password`}>
+              Reset password
+            </Link>
+          </div>
           <div className="login-box-footer">
             Inicia sesión con
             <ul>
