@@ -1,8 +1,8 @@
 import React from 'react';
 import { Avatar, List } from 'antd';
 import { connect } from 'react-redux';
-import { StyledCard } from '../../styled';
-import LinkButton from '../../common/ui/LinkButton';
+import { StyledCard } from '../styled';
+import LinkButton from '../common/ui/LinkButton';
 
 class UserInfo extends React.Component {
   render() {

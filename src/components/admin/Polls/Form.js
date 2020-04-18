@@ -20,7 +20,7 @@ const PollForm = (props) => {
     description,
     poll_category_id,
     due_date,
-    items_attributes
+    items_attributes = []
   } = props.data;
 
   const formatDueDateShow = moment.utc(due_date).format("L");

@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { Avatar, Badge, Icon, Collapse, List } from 'antd';
-import { StyledCard } from '../../../styled';
-import { truncate } from '../../../../helpers';
+import { StyledCard } from '../../styled';
+import { truncate } from '../../../helpers';
 const { Panel } = Collapse;
 
 const StyledCollapse = styled(Collapse)`

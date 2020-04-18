@@ -1,7 +1,7 @@
 import React from 'react';
-import UserInfo from '../../components/app/Home/UserInfo';
+import UserInfo from '../../components/app/UserInfo';
 import Banner from '../../components/app/Banner';
-import Feed from '../../components/app/Home/Feed';
+import Feed from '../../components/app/Feed';
 import PollService from '../../services/api/poll';
 import { Row, Col, Affix } from 'antd';
 import { connect } from 'react-redux';

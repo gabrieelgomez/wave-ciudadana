@@ -1,5 +1,5 @@
 import React from 'react';
-import PollService from '../../../../services/api/poll';
+import PollService from '../../../services/api/poll';
 import FeedCard from './Card';
 
 class List extends React.Component {
