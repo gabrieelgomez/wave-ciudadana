@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { StyledCard } from '../../styled';
 import PollForm from './Form';
 import moment from 'moment';
 
@@ -8,9 +8,49 @@ class NewPollForm extends React.Component {
     poll: {
       title: '',
       description: '',
+      due_date: '',
       poll_category_id: '',
-      due_date: ''
+      items_attributes: []
     }
+  }
+
+  addField = () => {
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          items_attributes: [...prevState.poll.items_attributes, { title: "" }]
+        }
+      }
+    })
+  }
+
+  itemshandleChange = (e, i) => {
+    const items = this.state.poll.items_attributes;
+    items[i].title = e.target.value;
+
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          items_attributes: this.state.poll.items_attributes
+        }
+      }
+    })
+  }
+
+  itemshandleRemove = (i) => {
+    const items = this.state.poll.items_attributes;
+    items.splice(i,1);
+
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          items_attributes: items
+        }
+      }
+    })
   }
 
   handleSelectChange = (e) => {
@@ -57,25 +97,26 @@ class NewPollForm extends React.Component {
   }
 
   render() {
-    const {
-      poll
-    } = this.state;
+    const { poll } = this.state;
 
-    const {pollCategoriesData} = this.props;
+    const {pollCategories} = this.props;
     return (
       <div className="admin-container">
         <h1>Crear nueva propuesta</h1>
-        <Card>
+        <StyledCard>
           <PollForm
             handleSelect={this.handleSelectChange}
             handleSubmit={this.handleCreatePoll}
             handleChange={this.handleChange}
             datePickerChange={this.datePickerChange}
+            itemshandleChange={this.itemshandleChange}
+            itemshandleRemove={this.itemshandleRemove}
+            addField={this.addField}
             data={poll}
-            pollCategoriesData={pollCategoriesData}
+            pollCategories={pollCategories}
           >
           </PollForm>
-        </Card>
+        </StyledCard>
       </div>
     )
   }

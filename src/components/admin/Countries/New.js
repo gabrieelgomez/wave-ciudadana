@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { StyledCard } from '../../styled';
 import CountryForm from './Form';
 
 class NewCountryForm extends React.Component {
@@ -37,14 +37,14 @@ class NewCountryForm extends React.Component {
     return (
       <div className="admin-container">
         <h1>Crear nuevo país</h1>
-        <Card>
+        <StyledCard>
           <CountryForm
             handleSubmit={this.handleCreateCountry}
             handleChange={this.handleChange}
             data={country}
           >
           </CountryForm>
-        </Card>
+        </StyledCard>
       </div>
     )
   }

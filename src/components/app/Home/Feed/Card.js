@@ -7,7 +7,7 @@ import { StyledCard } from '../../../styled';
 import { truncate } from '../../../../helpers';
 const { Panel } = Collapse;
 
-const StyledPanel = styled(Collapse)`
+const StyledCollapse = styled(Collapse)`
   background-color: white;
   border: 0;
   font-size: 12px;
@@ -51,7 +51,7 @@ const FeedCard = (props) => {
           <h3><Link to={`/poll/${info.id}`}>{info.title}</Link></h3>
           <p>{truncate(info.description, 150)}</p>
           { info.items.length !== 0 &&
-            <StyledPanel>
+            <StyledCollapse>
               <Panel header="Items" key="1">
                 <List bordered>
                   { info.items.map((item, i) => {
@@ -63,7 +63,7 @@ const FeedCard = (props) => {
                   })}
                 </List>
               </Panel>
-            </StyledPanel>
+            </StyledCollapse>
           }
           <div className="feed-card-footer">
             <div className="feed-card-footer-info"> {info.total_poll_votes} votos | Vence el {info.due_date ? formatDueDateShow : ''}</div>

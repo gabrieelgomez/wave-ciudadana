@@ -6,7 +6,7 @@ class PollService {
 
   create = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
     const { uid, client, access_token } = tokens;
-    const res = await this.api({
+    await this.api({
       method: 'POST',
       endpoint: 'v1/wave_citizen/polls/create',
       payload,
@@ -17,7 +17,35 @@ class PollService {
       successCallback,
       errorCallback
     })
-    console.log(res)
+  }
+
+  update = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
+    const { uid, client, access_token } = tokens;
+    await this.api({
+      method: 'POST',
+      endpoint: `v1/wave_citizen/polls/${payload.id}/update`,
+      payload,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback,
+      errorCallback
+    })
+  }
+
+  delete = async ({id, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
+    const { uid, client, access_token } = tokens;
+    await this.api({
+      method: 'DELETE',
+      endpoint: `v1/wave_citizen/polls/${id}/destroy`,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback,
+      errorCallback
+    })
   }
 
   getOne = async ({tokens, id}) => {
@@ -91,7 +119,7 @@ class PollService {
 
   createVote = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
     const { uid, client, access_token } = tokens;
-    const res = await this.api({
+    await this.api({
       method: 'POST',
       endpoint: 'v1/wave_citizen/votes/create',
       payload,
@@ -102,7 +130,6 @@ class PollService {
       successCallback,
       errorCallback
     })
-    console.log(res)
   }
 }
 

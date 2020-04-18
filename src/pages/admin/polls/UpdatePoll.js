@@ -1,12 +1,12 @@
 import React from 'react';
 import UpdatePollForm from "../../../components/admin/Polls/Update";
-import { connect } from 'react-redux';
-import { api } from '../../../services/api';
+import PollService from '../../../services/api/poll';
 import swal from 'sweetalert';
 import moment from 'moment';
+import { connect } from 'react-redux';
+import { api } from '../../../services/api';
 
 class UpdatePoll extends React.Component {
-
   state = {
     poll: {},
     poll_categories: []
@@ -14,8 +14,54 @@ class UpdatePoll extends React.Component {
 
   componentDidMount() {
     const pollID = this.props.match.params.id;
-    this.getPollData(pollID)
-    this.getPollCategoriesData()
+    this.service = new PollService(this.props.api)
+    this.getPoll(pollID)
+    this.getCategories()
+  }
+
+  getCategories = async () => {
+    const {tokens} = this.props;
+    const data = await this.service.getCategories({tokens})
+    this.setState({
+      poll_categories: data
+    })
+  }
+
+  getPoll = async (id) => {
+    const { tokens } = this.props;
+    const res = await this.service.getOne({tokens, id})
+    const data = res.data.data;
+
+    const poll = {
+      id: data.id,
+      type: data.type,
+      ...data.attributes
+    }
+    
+    this.setState({
+      poll: poll
+    })
+  }
+
+  updatePoll = (poll) => {
+    const {tokens} = this.props;
+    const payload = {
+      poll: poll
+    }
+
+    const successCallback = () => {
+      swal('Datos actualizados exitosamente', '', 'success')
+    }
+
+    const errorCallback = (err) => {
+      swal({
+        title: "Hubo un error",
+        text: err.toString(),
+        icon: 'error'
+      })
+    }
+
+    this.service.update({payload, tokens, successCallback, errorCallback})
   }
 
   handleChange = (e) => {
@@ -61,81 +107,6 @@ class UpdatePoll extends React.Component {
     this.updatePoll(poll)
   }
 
-  getPollCategoriesData = async () => {
-    let data = [];
-    const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
-      method: 'GET',
-      endpoint: 'v1/wave_citizen/poll_categories',
-      headers: {
-        'access-token': access_token,
-        client, uid
-      }
-    })
-
-    if (res.data) {
-      data = res.data.data.map((item) => {
-        const attrs = item.attributes;
-
-        return {
-          id: item.id,
-          ...attrs
-        }
-      });
-    }
-
-    this.setState({
-      poll_categories: data
-    })
-  }
-
-  getPollData = async (id) => {
-    const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
-      method: 'GET',
-      endpoint: `v1/wave_citizen/polls/${id}`,
-      headers: {
-        'access-token': access_token,
-        client, uid
-      }
-    })
-
-    const data = res.data.data
-
-    this.setState({
-      poll: {
-        id: data.id,
-        ...data.attributes
-      }
-    })
-  }
-
-  updatePoll = async (poll) => {
-    const { uid, client, access_token } = this.props.tokens;
-    await this.props.api({
-      method: 'PUT',
-      endpoint: `v1/wave_citizen/polls/${poll.id}/update`,
-      payload: {
-        poll
-      },
-      headers: {
-        'access-token': access_token,
-        client, uid
-      },
-      successCallback: () => {
-        swal('Datos actualizados exitosamente', '', 'success')
-        this.props.history.push(`/admin/poll/${poll.id}`)
-      },
-      errorCallback: (err) => {
-        swal({
-          title: "Hubo un error",
-          text: err.toString(),
-          icon: 'error'
-        })
-      }
-    })
-  }
-
   render() {
     return <UpdatePollForm
       pollData={this.state.poll}
@@ -150,8 +121,7 @@ class UpdatePoll extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { tokens } = state.session;
-  const { currentUser } = state.session;
+  const { tokens, currentUser } = state.session;
   return { tokens, currentUser };
 }
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PollShowCard from "../../../components/admin/Polls/Show";
+import PollService from '../../../services/api/poll';
+import swal from 'sweetalert';
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
-import swal from 'sweetalert';
 
 class ShowPoll extends React.Component {
 
@@ -14,21 +15,14 @@ class ShowPoll extends React.Component {
 
   componentDidMount() {
     this.pollID = this.props.match.params.id
-    this.getPollData(this.pollID)
+    this.service = new PollService(this.props.api)
+    this.getPoll(this.pollID)
   }
 
-  getPollData = async (id) => {
-    const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
-      method: 'GET',
-      endpoint: `v1/wave_citizen/polls/${id}`,
-      headers: {
-        'access-token': access_token,
-        client, uid
-      }
-    })
-
-    const data = res.data.data
+  getPoll = async (id) => {
+    const { tokens } = this.props;
+    const res = await this.service.getOne({tokens, id})
+    const data = res.data.data;
     const pollData = data.attributes
 
     this.setState({
@@ -46,27 +40,23 @@ class ShowPoll extends React.Component {
   }
 
   deletePoll = async (id) => {
-    const { uid, client, access_token } = this.props.tokens;
-    await this.props.api({
-      method: 'DELETE',
-      endpoint: `v1/wave_citizen/polls/${id}/destroy`,
-      headers: {
-        'access-token': access_token,
-        client, uid
-      },
-      successCallback: () => {
-        swal(`Encuesta eliminada`, {
-          icon: "warning",
-        }).then(()=> {
-          this.props.history.push('/admin/polls');
-        });
-      },
-      errorCallback: () => {
-        swal(`Hubo un error, no se ha podido eliminar`, {
-          icon: "error",
-        })
-      }
-    })
+    const {tokens} = this.props;
+
+    const successCallback = () => {
+      swal(`Encuesta eliminada`, {
+        icon: "warning",
+      }).then(()=> {
+        this.props.history.push('/admin/polls');
+      });
+    }
+
+    const errorCallback = (err) => {
+      swal(`Hubo un error, no se ha podido eliminar`, {
+        icon: "error",
+      })
+    }
+
+    this.service.delete({id, tokens, successCallback, errorCallback})
   }
 
   handleDelete = (e) => {

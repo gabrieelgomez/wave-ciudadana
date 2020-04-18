@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from 'antd';
+import { StyledCard } from '../../styled';
 import UserForm from './Form';
 
 class NewUserForm extends React.Component {
@@ -62,14 +62,14 @@ class NewUserForm extends React.Component {
     return (
       <div className="admin-container">
         <h1>Crear nuevo usuario admin</h1>
-        <Card>
+        <StyledCard>
           <UserForm 
             data={user}
             handleSubmit={this.handleCreateUser}
             handleChange={this.handleChange}
             handleSelect={this.handleSelect}
           />
-        </Card>
+        </StyledCard>
       </div>
     )
   }

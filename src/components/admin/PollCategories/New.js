@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { StyledCard } from '../../styled';
 import PollCategoryForm from './Form';
 
 class NewPollCategoryForm extends React.Component {
@@ -50,7 +50,7 @@ class NewPollCategoryForm extends React.Component {
     return (
       <div className="admin-container">
         <h1>Crear nueva categoría de encuesta</h1>
-        <Card>
+        <StyledCard>
           <PollCategoryForm
             handleSubmit={this.handleCreatePollCategory}
             handleChange={this.handleChange}
@@ -59,7 +59,7 @@ class NewPollCategoryForm extends React.Component {
             countriesData={countriesData}
           >
           </PollCategoryForm>
-        </Card>
+        </StyledCard>
       </div>
     )
   }

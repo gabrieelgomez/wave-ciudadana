@@ -27,7 +27,7 @@ class Show extends React.Component {
       type: data.type,
       ...data.attributes
     }
-    
+
     this.setState({
       poll: poll
     })
