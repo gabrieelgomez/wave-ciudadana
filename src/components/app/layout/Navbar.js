@@ -46,7 +46,7 @@ class Navbar extends React.Component {
     let form;
 
     if (showLogin) {
-      form = <LoginForm cb={this.handleCancel}/>
+      form = <LoginForm cb={this.handleCancel} history={this.props.history} />
     } else if (showRegister) {
       form = <RegisterForm cb={this.handleCancel}/>
     }
@@ -60,8 +60,8 @@ class Navbar extends React.Component {
           </ul>
           { currentUser ? (
               <ul>
-                <li class="currentUser">
-                  <Link to={`/profile`}>{currentUser.email}</Link>
+                <li className="currentUser">
+                  <Link to={`/my-profile`}>{currentUser.email}</Link>
                 </li>
                 { currentUser.roles && currentUser.roles.length !== 0 && currentUser.roles[0].name === 'superadmin' &&
                   <li>
@@ -88,7 +88,8 @@ class Navbar extends React.Component {
         </nav>
         <CustomModal
           visible={this.state.visible}
-          handleCancel={this.handleCancel}
+          handleClose={this.handleCancel}
+          footer={false}
         >
           {form}
         </CustomModal>

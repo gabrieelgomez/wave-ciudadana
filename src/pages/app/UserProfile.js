@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import ProfileForm from '../../components/app/User/profileForm';
+import ProfileForm from '../../components/app/User/ProfileForm';
 import { SET_CURRENT_USER, SET_TOKENS } from '../../actions/session';
 import swal from 'sweetalert';
 import {api} from '../../services/api';

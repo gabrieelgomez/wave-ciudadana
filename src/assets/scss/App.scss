@@ -2,14 +2,26 @@
 
 $primary: #0c2e60;
 $secondary: #ff663b;
+$fontPrimary: 'Martel Sans';
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #fff !important;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #c0c0c0;
+}
 
 a {
-  color: $primary !important;
-  font-family: 'Martel Sans';
+  color: $primary;
+  font-family: $fontPrimary;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 }
 
 .title {
@@ -20,6 +32,18 @@ h1, h2, h3, h4 {
   font-size: 30px;
   border-bottom: 2px solid #c8c8c8;
   margin-bottom: 30px;
+}
+
+.spacing-top {
+  padding: 15px 0;
+}
+
+.ant-form-item {
+  margin-bottom: 15px;
+}
+
+.ant-select-selection, .ant-input {
+  border-radius: 10px;
 }
 
 .layout {
@@ -53,29 +77,26 @@ h1, h2, h3, h4 {
   width: 100%;
 }
 
-.modal-box {
-  background-color: white;
-  padding: 50px;
-  border-radius: 25px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  text-align: center;
-
-  h1 {
-    text-transform: uppercase;
-    color: $secondary;
-    font-weight: 700;
-    margin-bottom: 30px;
-  }
-
-  @media screen and (min-width: 0px) and (max-width: 720px) {
-    padding: 30px 20px;
-  }
-}
-
 .login-form-register {
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+.login-box {
+  text-align: center;
+}
+
+.login-box-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+
+  a {
+    margin-top: 20px;
+    font-size: 12px;
+  }
 }
 
 .login-box-footer {
@@ -86,7 +107,7 @@ h1, h2, h3, h4 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 
   ul {
     list-style: none;
@@ -107,9 +128,7 @@ h1, h2, h3, h4 {
 }
 
 .header {
-  background: #fff;
-  border-radius: 5px;
-  margin: 0 5%;
+  background: $primary;
   position: relative;
   z-index: 2;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -134,7 +153,7 @@ h1, h2, h3, h4 {
     }
 
     li {
-      font-family: 'Martel Sans';
+      font-family: $fontPrimary;
       text-transform: uppercase;
       font-size: 14px;
       font-weight: 600;
@@ -142,12 +161,17 @@ h1, h2, h3, h4 {
       padding: 10px;
       transition: .5s;
 
+      a, span {
+        color: #fff;
+      }
+
       &.currentUser {
         text-transform: lowercase;
       }
 
       i {
         margin-right: 5px;
+        color: #fff;
       }
     }
   }
@@ -217,8 +241,310 @@ h1, h2, h3, h4 {
 
     p {
       font-size: 16px;
-      font-family: 'Martel Sans';
+      font-family: $fontPrimary;
       color: $primary;
     }
   }
+}
+
+.page {
+  padding: 20px 0;
+}
+
+.quick-post {
+  border-radius: 12px;
+  background-color: #fff;
+  box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
+}
+
+.quick-post-header {
+  border-bottom: 1px solid #eaeaf5;
+  padding: 0 25px;
+
+  .ant-tabs-nav {
+    width: 100%;
+    font-family: $fontPrimary;
+  }
+
+  .ant-tabs-nav .ant-tabs-tab {
+    width: 50%;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.quick-post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+
+  button {
+    width: 100px;
+    height: 40px;
+    padding: 0;
+  }
+}
+
+.group-floating-label {
+  position: relative;
+  margin-bottom: 30px !important;
+
+  .input-control {
+    .ant-input {
+      display: block;
+      width: 100%;
+      line-height: 1.25;
+      color: rgba(0, 0, 0, 0.65);
+      background-color: #fff;
+      background-image: none;
+      background-clip: padding-box;
+      border: 1px solid #d9d9d9;
+      border-radius: 10px;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out 15s;
+      box-shadow: none;
+      padding: 0 10px;
+      font-family: $fontPrimary;
+
+      &.ant-input-disabled {
+        background-color: rgba(245, 245, 245, 0.36);
+        color: rgba(0, 0, 0, 0.36);
+      }
+
+      &:focus, &:hover {
+        box-shadow: none;
+        border-color: #4285f4;
+      }
+
+      &::-webkit-input-placeholder {
+        color: #fff;
+
+      }
+
+      &::-moz-placeholder {
+        color: #fff;
+      }
+
+      &:-ms-input-placeholder {
+        color: #fff;
+      }
+
+      &:focus + .ant-input-suffix, &:not(:placeholder-shown) + .ant-input-suffix {
+        .floating-label {
+          font-size: 85%;
+          transform: translate3d(0, -25px, 0);
+          color: rgba(0, 0, 0, .7);
+          padding: 0 10px;
+          font-family: $fontPrimary;
+        }
+      }
+    }
+
+    &.show-placeholder {
+      .ant-input {
+        &:focus {
+          &::-webkit-input-placeholder {
+            color: #ccc;
+          }
+
+          &::-moz-placeholder {
+            color: #ccc;
+          }
+
+          &:-ms-input-placeholder {
+            color: #ccc;
+          }
+        }
+      }
+    }
+  }
+
+  &.input-prefix {
+    .prefix {
+      display: inline-block;
+      border: 1px solid #e8e8e8;
+      border-radius: 20px;
+      padding: 5px 10px;
+      line-height: 10px;
+      margin-right: 20px;
+      position: absolute;
+      left: 0;
+      top: 4px;
+      text-align: center;
+      z-index: 9;
+      color: rgba(0, 0, 0, 0.65);
+    }
+
+    .input-control {
+      .ant-input {
+        padding-left: 70px;
+      }
+    }
+
+    .ant-input-suffix {
+      .floating-label {
+        padding-left: 70px;
+      }
+    }
+
+    .ant-input-prefix {
+      left: 0;
+      top: 0;
+    }
+  }
+
+  .ant-input-suffix {
+    left: 0;
+    right: 0;
+    top: 0;
+
+    .floating-label {
+      position: absolute !important;
+      top: 0;
+      padding: 0px;
+      transition: all 200ms;
+      color: rgba(0, 0, 0, 0.5);
+      line-height: 30px;
+      transform: translate3d(0, 0, 0);
+      padding: 0 10px;
+      font-family: $fontPrimary;
+    }
+  }
+
+  .has-error {
+    .ant-input {
+      box-shadow: none !important;
+    }
+
+    .input-control {
+      .ant-input {
+        border-bottom: 2px solid red;
+      }
+    }
+  }
+
+  .ant-form-explain {
+    margin-bottom: 0px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 35px;
+  }
+
+  .suffix-right {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    cursor: pointer;
+  }
+
+  &.default-floated {
+    .floating-label {
+      transform: translate3d(0, -25px, 0) !important;
+      padding-left: 0 !important;
+    }
+  }
+}
+
+.border-bottom {
+  border-bottom: 1px solid #e8e8e8;
+  margin-bottom: 15px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  .remove-item {
+    cursor: pointer;
+    margin-left: 15px;
+  }
+
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+}
+
+.add-item {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.ant-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 12px;
+}
+
+.feed-profile-header {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 10px;
+
+  span.nickname {
+    margin-left: 10px;
+    font-weight: 700;
+  }
+}
+
+.swal-modal {
+  border-radius: 12px;
+  font-family: $fontPrimary;
+}
+
+.feed-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+
+  .feed-card-name {
+    display: flex;
+    align-items: center;
+
+    .name {
+      margin-left: 5px;
+      font-size: 12px;
+    }
+  }
+
+  .ant-badge sup {
+    font-size: 10px;
+  }
+}
+
+.feed-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e8e8e8;
+  padding-top: 15px;
+
+  .feed-card-footer-info {
+    font-size: 12px;
+  }
+
+  i {
+    margin-left: 10px;
+    font-size: 15px;
+  }
+
+  .ant-badge-count {
+    min-width: 15px;
+    height: 15px;
+    background-color: white;
+    font-size: 10px;
+    padding: 0;
+    color: $primary;
+  }
+}
+
+.ant-radio-group {
+  width: 100%;
 }

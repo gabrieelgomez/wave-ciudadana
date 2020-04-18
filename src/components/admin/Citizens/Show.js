@@ -1,5 +1,6 @@
 import React from 'react';
-import { Descriptions, Card, Icon } from 'antd';
+import { Descriptions, Icon } from 'antd';
+import { StyledCard } from '../../styled';
 import { Link } from 'react-router-dom';
 
 const CitizenShowCard = (props) => {
@@ -17,7 +18,7 @@ const CitizenShowCard = (props) => {
 
   return (
     <div className="admin-container">
-      <Card>
+      <StyledCard>
         <div className="card-actions">
           <Link to={`/admin/citizen/${id}/update`}>Editar<Icon type="edit"/></Link>
           <span onClick={props.handleDelete}>Eliminar<Icon type="delete"/></span>
@@ -33,7 +34,7 @@ const CitizenShowCard = (props) => {
           <Descriptions.Item label="Email">{email}</Descriptions.Item>
           <Descriptions.Item label="Descripción">{description}</Descriptions.Item>
         </Descriptions>
-      </Card>
+      </StyledCard>
     </div>
   )
 }

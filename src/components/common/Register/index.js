@@ -103,7 +103,12 @@ class Register extends React.Component {
   render() {
     return (
       <div className="login-box">
-        <h1>Registro</h1>
+        <h1 style={{
+          textTransform: 'uppercase',
+          color: '#ff663b',
+          fontWeight: 700,
+          marginBottom: '30px'
+        }}>Registro</h1>
         <Tabs defaultActiveKey={this.state.status_citizen} onChange={this.statusCitizenChange}>
           <TabPane tab="Ciudadano" key="citizen"></TabPane>
           <TabPane tab="Candidato" key="candidate"></TabPane>

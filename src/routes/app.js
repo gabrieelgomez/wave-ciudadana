@@ -5,6 +5,7 @@ import DefaultAppLayout from "../layouts/app";
 import Home from "../pages/app/Home";
 import UserProfile from "../pages/app/UserProfile";
 import ResetPassword from "../pages/app/ResetPassword";
+import ShowPoll from "../pages/app/polls/ShowPoll";
 
 export default [
   {
@@ -14,7 +15,7 @@ export default [
     component: Home
   },
   {
-    path: "/profile",
+    path: "/my-profile",
     layout: DefaultAppLayout,
     component: UserProfile
   },
@@ -22,5 +23,11 @@ export default [
     path: "/reset-password",
     layout: DefaultAppLayout,
     component: ResetPassword
+  },
+  {
+    path: "/poll/:id",
+    exact: true,
+    layout: DefaultAppLayout,
+    component: ShowPoll
   }
 ];

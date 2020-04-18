@@ -20,6 +20,10 @@ class LoginForm extends React.Component {
     });
   }
 
+  redirectToAdmin = () => {
+    this.props.history.push('/admin');
+  }
+
   loginUser = (e) => {
     e.preventDefault();
     const {
@@ -64,7 +68,7 @@ class LoginForm extends React.Component {
 
         if (currentUser.roles && currentUser.roles.length !== 0) {
           if (currentUser.roles[0].name === 'superadmin') { 
-            console.log('superadmin logged')
+            this.redirectToAdmin()
           }
         } else {
           console.log('User with no role')
@@ -86,7 +90,12 @@ class LoginForm extends React.Component {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="login-box">
-        <h1>Inicio de sesión</h1>
+        <h1 style={{
+          textTransform: 'uppercase',
+          color: '#ff663b',
+          fontWeight: 700,
+          marginBottom: '30px'
+        }}>Inicio de sesión</h1>
         <Form className="login-form" onSubmit={this.loginUser}>
           <Form.Item>
             {getFieldDecorator('email', {
@@ -114,12 +123,14 @@ class LoginForm extends React.Component {
               />,
             )}
           </Form.Item>
-          <StyledButton htmlType="submit">
-            Iniciar sesión
-          </StyledButton>
-          <Link to={`/reset-password`}>
-            Reset password
-          </Link>
+          <div className="login-box-buttons">
+            <StyledButton htmlType="submit">
+              Iniciar sesión
+            </StyledButton>
+            <Link to={`/reset-password`}>
+              Reset password
+            </Link>
+          </div>
           <div className="login-box-footer">
             Inicia sesión con
             <ul>

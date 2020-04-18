@@ -32,7 +32,7 @@ import NewProposalCategory from "../pages/admin/proposal_categories/NewProposalC
 import ShowProposalCategory from "../pages/admin/proposal_categories/ShowProposalCategory";
 import UpdateProposalCategory from "../pages/admin/proposal_categories/UpdateProposalCategory";
 
-// ProposalCategories
+// PollCategories
 import AllPollCategories from "../pages/admin/poll_categories/AllPollCategories";
 import NewPollCategory from "../pages/admin/poll_categories/NewPollCategory";
 import ShowPollCategory from "../pages/admin/poll_categories/ShowPollCategory";
@@ -43,6 +43,12 @@ import AllProposals from "../pages/admin/proposals/AllProposals";
 import NewProposal from "../pages/admin/proposals/NewProposal";
 import ShowProposal from "../pages/admin/proposals/ShowProposal";
 import UpdateProposal from "../pages/admin/proposals/UpdateProposal";
+
+// Poll
+import AllPolls from "../pages/admin/polls/AllPolls";
+import NewPoll from "../pages/admin/polls/NewPoll";
+import ShowPoll from "../pages/admin/polls/ShowPoll";
+import UpdatePoll from "../pages/admin/polls/UpdatePoll";
 
 export default [
   {
@@ -229,6 +235,31 @@ export default [
     path: "/admin/proposal/:id/update",
     layout: DefaultAdminLayout,
     component: UpdateProposal,
+    exact: true
+  },
+
+  {
+    path: "/admin/polls",
+    layout: DefaultAdminLayout,
+    component: AllPolls,
+    exact: true
+  },
+  {
+    path: "/admin/poll/new",
+    layout: DefaultAdminLayout,
+    component: NewPoll,
+    exact: true
+  },
+  {
+    path: "/admin/poll/:id",
+    layout: DefaultAdminLayout,
+    component: ShowPoll,
+    exact: true
+  },
+  {
+    path: "/admin/poll/:id/update",
+    layout: DefaultAdminLayout,
+    component: UpdatePoll,
     exact: true
   },
 ];

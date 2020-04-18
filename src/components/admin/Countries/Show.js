@@ -1,5 +1,6 @@
 import React from 'react';
-import { Descriptions, Card, Icon } from 'antd';
+import { Descriptions, Icon } from 'antd';
+import { StyledCard } from '../../styled';
 import { Link } from 'react-router-dom';
 
 const CountryShowCard = (props) => {
@@ -12,7 +13,7 @@ const CountryShowCard = (props) => {
 
   return (
     <div className="admin-container">
-      <Card>
+      <StyledCard>
         <div className="card-actions">
           <Link to={`/admin/country/${id}/update`}>Editar<Icon type="edit"/></Link>
           <span onClick={props.handleDelete}>Eliminar<Icon type="delete"/></span>
@@ -22,7 +23,7 @@ const CountryShowCard = (props) => {
           <Descriptions.Item label="Código país">{country_code}</Descriptions.Item>
           <Descriptions.Item label="Moneda">{currency}</Descriptions.Item>
         </Descriptions>
-      </Card>
+      </StyledCard>
     </div>
   )
 }

@@ -55,8 +55,8 @@ class ShowProposal extends React.Component {
         client, uid
       },
       successCallback: () => {
-        swal(`Tipo de candidatura eliminada con exito`, {
-          icon: "success",
+        swal(`Propuesta eliminada`, {
+          icon: "warning",
         }).then(()=> {
           this.props.history.push('/admin/proposals');
         });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { StyledCard } from '../../styled';
 import ProposalCategoryForm from './Form';
 
 class NewProposalCategoryForm extends React.Component {
@@ -50,7 +50,7 @@ class NewProposalCategoryForm extends React.Component {
     return (
       <div className="admin-container">
         <h1>Crear nueva categoría de propuesta</h1>
-        <Card>
+        <StyledCard>
           <ProposalCategoryForm
             handleSubmit={this.handleCreateProposalCategory}
             handleChange={this.handleChange}
@@ -59,7 +59,7 @@ class NewProposalCategoryForm extends React.Component {
             countriesData={countriesData}
           >
           </ProposalCategoryForm>
-        </Card>
+        </StyledCard>
       </div>
     )
   }

@@ -2,6 +2,7 @@
 
 $primary: #0c2e60;
 $secondary: #ff663b;
+$fontPrimary: 'Martel Sans';
 
 .logo {
   height: 40px;
@@ -67,7 +68,7 @@ $secondary: #ff663b;
 
 .ant-menu-submenu-title span {
   color: $primary;
-  font-family: 'Martel Sans';
+  font-family: $fontPrimary;
 }
 
 .ant-menu-item a {
@@ -82,4 +83,17 @@ $secondary: #ff663b;
 
 .ant-menu-item .anticon + a {
   transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.swal-modal {
+  border-radius: 12px;
+  font-family: $fontPrimary;
+}
+
+.ant-table-pagination.ant-pagination {
+  margin: 16px;
+}
+
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+  font-family: $fontPrimary;
 }

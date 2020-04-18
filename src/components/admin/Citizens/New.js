@@ -1,5 +1,6 @@
 import React from 'react';
-import { Form, Input, Col, Card } from 'antd';
+import { Form, Input, Col } from 'antd';
+import { StyledCard } from '../../styled';
 import CitizenForm from './Form';
 
 class NewCitizenForm extends React.Component {
@@ -76,7 +77,7 @@ class NewCitizenForm extends React.Component {
     return (
       <div className="admin-container">
         <h1>Crear nuevo ciudadano</h1>
-        <Card>
+        <StyledCard>
           <CitizenForm
             handleSelectType={this.handleSelectType}
             handleSelectStatus={this.handleSelectStatus}
@@ -108,7 +109,7 @@ class NewCitizenForm extends React.Component {
               </Form.Item>
             </Col>
           </CitizenForm>
-        </Card>
+        </StyledCard>
       </div>
     )
   }

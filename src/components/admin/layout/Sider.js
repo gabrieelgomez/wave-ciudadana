@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Layout, Menu, Icon } from 'antd';
 import styled from 'styled-components';
 
@@ -30,7 +30,9 @@ class AdminSider extends React.Component {
         onCollapse={this.onCollapse}
       >
         <div className='logo'>
-          <img src={'https://www.qbrobotics.com/wp-content/uploads/2018/03/sample-logo-470x235.png'} alt="logo" />
+          <Link to="/">
+            <img src={'https://www.qbrobotics.com/wp-content/uploads/2018/03/sample-logo-470x235.png'} alt="logo" />
+          </Link>
         </div>
         <Menu 
           mode="inline"
@@ -85,10 +87,10 @@ class AdminSider extends React.Component {
             <NavLink to='/admin/proposals'>Propuestas</NavLink>
           </Menu.Item>
 
-          {/* <Menu.Item key='9'>
-            <Icon type='user' />
-            <NavLink to='#'>Encuestas</NavLink>
-          </Menu.Item> */}
+          <Menu.Item key='/admin/polls'>
+            <Icon type='check' />
+            <NavLink to='/admin/polls'>Encuestas</NavLink>
+          </Menu.Item>
 
         </Menu>
       </StyledSider>

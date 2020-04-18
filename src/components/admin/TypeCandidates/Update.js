@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from 'antd';
+import { StyledCard } from '../../styled';
 import TypeCandidateForm from './Form';
 
 class UpdateTypeCandidateForm extends React.Component {
@@ -9,7 +9,7 @@ class UpdateTypeCandidateForm extends React.Component {
     return (
       <div className="admin-container">
         <h1>Actualizar tipo de candidatura</h1>
-        <Card>
+        <StyledCard>
           <TypeCandidateForm
             data={this.props.type_candidateData}
             countriesData={countriesData}
@@ -17,7 +17,7 @@ class UpdateTypeCandidateForm extends React.Component {
             handleSelect={this.props.handleSelectChange}
             handleChange={this.props.handleChange}
           />
-        </Card>
+        </StyledCard>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Descriptions, Card, Icon } from 'antd';
+import { Descriptions, Icon } from 'antd';
+import { StyledCard } from '../../styled';
 import { Link } from 'react-router-dom';
 
 const UserShowCard = (props) => {
@@ -17,7 +18,7 @@ const UserShowCard = (props) => {
 
   return (
     <div className="admin-container">
-      <Card>
+      <StyledCard>
         <div className="card-actions">
           <Link to={`/admin/user/${id}/update`}>Editar<Icon type="edit"/></Link>            
         </div>
@@ -31,7 +32,7 @@ const UserShowCard = (props) => {
           <Descriptions.Item label="Telefono 1">{phone_one}</Descriptions.Item>
           <Descriptions.Item label="Telefono 2">{phone_two}</Descriptions.Item>
         </Descriptions>
-      </Card>
+      </StyledCard>
     </div>
   )
 }
