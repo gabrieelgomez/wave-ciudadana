@@ -83,9 +83,15 @@ class UserProfile extends React.Component {
         swal('Datos actualizados exitosamente', '', 'success')
       }
     })
-    console.log(res)
-    this.props.setTokens(res.headers);
-    this.props.setCurrentUser(res.data.data)
+
+    const data = res.data.data
+    const headers = {
+      access_token: res.headers['access-token'],
+      client: res.headers.client,
+      uid: res.headers.uid
+    }
+    this.props.setTokens(headers);
+    this.props.setCurrentUser({id: data.id, ...data.attributes})
   }
 
   render() {

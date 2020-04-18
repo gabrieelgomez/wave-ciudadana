@@ -21,11 +21,18 @@ const StyledRadioGroup = styled(Radio.Group)`
 
 class VoteItems extends React.Component {
   state = {
-    vote: {}
+    vote: {},
+    voted: false,
+    items: [],
+    selectedItem: null
   }
 
   componentDidMount() {
     this.service = new PollService(this.props.api)
+    this.setState({
+      voted: this.props.isVoted,
+      items: this.props.items
+    })
   }
   
   voteItem = vote => {
@@ -39,6 +46,21 @@ class VoteItems extends React.Component {
 
     const successCallback = () => {
       swal('Voto registrado', '', 'success')
+
+      if (this.props.isVoted === false) {
+        const newItems = this.state.items.map(i => {
+          if (i.id === this.state.selectedItem) {
+            i.voted_by_current_user = true
+          }
+  
+          return i
+        })
+  
+        this.setState({
+          voted: true,
+          items: newItems
+        })
+      }
     }
 
     const errorCallback = err => {
@@ -60,12 +82,18 @@ class VoteItems extends React.Component {
     })
   };
 
+  handleSelectedItem = id => {
+    this.setState({
+      selectedItem: id
+    })
+  }
+
   render() {
     const radioStyle = {
       width: '100%'
     };
 
-    const { items, isVoted } = this.props;
+    const { items, voted } = this.state;
     
     return (
       <div className="spacing-top">
@@ -73,8 +101,8 @@ class VoteItems extends React.Component {
           <StyledRadioGroup onChange={this.onChange}>
             { items.map((item, i) => {
               return (
-                <List.Item key={i}>
-                    <StyledRadioButton style={radioStyle} value={item.id} disabled={isVoted}>
+                <List.Item key={i} onClick={()=> this.handleSelectedItem(item.id)}>
+                    <StyledRadioButton style={radioStyle} value={item.id} disabled={voted}>
                     { item.voted_by_current_user && 
                       <Icon type="check" />
                     }
@@ -85,7 +113,7 @@ class VoteItems extends React.Component {
             })}
           </StyledRadioGroup>
         </List>
-        { !isVoted && 
+        { !voted && 
           <StyledButton onClick={() => this.voteItem(this.state.vote)}>Votar</StyledButton>        
         }
       </div>
