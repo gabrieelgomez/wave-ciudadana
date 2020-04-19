@@ -40,12 +40,12 @@ class Home extends React.Component {
         { currentUser ? (
           <div className="page">
             <Row gutter={16}>
-              <Col offset={1} span={6} lg={6} md={6} xs={24}>
+              <Col span={6} lg={{span: 6, offset: 1}} md={{span: 8, offset: 1}} xs={0}>
                 <Affix offsetTop={15}>
                   <UserInfo />
                 </Affix>
               </Col>
-              <Col span={10} lg={10} md={10} xs={24}>
+              <Col span={10} lg={10} md={14} xs={{span: 22, offset: 1}}>
                 <Feed
                   api={api}
                   tokens={tokens}

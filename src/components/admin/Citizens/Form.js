@@ -22,9 +22,9 @@ const CitizenForm = (props) => {
 
   const placeholderSelectStatus = props.data.status_citizen
 
-  const type_candidacy = props.data.type_candidacy
-  const currentTypeCandidacyName = type_candidacy !== undefined ? type_candidacy.name : 'Cargando...';
-  const placeholderSelectType = type_candidacy_id === '' ? 'Seleccionar tipo de candidatura' : currentTypeCandidacyName;
+  // const type_candidacy = props.data.type_candidacy
+  // const currentTypeCandidacyName = type_candidacy !== undefined ? type_candidacy.name : 'Cargando...';
+  // const placeholderSelectType = type_candidacy_id === '' ? 'Seleccionar tipo de candidatura' : currentTypeCandidacyName;
 
   const isCandidate = status_citizen === 'candidate'
   
@@ -34,7 +34,7 @@ const CitizenForm = (props) => {
         <Col span={12} lg={12} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
             <label>Estado del ciudadano</label><br></br>
-            <Select placeholder={placeholderSelectStatus} defaultValue={status_citizen} style={{ width: 120 }} onChange={props.handleSelectStatus}>
+            <Select placeholder={placeholderSelectStatus} defaultValue={status_citizen} style={{ width: 180 }} onChange={props.handleSelectStatus}>
               <Option value="citizen">Ciudadano</Option>
               <Option value="candidate">Candidato</Option>
             </Select>
@@ -44,7 +44,7 @@ const CitizenForm = (props) => {
           <Col span={12} lg={12} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
             <label>Tipo de Candidatura</label><br></br>
-            <Select placeholder={placeholderSelectType} defaultValue={type_candidacy_id} style={{ width: 120 }} onChange={props.handleSelectType}>
+            <Select placeholder={type_candidacy_id} defaultValue={type_candidacy_id} style={{ width: 180 }} onChange={props.handleSelectType}>
               { props.typeCandidatesData !== undefined ? props.typeCandidatesData.map((item) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })

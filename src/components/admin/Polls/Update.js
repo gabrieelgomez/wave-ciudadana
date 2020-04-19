@@ -5,14 +5,14 @@ import PollCategoryForm from './Form';
 class UpdatePollForm extends React.Component {
 
   render() {
-    const {pollCategoriesData, currentUser} = this.props;
+    const {pollCategories, currentUser} = this.props;
     return (
       <div className="admin-container">
         <h1>Actualizar Encuesta</h1>
         <StyledCard>
           <PollCategoryForm
             data={this.props.pollData}
-            pollCategoriesData={pollCategoriesData}
+            pollCategories={pollCategories}
             currentUser={currentUser}
             handleSubmit={this.props.handleUpdatePoll}
             handleSelect={this.props.handleSelectChange}

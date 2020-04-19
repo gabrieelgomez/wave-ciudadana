@@ -20,7 +20,7 @@ const PollForm = (props) => {
     description,
     poll_category_id,
     due_date,
-    items_attributes = []
+    items = []
   } = props.data;
 
   const formatDueDateShow = moment.utc(due_date).format("L");
@@ -59,7 +59,7 @@ const PollForm = (props) => {
         <Col span={8} lg={8} md={8} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
             <label>Categoría de la encuesta</label><br></br>
-            <Select placeholder={placeholderSelect} defaultValue={poll_category_id} style={{ width: 120 }} onChange={props.handleSelect}>
+            <Select placeholder={placeholderSelect} defaultValue={poll_category_id} style={{ width: 180 }} onChange={props.handleSelect}>
               { props.pollCategories !== undefined ? props.pollCategories.map((item) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })
@@ -84,7 +84,7 @@ const PollForm = (props) => {
 
         <Col span={24} lg={24} md={24} xs={24}>
           <h4>Items</h4>
-          {items_attributes.map((item, i)=> {
+          {items.map((item, i)=> {
             return (
               <div className="item" key={i+1}>
                 <Form.Item>

@@ -125,7 +125,7 @@ class PollForm extends React.Component {
           <Row>
             <Col span={12}>
               <Form.Item>
-                <Select placeholder={placeholderSelect} defaultValue={poll_category_id} style={{ width: 120 }} onChange={this.handleSelectChange}>
+                <Select placeholder={placeholderSelect} defaultValue={poll_category_id} style={{ width: 180 }} onChange={this.handleSelectChange}>
                   { this.props.categories !== undefined ? this.props.categories.map((item) => {
                       return <Option key={item.id} value={item.id}>{item.name}</Option>
                     })

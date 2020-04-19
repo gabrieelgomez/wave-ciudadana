@@ -40,7 +40,7 @@ class Show extends React.Component {
     return (
       <div className="page">
         <Row>
-          <Col span={12} offset={6}>
+          <Col xs={{ span: 22, offset: 1 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
             <PollInfo
               api={api}
               tokens={tokens}

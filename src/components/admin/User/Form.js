@@ -137,7 +137,7 @@ const UserForm = (props) => {
         <Col span={12} lg={12} xs={24}>
           <Form.Item>
             <label>Género</label>
-            <Select defaultValue={gender} style={{ width: 120 }} onChange={props.handleSelect}>
+            <Select defaultValue={gender} style={{ width: 180 }} onChange={props.handleSelect}>
               <Option value="male">Masculino</Option>
               <Option value="female">Femenino</Option>
             </Select>

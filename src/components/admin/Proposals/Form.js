@@ -52,7 +52,7 @@ const ProposalForm = (props) => {
         <Col span={12} lg={8} md={12} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
             <label>Categoría de la propuesta</label><br></br>
-            <Select placeholder={placeholderSelect} defaultValue={proposal_category_id} style={{ width: 120 }} onChange={props.handleSelect}>
+            <Select placeholder={placeholderSelect} defaultValue={proposal_category_id} style={{ width: 180 }} onChange={props.handleSelect}>
               { props.proposalCategoriesData !== undefined ? props.proposalCategoriesData.map((item) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })

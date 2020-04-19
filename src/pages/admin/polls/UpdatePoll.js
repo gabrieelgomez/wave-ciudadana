@@ -110,7 +110,7 @@ class UpdatePoll extends React.Component {
   render() {
     return <UpdatePollForm
       pollData={this.state.poll}
-      pollCategoriesData={this.state.poll_categories}
+      pollCategories={this.state.poll_categories}
       currentUser={this.props.currentUser}
       handleUpdatePoll={this.handleUpdatePoll}
       handleSelectChange={this.handleSelectChange}
