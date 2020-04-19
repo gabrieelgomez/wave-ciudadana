@@ -8,8 +8,14 @@ import { api } from '../../../services/api';
 
 class UpdatePoll extends React.Component {
   state = {
-    poll: {},
-    poll_categories: []
+    poll: {
+      title: '',
+      description: '',
+      due_date: '',
+      poll_category_id: '',
+      items: []
+    },
+    poll_categories: [],
   }
 
   componentDidMount() {
@@ -107,6 +113,45 @@ class UpdatePoll extends React.Component {
     this.updatePoll(poll)
   }
 
+  addField = () => {
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          items: [...prevState.poll.items, { title: "" }]
+        }
+      }
+    })
+  }
+
+  itemshandleChange = (e, i) => {
+    const items = this.state.poll.items;
+    items[i].title = e.target.value;
+
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          items: this.state.poll.items
+        }
+      }
+    })
+  }
+
+  itemshandleRemove = (i) => {
+    const items = this.state.poll.items;
+    items.splice(i,1);
+
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          items: items
+        }
+      }
+    })
+  }
+
   render() {
     return <UpdatePollForm
       pollData={this.state.poll}
@@ -116,6 +161,9 @@ class UpdatePoll extends React.Component {
       handleSelectChange={this.handleSelectChange}
       datePickerChange={this.datePickerChange}
       handleChange={this.handleChange}
+      addField={this.addField}
+      itemshandleRemove={this.itemshandleRemove}
+      itemshandleChange={this.itemshandleChange}
     />
   }
 }

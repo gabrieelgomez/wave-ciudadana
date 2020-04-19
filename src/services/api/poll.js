@@ -23,7 +23,7 @@ class PollService {
     const { uid, client, access_token } = tokens;
     await this.api({
       method: 'POST',
-      endpoint: `v1/wave_citizen/polls/${payload.id}/update`,
+      endpoint: `v1/wave_citizen/polls/${payload.poll.id}/update`,
       payload,
       headers: {
         'access-token': access_token,

@@ -18,6 +18,9 @@ class UpdatePollForm extends React.Component {
             handleSelect={this.props.handleSelectChange}
             handleChange={this.props.handleChange}
             datePickerChange={this.props.datePickerChange}
+            addField={this.props.addField}
+            itemshandleRemove={this.props.itemshandleRemove}
+            itemshandleChange={this.props.itemshandleChange}
           />
         </StyledCard>
       </div>
