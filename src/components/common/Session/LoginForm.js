@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
       }
 
       const currentUser = {
-        ...response.data.data
+        ...response.data.data.citizen
       }
 
       setTokens(tokens)

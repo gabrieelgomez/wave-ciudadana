@@ -86,7 +86,7 @@ class Register extends React.Component {
       console.log(response)
 
       if (response.status === 200) {
-        this.props.setCurrentUser(response.data.data);
+        this.props.setCurrentUser(response.data.data.citizen);
 
         swal("Registrado exitosamente", "", "success");
       } else {

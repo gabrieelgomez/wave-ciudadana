@@ -1,49 +1,30 @@
 import React from 'react';
-import { Card, Row, Col } from 'antd';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import ProfileForm from '../../components/app/User/ProfileForm';
-import { SET_CURRENT_USER, SET_TOKENS } from '../../actions/session';
 import swal from 'sweetalert';
-import {api} from '../../services/api';
+import ProfileForm from '../../components/app/Citizen/ProfileForm';
+import { connect } from 'react-redux';
+import { Row, Col } from 'antd';
+import { StyledCard } from '../../components/styled';
+import { SET_CURRENT_USER, SET_TOKENS } from '../../actions/session';
+import { api } from '../../services/api';
 
-const StyledCard = styled(Card)`
-  padding: 0 50px;
-  h1 {
-    font-weight: 700;
-    margin-top: 30px;
-  }
-`
-
-class UserProfile extends React.Component {
+class CitizenProfile extends React.Component {
   state = {
-    user: {}
+    citizen: {}
   }
 
   componentDidMount() {
-    const {
-      id,
-      name,
-      lastname,
-      nickname,
-      avatar,
-      email,
-      phone_one,
-      phone_two,
-      dni,
-      gender
-    } = this.props.currentUser
+    const { id, name, nickname, avatar, email, phone, dni, gender } = this.props.currentUser
+
+    console.log(this.props.currentUser)
 
     this.setState({
-      user: {
+      citizen: {
         id,
         name,
-        lastname,
         nickname,
         avatar,
         email,
-        phone_one,
-        phone_two,
+        phone,
         dni,
         gender
       }
@@ -54,8 +35,8 @@ class UserProfile extends React.Component {
     const { name, value } = e.target;
     this.setState(prevState => {
       return {
-        user: {
-          ...prevState.user,
+        citizen: {
+          ...prevState.citizen,
           [name]: value
         }
       }
@@ -64,16 +45,16 @@ class UserProfile extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.updateUser(this.state.user);
+    this.updateCitizen(this.state.citizen);
   }
 
-  updateUser = async (user) => {
+  updateCitizen = async (citizen) => {
     const { uid, client, access_token } = this.props.session.tokens;
     const res = await this.props.api({
       method: 'PUT',
-      endpoint: `v1/users/${user.id}/update`,
+      endpoint: `v1/wave_citizen/citizens/${citizen.id}/update`,
       payload: {
-        user
+        citizen
       },
       headers: {
         'access-token': access_token,
@@ -100,7 +81,7 @@ class UserProfile extends React.Component {
         <Row>
           <Col span={14} offset={5}>
             <StyledCard>
-              <ProfileForm user={this.state.user} updateUser={this.handleSubmit} handleChange={this.handleChange}/>
+              <ProfileForm citizen={this.state.citizen} updateCitizen={this.handleSubmit} handleChange={this.handleChange}/>
             </StyledCard>
           </Col>
         </Row>
@@ -123,4 +104,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(CitizenProfile);
