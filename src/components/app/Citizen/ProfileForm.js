@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
-import { Form, Avatar } from 'antd';
+import { Form, Avatar, Upload, Icon } from 'antd';
 import { StyledInput, StyledButton } from '../../styled';
-import FileBase64 from 'react-file-base64';
 
 class ProfileForm extends Component {
-  // Callback~
-  handleGetFile = (file) => {
-    this.props.getFile(file)
+
+  getBase64 = (img, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+  }
+
+  dummyRequest = ({file, onSuccess}) => {
+    setTimeout(() => {
+      let avatarBase64 = '';
+      this.getBase64(file, (result) => {
+        avatarBase64 = result;
+
+        this.props.getFile(avatarBase64)
+      });
+
+      onSuccess("ok")
+    }, 0)
   }
 
   render() {
@@ -23,11 +37,17 @@ class ProfileForm extends Component {
     return (
       <div>
         <Form name="nest-messages" onSubmit={this.props.updateCitizen}>
-          <Avatar size={80} src={avatar ? avatar : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
-          <FileBase64
-            multiple={ false }
-            onDone={ this.handleGetFile }
-          />
+          <Item>
+            <Upload name="avatar" customRequest={this.dummyRequest}>
+              <div style={{position: 'relative'}}>
+                <Avatar size={120} src={avatar ? avatar : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
+                <div className="upload-mask">
+                  <Icon type="plus" />
+                  <div className="ant-upload-text">Upload</div>
+                </div>
+              </div>
+            </Upload>
+          </Item>
           <Item name={['citizen', 'nickname']} rules={[{ required: true }]}>
             <label>Usuario</label>
             <StyledInput placeholder="Nickname" value={nickname} name="nickname" onChange={this.props.handleChange}/>

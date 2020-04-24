@@ -15,8 +15,6 @@ class CitizenProfile extends React.Component {
   componentDidMount() {
     const { id, name, nickname, avatar, email, phone, dni, gender } = this.props.currentUser
 
-    console.log(this.props.currentUser)
-
     this.setState({
       citizen: {
         id,
@@ -48,9 +46,7 @@ class CitizenProfile extends React.Component {
     this.updateCitizen(this.state.citizen);
   }
 
-  getFile = (file) => {
-    const { base64 } = file
-
+  getFile = (base64) => {
     this.setState(prevState => {
       return {
         citizen: {
