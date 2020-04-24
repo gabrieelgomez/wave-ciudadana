@@ -48,6 +48,19 @@ class CitizenProfile extends React.Component {
     this.updateCitizen(this.state.citizen);
   }
 
+  getFile = (file) => {
+    const { base64 } = file
+
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          avatar: base64
+        }
+      }
+    });
+  }
+
   updateCitizen = async (citizen) => {
     const { uid, client, access_token } = this.props.session.tokens;
     const res = await this.props.api({
@@ -81,7 +94,7 @@ class CitizenProfile extends React.Component {
         <Row>
           <Col span={14} offset={5}>
             <StyledCard>
-              <ProfileForm citizen={this.state.citizen} updateCitizen={this.handleSubmit} handleChange={this.handleChange}/>
+              <ProfileForm citizen={this.state.citizen} updateCitizen={this.handleSubmit} getFile={this.getFile} handleChange={this.handleChange}/>
             </StyledCard>
           </Col>
         </Row>

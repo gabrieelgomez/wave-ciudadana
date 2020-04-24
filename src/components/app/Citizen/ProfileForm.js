@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { Form } from 'antd';
+import { Form, Avatar } from 'antd';
 import { StyledInput, StyledButton } from '../../styled';
+import FileBase64 from 'react-file-base64';
 
-class ProfileForm extends Component { 
+class ProfileForm extends Component {
+  // Callback~
+  handleGetFile = (file) => {
+    this.props.getFile(file)
+  }
+
   render() {
     const {
       name,
       nickname,
       email,
-      phone
+      phone,
+      avatar
     } = this.props.citizen;
    
     const Item = Form.Item;
@@ -16,6 +23,11 @@ class ProfileForm extends Component {
     return (
       <div>
         <Form name="nest-messages" onSubmit={this.props.updateCitizen}>
+          <Avatar size={80} src={avatar ? avatar : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
+          <FileBase64
+            multiple={ false }
+            onDone={ this.handleGetFile }
+          />
           <Item name={['citizen', 'nickname']} rules={[{ required: true }]}>
             <label>Usuario</label>
             <StyledInput placeholder="Nickname" value={nickname} name="nickname" onChange={this.props.handleChange}/>
