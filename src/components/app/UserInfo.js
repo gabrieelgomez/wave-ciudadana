@@ -7,12 +7,12 @@ import LinkButton from '../common/ui/LinkButton';
 class UserInfo extends React.Component {
   render() {
     const {currentUser} = this.props;
-    const { name, lastname, email, nickname } = currentUser;
+    const { name, lastname, email, nickname, avatar } = currentUser;
 
     return (
       <StyledCard>
         <div className="feed-profile-header">
-          <Avatar size={30} src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
+          <Avatar size={30} src={avatar ? avatar : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
           <span className="nickname">{ nickname }</span>
         </div>
         <List>

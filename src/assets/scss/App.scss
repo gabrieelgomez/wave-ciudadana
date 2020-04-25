@@ -538,7 +538,7 @@ h1, h2, h3, h4 {
   .ant-badge-count {
     min-width: 15px;
     height: 15px;
-    background-color: white;
+    background-color: #fff;
     font-size: 10px;
     padding: 0;
     color: $primary;
@@ -551,4 +551,36 @@ h1, h2, h3, h4 {
 
 .ant-radio-button-wrapper-disabled.ant-radio-button-wrapper-checked {
   color: rgba(0, 0, 0, 0.25);
+}
+
+.avatar-profile-mask {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0,0,0,.2);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.banner-profile {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  height: 60px;
+  color: $primary;
+  flex-direction: column;
+  background-color: #fff;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-top-left-radius: 20px;
+  font-size: 12px;
 }
