@@ -70,8 +70,6 @@ class LoginForm extends React.Component {
           if (currentUser.roles[0].name === 'superadmin') { 
             this.redirectToAdmin()
           }
-        } else {
-          console.log('User with no role')
         }
 
         swal("Inicio de sesión exitoso", "", "success");

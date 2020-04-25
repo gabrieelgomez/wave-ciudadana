@@ -9,24 +9,29 @@ import { api } from '../../services/api';
 
 class CitizenProfile extends React.Component {
   state = {
-    citizen: {}
+    citizen: {},
+    type_candidacies: []
   }
 
   componentDidMount() {
-    const { id, name, nickname, avatar, email, phone, dni, gender } = this.props.currentUser
+    const { id, name, nickname, avatar, banner, email, phone, description, status_citizen, type_candidacy_id } = this.props.currentUser;
 
     this.setState({
       citizen: {
         id,
         name,
+        banner,
         nickname,
-        avatar,
         email,
+        avatar,
         phone,
-        dni,
-        gender
+        description,
+        status_citizen,
+        type_candidacy_id
       }
     })
+
+    this.getTypeCandidacies()
   }
 
   handleChange = (e) => {
@@ -41,12 +46,36 @@ class CitizenProfile extends React.Component {
     });
   }
 
+  handleSelectStatus = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          status_citizen: value
+        }
+      }
+    });
+  }
+
+  handleSelectType = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          type_candidacy_id: value
+        }
+      }
+    });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     this.updateCitizen(this.state.citizen);
   }
 
-  getFile = (base64) => {
+  getAvatarBase64 = (base64) => {
     this.setState(prevState => {
       return {
         citizen: {
@@ -55,6 +84,45 @@ class CitizenProfile extends React.Component {
         }
       }
     });
+  }
+
+  getBannerBase64 = (base64) => {
+    this.setState(prevState => {
+      return {
+        citizen: {
+          ...prevState.citizen,
+          banner: base64
+        }
+      }
+    });
+  }
+
+  getTypeCandidacies = async () => {
+    let data = [];
+    const { uid, client, access_token } = this.props.session.tokens;
+    const res = await this.props.api({
+      method: 'GET',
+      endpoint: 'v1/wave_citizen/type_candidacies',
+      headers: {
+        'access-token': access_token,
+        client, uid
+      }
+    })
+
+    if (res.data) {
+      data = res.data.data.map((item) => {
+        const attrs = item.attributes;
+
+        return {
+          id: item.id,
+          ...attrs
+        }
+      });
+    }
+
+    this.setState({
+      type_candidacies: data
+    })
   }
 
   updateCitizen = async (citizen) => {
@@ -88,9 +156,18 @@ class CitizenProfile extends React.Component {
     return (
       <div className="container">
         <Row>
-          <Col span={14} offset={5}>
+          <Col span={16} offset={4}>
             <StyledCard>
-              <ProfileForm citizen={this.state.citizen} updateCitizen={this.handleSubmit} getFile={this.getFile} handleChange={this.handleChange}/>
+              <ProfileForm
+                citizen={this.state.citizen}
+                typeCandidacies={this.state.type_candidacies}
+                updateCitizen={this.handleSubmit}
+                getAvatarBase64={this.getAvatarBase64}
+                getBannerBase64={this.getBannerBase64}
+                handleChange={this.handleChange}
+                handleSelectStatus={this.handleSelectStatus}
+                handleSelectType={this.handleSelectType}
+              />
             </StyledCard>
           </Col>
         </Row>
