@@ -55,6 +55,10 @@ class LoginForm extends React.Component {
       }
 
       const currentUser = {
+        ...response.data.data
+      }
+
+      const currentCitizen = {
         ...response.data.data.citizen
       }
 
@@ -64,12 +68,13 @@ class LoginForm extends React.Component {
       cb();
 
       if (response.statusText === "OK") {
-        setCurrentUser(currentUser)
-
         if (currentUser.roles && currentUser.roles.length !== 0) {
-          if (currentUser.roles[0].name === 'superadmin') { 
+          if (currentUser.roles[0].name === 'superadmin') {
+            setCurrentUser(currentUser)
             this.redirectToAdmin()
           }
+        } else {
+          setCurrentUser(currentCitizen)
         }
 
         swal("Inicio de sesión exitoso", "", "success");
