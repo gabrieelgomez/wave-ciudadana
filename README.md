@@ -1,4 +1,4 @@
-# Cinema API documentation
+# Movie Company API Documentation
 - Login
 - People
 - Movies
@@ -51,30 +51,6 @@
 }
 ```
 
-# Movies
-
-## Create, POST /v1/movies/create
-
-### Body Parameters:
-```JSON BODY
-{
-  "movie":{
-		"title": "Un titulo",
-		"release_year": "20-04-2020",
-		"casts_attributes": [
-			{
-				"person_id": "1",
-				"role_id": "1"
-			},
-			{
-				"person_id": "5",
-				"role_id": "2"
-			}
-		]	
-	}
-}
-```
-
 # Role
 
 ## Get all, GET /v1/roles
@@ -100,6 +76,30 @@
     "created_at": "2020-04-27T00:20:20.795Z",
     "updated_at": "2020-04-27T00:20:20.795Z"
   }
+}
+```
+
+# Movies
+
+## Create, POST /v1/movies/create
+
+### Body Parameters:
+```JSON BODY
+{
+  "movie":{
+		"title": "Un titulo",
+		"release_year": "20-04-2020",
+		"casts_attributes": [
+			{
+				"person_id": "1",
+				"role_id": "1"
+			},
+			{
+				"person_id": "5",
+				"role_id": "2"
+			}
+		]	
+	}
 }
 ```
 
