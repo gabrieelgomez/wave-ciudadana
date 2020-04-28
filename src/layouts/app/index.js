@@ -10,7 +10,6 @@ class DefaultAppLayout extends Component {
     const {
       currentUser, tokens
     } = this.props;
-    console.log(this.props)
 
     return (
       <Layout className="layout">
