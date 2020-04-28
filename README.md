@@ -9,10 +9,10 @@
 # Login
 
 
-## POST /v1/auth/sign_in
+## Sign ing, POST /v1/auth/sign_in
 
 ### Body Parameters:
-```BODY JSON
+```JSON BODY
 {
   "email": "user@admin.com",
   "password": "12345678"
@@ -38,10 +38,10 @@
 
 # People
 
-## Create /v1/people/create
+## Create, POST /v1/people/create
 
 ### Body Parameters:
-```BODY JSON
+```JSON BODY
 {
   "person":{
 		"first_name": "Un actor",
@@ -53,10 +53,68 @@
 
 # Movies
 
-## Create /v1/movies/create
+## Create, POST /v1/movies/create
 
 ### Body Parameters:
-```BODY JSON
+```JSON BODY
+{
+  "movie":{
+		"title": "Un titulo",
+		"release_year": "20-04-2020",
+		"casts_attributes": [
+			{
+				"person_id": "1",
+				"role_id": "1"
+			},
+			{
+				"person_id": "5",
+				"role_id": "2"
+			}
+		]	
+	}
+}
+```
+
+# Role
+
+## Get all, GET /v1/roles
+
+### Response:
+```JSON BODY
+{
+  "actor": {
+    "id": 1,
+    "name": "actor",
+    "created_at": "2020-04-27T00:20:20.783Z",
+    "updated_at": "2020-04-27T00:20:20.783Z"
+  },
+  "director": {
+    "id": 2,
+    "name": "director",
+    "created_at": "2020-04-27T00:20:20.789Z",
+    "updated_at": "2020-04-27T00:20:20.789Z"
+  },
+  "producer": {
+    "id": 3,
+    "name": "producer",
+    "created_at": "2020-04-27T00:20:20.795Z",
+    "updated_at": "2020-04-27T00:20:20.795Z"
+  }
+}
+```
+
+# Cast
+
+## Create a casting one person to movie, POST /v1/casts/create
+
+### Body Parameters:
+```JSON BODY
+# Movies
+
+## Create, POST /v1/movies/create
+
+### Body Parameters:
+```JSON BODY
 {
   "movie":{
 		"title": "Un titulo",
