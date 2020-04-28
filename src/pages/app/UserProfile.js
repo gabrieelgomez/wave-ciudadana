@@ -1,6 +1,8 @@
 import React from 'react';
 import swal from 'sweetalert';
 import ProfileForm from '../../components/app/Citizen/ProfileForm';
+import HeaderPage from '../../components/app/HeaderPage';
+import headerImg from '../../assets/img/icons/userprofile.svg';
 import { connect } from 'react-redux';
 import { Row, Col } from 'antd';
 import { StyledCard } from '../../components/styled';
@@ -154,8 +156,9 @@ class CitizenProfile extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container page">
         <Row>
+          <HeaderPage title="Mi Perfil" img={headerImg} />
           <Col span={16} offset={4}>
             <StyledCard>
               <ProfileForm

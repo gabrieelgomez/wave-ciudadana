@@ -248,7 +248,39 @@ h1, h2, h3, h4 {
 }
 
 .page {
-  padding: 20px 0;
+  padding: 20px;
+
+  .page-header {
+    height: 80px;
+    border-radius: 10px;
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 100px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,.1);
+    margin-bottom: 30px;
+
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 110%;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      color: $primary;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    span {
+      font-size: 13px;
+      font-family: $fontPrimary;
+    }
+  }
 }
 
 .quick-post {
@@ -566,6 +598,15 @@ h1, h2, h3, h4 {
   color: #fff;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.banner-box {
+  position: relative;
+
+  img {
+    height: 120px;
+    object-fit: cover;
+  }
 }
 
 .banner-profile {

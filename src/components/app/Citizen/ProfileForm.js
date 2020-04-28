@@ -76,7 +76,7 @@ class ProfileForm extends Component {
             <Col span={17} offset={1}>
               <Item>
                 <Upload name="banner" customRequest={this.bannerRequest}>
-                  <div style={{position: 'relative'}}>
+                  <div className="banner-box">
                     <img width="100%" src={banner ? banner : "https://www.bannerbatterien.com/upload/filecache/Banner-Batterien-Solar-web_5b783e66a0dd14b56c07227718cd636d.jpg"} alt="Banner del citizen" />
                     <div className="banner-profile">
                       <Icon type="plus" />

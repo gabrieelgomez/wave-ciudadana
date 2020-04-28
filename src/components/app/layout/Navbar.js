@@ -57,6 +57,11 @@ class Navbar extends React.Component {
             <li>
             <Link to="/">Home</Link>
             </li>
+            { currentUser &&
+              <li>
+                <Link to="/my-polls">Mis Encuestas</Link>
+              </li>
+            }
           </ul>
           { currentUser ? (
               <ul>
