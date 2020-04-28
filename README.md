@@ -43,9 +43,9 @@
 ```JSON BODY
 {
   "person":{
-		"first_name": "Un actor",
-		"last_name": "Su apellid",
-		"aliases": "snowden0"
+		"first_name": "John",
+		"last_name": "Doe",
+		"aliases": "john_doe"
 	}
 }
 ```
@@ -63,7 +63,9 @@
 
 ## Show, GET /v1/people/:person_id
 ## Index, GET /v1/people
-## Delete, DELETE /v1/people/destroy
+## Delete, DELETE /v1/people/:person_id/destroy
+
+
 
 # Role
 
@@ -101,7 +103,7 @@
 ```JSON BODY
 {
   "movie":{
-		"title": "Un titulo",
+		"title": "Gladiador",
 		"release_year": "20-04-2020",
 		"casts_attributes": [
 			{
@@ -122,7 +124,7 @@
 ```JSON BODY
 {
   "movie":{
-    "title": "Cambio de titulo",
+    "title": "Gladiador 2",
 		"casts_attributes": [
 			{
         "id": "1",
@@ -135,17 +137,13 @@
 
 ## Show, GET /v1/movies/:movie_id
 ## Index, GET /v1/movies
-## Delete, DELETE /v1/movies/destroy
+## Delete, DELETE /v1/movies/:movie_id/destroy
+
+
 
 # Cast
 
-## Create a casting one person to movie, POST /v1/casts/create
-
-### Body Parameters:
-```JSON BODY
-# Movies
-
-## Create, POST /v1/movies/create
+## Create a person's cast to movie, POST /v1/casts/create
 
 ### Body Parameters:
 ```JSON BODY
@@ -158,4 +156,4 @@
 }
 ```
 
-## Destroy a person from casting, DELETE /v1/casts/:cast_id/update
+## Destroy a person from casting, DELETE /v1/casts/:cast_id/destroy
