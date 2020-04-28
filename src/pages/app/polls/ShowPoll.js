@@ -1,6 +1,8 @@
 import React from 'react';
 import PollInfo from '../../../components/app/Polls/Info';
 import PollService from '../../../services/api/poll';
+import HeaderPage from '../../../components/app/HeaderPage';
+import headerImg from '../../../assets/img/icons/vote.svg';
 import { Row, Col, Form } from 'antd';
 import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
 import { connect } from 'react-redux';
@@ -38,7 +40,8 @@ class Show extends React.Component {
     const { api, tokens } = this.props;
 
     return (
-      <div className="page">
+      <div className="container page">
+        <HeaderPage title={poll.title} img={headerImg} subtitle="Encuesta" />
         <Row>
           <Col xs={{ span: 22, offset: 1 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
             <PollInfo
