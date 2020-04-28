@@ -52,11 +52,15 @@ class UpdatePoll extends React.Component {
   updatePoll = (poll) => {
     const {tokens} = this.props;
     const payload = {
-      poll: poll
+      poll: {
+        ...poll,
+        items_attributes: poll.items
+      }
     }
 
     const successCallback = () => {
       swal('Datos actualizados exitosamente', '', 'success')
+      this.props.history.push(`/admin/poll/${poll.id}`)
     }
 
     const errorCallback = (err) => {
@@ -138,15 +142,20 @@ class UpdatePoll extends React.Component {
     })
   }
 
-  itemshandleRemove = (i) => {
+  itemshandleRemove = (id) => {
     const items = this.state.poll.items;
-    items.splice(i,1);
+    const updatedItems = items.map(item => {
+      if (id === item.id) {
+        Object.assign(item, {_destroy: true})
+      }
+      return item
+    })
 
     this.setState(prevState=> {
       return {
         poll: {
           ...prevState.poll,
-          items: items
+          items: updatedItems
         }
       }
     })

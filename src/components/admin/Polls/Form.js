@@ -25,10 +25,6 @@ const PollForm = (props) => {
 
   const formatDueDateShow = moment.utc(due_date).format("L");
 
-  const poll_category = props.data.poll_category
-  const currentPollCategoryName = poll_category !== undefined ? poll_category.name : 'Cargando...';
-  const placeholderSelect = poll_category_id === '' ? 'Seleccionar categoría de encuesta' : currentPollCategoryName;
-
   return (
     <Form onSubmit={props.handleSubmit}>
       <Row>
@@ -59,7 +55,7 @@ const PollForm = (props) => {
         <Col span={8} lg={8} md={8} xs={24}>
           <Form.Item style={{padding: '0 15px'}}>
             <label>Categoría de la encuesta</label><br></br>
-            <Select placeholder={placeholderSelect} defaultValue={poll_category_id} style={{ width: 180 }} onChange={props.handleSelect}>
+            <Select placeholder={poll_category_id} defaultValue={poll_category_id} style={{ width: 180 }} onChange={props.handleSelect}>
               { props.pollCategories !== undefined ? props.pollCategories.map((item) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })
@@ -85,6 +81,7 @@ const PollForm = (props) => {
         <Col span={24} lg={24} md={24} xs={24}>
           <h4>Items</h4>
           {items.map((item, i)=> {
+            if (item.hasOwnProperty("_destroy")) return false
             return (
               <div className="item" key={i+1}>
                 <Form.Item>
@@ -94,13 +91,12 @@ const PollForm = (props) => {
                     placeholder={`Item ${i+1}`}
                   />
                 </Form.Item>
-                <span className="remove-item" onClick={() => {props.itemshandleRemove(i)}}><Icon type="delete"/></span>
+                <span className="remove-item" onClick={() => {props.itemshandleRemove(item.id)}}><Icon type="delete"/></span>
               </div>
             )
           })}
           <span className="add-item" onClick={props.addField}>Agregar item <Icon type="plus"/></span>
         </Col>
-
       </Row>
       { props.children }
       <Button htmlType="submit">
