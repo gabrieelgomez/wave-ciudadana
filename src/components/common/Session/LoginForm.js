@@ -54,8 +54,13 @@ class LoginForm extends React.Component {
         client, uid
       }
 
-      const currentUser = {
-        ...response.data.data.citizen
+      const data = response.data.data
+      let loggedUser = {};
+
+      if (response.data.data.citizen !== null) {
+        loggedUser = {...data.citizen}
+      } else {
+        loggedUser = {...data}
       }
 
       setTokens(tokens)
@@ -64,10 +69,10 @@ class LoginForm extends React.Component {
       cb();
 
       if (response.statusText === "OK") {
-        setCurrentUser(currentUser)
+        setCurrentUser(loggedUser)
 
-        if (currentUser.roles && currentUser.roles.length !== 0) {
-          if (currentUser.roles[0].name === 'superadmin') { 
+        if (loggedUser.roles && loggedUser.roles.length !== 0) {
+          if (loggedUser.roles[0].name === 'superadmin') {
             this.redirectToAdmin()
           }
         }
