@@ -7,11 +7,10 @@ import {
   Row,
   Col,
   Select,
-  DatePicker,
-  Icon
+  DatePicker
 } from 'antd';
-import { StyledInput } from '../../styled';
-const {Option} = Select;
+import PollItems from './Items';
+const { Option } = Select;
 const { TextArea } = Input;
 
 const PollForm = (props) => {
@@ -79,23 +78,7 @@ const PollForm = (props) => {
         </Col>
 
         <Col span={24} lg={24} md={24} xs={24}>
-          <h4>Items</h4>
-          {items.map((item, i)=> {
-            if (item.hasOwnProperty("_destroy")) return false
-            return (
-              <div className="item" key={i+1}>
-                <Form.Item>
-                  <StyledInput
-                    onChange={(e) => {props.itemshandleChange(e, i)}}
-                    value={item.title}
-                    placeholder={`Item ${i+1}`}
-                  />
-                </Form.Item>
-                <span className="remove-item" onClick={() => {props.itemshandleRemove(item.id)}}><Icon type="delete"/></span>
-              </div>
-            )
-          })}
-          <span className="add-item" onClick={props.addField}>Agregar item <Icon type="plus"/></span>
+          <PollItems items={items} addField={props.addField} />
         </Col>
       </Row>
       { props.children }

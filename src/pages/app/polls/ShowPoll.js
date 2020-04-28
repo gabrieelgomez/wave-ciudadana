@@ -37,7 +37,7 @@ class Show extends React.Component {
 
   render() {
     const { poll } = this.state;
-    const { api, tokens } = this.props;
+    const { api, tokens, currentUser} = this.props;
 
     return (
       <div className="container page">
@@ -47,6 +47,7 @@ class Show extends React.Component {
             <PollInfo
               api={api}
               tokens={tokens}
+              currentUser={currentUser}
               item={poll}
               type={poll.type}
             />

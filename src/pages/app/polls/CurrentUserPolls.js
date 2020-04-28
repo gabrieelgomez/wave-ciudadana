@@ -31,7 +31,7 @@ class CurrentUserPolls extends React.Component {
   }
 
   render() {
-    const { api } = this.props;
+    const { api, currentUser } = this.props;
     const polls = this.state.polls;
 
     return (
@@ -44,6 +44,7 @@ class CurrentUserPolls extends React.Component {
                 <PollInfo
                   api={api}
                   item={item}
+                  currentUser={currentUser}
                   type={item.type}
                   />
               </Col>

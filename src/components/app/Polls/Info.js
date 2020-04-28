@@ -7,7 +7,7 @@ import VoteItems from './VoteItems';
 
 const PollInfo = (props) => {
   const info = props.item;
-  const { api, tokens } = props;
+  const { api, tokens, currentUser } = props;
 
   const formatDueDateShow = moment.utc(info.due_date).format("L");
 
@@ -29,6 +29,12 @@ const PollInfo = (props) => {
             </div>
             { info.type_poll === 'poll_admin' &&
               <Badge count="Encuesta Oficial" style={{ backgroundColor: '#ff663b' }} />
+            }
+            { info.id === currentUser.id &&
+              <div>
+                <Icon type="message"></Icon>
+                <Icon type="like"></Icon>
+              </div>
             }
           </div>
           <small>{info.poll_category.name}</small>
