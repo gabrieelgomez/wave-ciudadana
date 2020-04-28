@@ -30,10 +30,10 @@ const PollInfo = (props) => {
             { info.type_poll === 'poll_admin' &&
               <Badge count="Encuesta Oficial" style={{ backgroundColor: '#ff663b' }} />
             }
-            { info.id === currentUser.id &&
+            { info.citizen.id === currentUser.id &&
               <div>
-                <Icon type="message"></Icon>
-                <Icon type="like"></Icon>
+                <Link to={`/poll/${info.id}/update`}><Icon type="edit"></Icon></Link>
+                <span onClick={() => props.removePoll(info.id)}><Icon type="delete"></Icon></span>
               </div>
             }
           </div>
