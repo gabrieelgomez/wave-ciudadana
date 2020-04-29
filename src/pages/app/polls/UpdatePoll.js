@@ -1,27 +1,25 @@
 import React from 'react';
-import UpdatePollForm from "../../../components/admin/Polls/Update";
 import PollService from '../../../services/api/poll';
+import HeaderPage from '../../../components/app/HeaderPage';
+import headerImg from '../../../assets/img/icons/vote.svg';
+import FormUpdate from '../../../components/app/Polls/FormUpdate';
 import swal from 'sweetalert';
 import moment from 'moment';
+import { Row, Col, Form } from 'antd';
+import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 
-class UpdatePoll extends React.Component {
+class Show extends React.Component {
   state = {
-    poll: {
-      title: '',
-      description: '',
-      due_date: '',
-      poll_category_id: '',
-      items: []
-    },
-    poll_categories: [],
+    poll: {},
+    poll_categories: []
   }
 
   componentDidMount() {
-    const pollID = this.props.match.params.id;
     this.service = new PollService(this.props.api)
-    this.getPoll(pollID)
+    this.pollID = this.props.match.params.id
+    this.getPoll(this.pollID)
     this.getCategories()
   }
 
@@ -37,13 +35,13 @@ class UpdatePoll extends React.Component {
     const { tokens } = this.props;
     const res = await this.service.getOne({tokens, id})
     const data = res.data.data;
-
+    
     const poll = {
       id: data.id,
       type: data.type,
       ...data.attributes
     }
-    
+
     this.setState({
       poll: poll
     })
@@ -60,7 +58,7 @@ class UpdatePoll extends React.Component {
 
     const successCallback = () => {
       swal('Datos actualizados exitosamente', '', 'success')
-      this.props.history.push(`/admin/poll/${poll.id}`)
+      this.props.history.push(`/poll/${poll.id}`)
     }
 
     const errorCallback = (err) => {
@@ -74,6 +72,36 @@ class UpdatePoll extends React.Component {
     this.service.update({payload, tokens, successCallback, errorCallback})
   }
 
+  handleUpdate = () => {
+    const { poll } = this.state;
+    this.updatePoll(poll)
+  }
+
+  datePickerChange = (date) => {
+    var datepickerDate = moment(date).format('YYYY-MM-DD');
+    var proposedDate = datepickerDate + "T00:00:00.000Z";
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          due_date: proposedDate
+        }
+      }
+    });
+  }
+
+  handleSelectChange = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          poll_category_id: value
+        }
+      }
+    });
+  }
+
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState(prevState=> {
@@ -84,37 +112,6 @@ class UpdatePoll extends React.Component {
         }
       }
     });
-  }
-
-  datePickerChange = (date) => {
-    var datepickerDate = moment(date).format('YYYY-MM-DD');
-    var formatDate = datepickerDate + "T00:00:00.000Z";
-    this.setState(prevState => {
-      return {
-        poll: {
-          ...prevState.poll,
-          due_date: formatDate
-        }
-      }
-    });
-  }
-
-  handleSelectChange = (e) => {
-    const value = e;
-    this.setState(prevState=> {
-      return {
-        poll: {
-          ...prevState.poll,
-          poll_category_id: value
-        }
-      }
-    });
-  }
-
-  handleUpdatePoll = (e) => {
-    e.preventDefault()
-    const { poll } = this.state;
-    this.updatePoll(poll)
   }
 
   addField = () => {
@@ -142,7 +139,7 @@ class UpdatePoll extends React.Component {
     })
   }
 
-  itemshandleRemove = (id) => {
+  removeField = (id) => {
     const items = this.state.poll.items;
     const updatedItems = items.map(item => {
       if (id === item.id) {
@@ -162,21 +159,37 @@ class UpdatePoll extends React.Component {
   }
 
   render() {
-    return <UpdatePollForm
-      pollData={this.state.poll}
-      pollCategories={this.state.poll_categories}
-      currentUser={this.props.currentUser}
-      handleUpdatePoll={this.handleUpdatePoll}
-      handleSelectChange={this.handleSelectChange}
-      datePickerChange={this.datePickerChange}
-      handleChange={this.handleChange}
-      addField={this.addField}
-      itemshandleRemove={this.itemshandleRemove}
-      itemshandleChange={this.itemshandleChange}
-    />
+    const { poll } = this.state;
+    const pollCategories = this.state.poll_categories;
+
+    return (
+      <div className="container page">
+        <HeaderPage title={poll.title} img={headerImg} subtitle="Encuesta" />
+        <Row>
+          <Col xs={{ span: 22, offset: 1 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
+            <FormUpdate
+              poll={poll}
+              pollCategories={pollCategories}
+              handleUpdate={this.handleUpdate}
+              handleChange={this.handleChange}
+              handleSelectChange={this.handleSelectChange}
+              datePickerChange={this.datePickerChange}
+              addField={this.addField}
+              removeField={this.removeField}
+              itemshandleChange={this.itemshandleChange}
+            />
+            <StyledCard>
+              <Form.Item>
+                <StyledTextAreaFeed placeholder="Comenta..."/>
+                <StyledButton>Comentar</StyledButton>
+              </Form.Item>
+            </StyledCard>
+          </Col>
+        </Row>
+      </div>
+    );
   }
 }
-
 const mapStateToProps = (state) => {
   const { tokens, currentUser } = state.session;
   return { tokens, currentUser };
@@ -186,4 +199,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdatePoll);
+export default connect(mapStateToProps, mapDispatchToProps)(Show);

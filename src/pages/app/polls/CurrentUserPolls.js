@@ -2,37 +2,32 @@ import React from 'react';
 import PollInfo from '../../../components/app/Polls/Info';
 import PollService from '../../../services/api/poll';
 import HeaderPage from '../../../components/app/HeaderPage';
-import headerImg from '../../../assets/img/icons/vote.svg';
+import headerImg from '../../../assets/img/icons/polls.svg';
 import swal from 'sweetalert'
-import { Row, Col, Form } from 'antd';
-import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
+import { Row, Col } from 'antd';
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
 
-class Show extends React.Component {
+class CurrentUserPolls extends React.Component {
   state = {
-    poll: {}
+    polls: []
   }
 
   componentDidMount() {
     this.service = new PollService(this.props.api)
-    this.pollID = this.props.match.params.id
-    this.getPoll(this.pollID)
+    this.getPolls()
   }
 
-  getPoll = async (id) => {
+  getPolls = async () => {
     const { tokens } = this.props;
-    const res = await this.service.getOne({tokens, id})
-    const data = res.data.data;
+    const data = await this.service.getAll({tokens})
 
-    const poll = {
-      id: data.id,
-      type: data.type,
-      ...data.attributes
-    }
+    const {currentUser} = this.props;
 
+    const currentUserPolls = data.filter(poll => poll.citizen_id === currentUser.id )
+    
     this.setState({
-      poll: poll
+      polls: currentUserPolls
     })
   }
 
@@ -43,7 +38,7 @@ class Show extends React.Component {
       swal(`Encuesta eliminada`, {
         icon: "warning",
       }).then(()=> {
-        this.props.history.push('/my-polls');
+        window.location.reload()
       });
     }
 
@@ -74,28 +69,28 @@ class Show extends React.Component {
   }
 
   render() {
-    const { poll } = this.state;
-    const { api, tokens, currentUser} = this.props;
+    const { api, currentUser } = this.props;
+    const polls = this.state.polls;
 
     return (
       <div className="container page">
-        <HeaderPage title={poll.title} img={headerImg} subtitle="Encuesta" />
-        <Row>
-          <Col xs={{ span: 22, offset: 1 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
-            <PollInfo
-              api={api}
-              tokens={tokens}
-              currentUser={currentUser}
-              item={poll}
-              handleRemove={this.handleRemove}
-            />
-            <StyledCard>
-              <Form.Item>
-                <StyledTextAreaFeed placeholder="Comenta..."/>
-                <StyledButton>Comentar</StyledButton>
-              </Form.Item>
-            </StyledCard>
-          </Col>
+        <Row gutter={16}>
+          <HeaderPage title="Mis encuestas" img={headerImg} />
+          { polls.length !== 0 ? (
+            polls.map((item, i)=> {
+              return (
+                <Col key={i} xs={24} md={8} lg={8}>
+                  <PollInfo
+                    api={api}
+                    item={item}
+                    currentUser={currentUser}
+                    handleRemove={this.handleRemove}
+                    />
+                </Col>
+              )
+            })
+          ) : ( <p>No tienes encuestas </p> )
+          }
         </Row>
       </div>
     );
@@ -110,4 +105,4 @@ const mapDispatchToProps = {
   api
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Show);
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentUserPolls);

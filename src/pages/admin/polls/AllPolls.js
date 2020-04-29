@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import AdminPolls from "../../../components/admin/Polls";
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
@@ -58,9 +59,18 @@ class AllPolls extends React.Component {
     if (res.data) {
       data = res.data.data.map((item, idx) => {
         const attrs = item.attributes;
+        var actualDate = moment().format('YYYY-MM-DD');
+        var formatActualDate = actualDate + "T00:00:00.000Z";
+
+        let expired = false;
+
+        if (attrs.due_date <= formatActualDate) {
+          expired = true
+        }
 
         return {
           id: item.id,
+          expired,
           ...attrs
         }
       });

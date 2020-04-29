@@ -6,6 +6,8 @@ import Home from "../pages/app/Home";
 import UserProfile from "../pages/app/UserProfile";
 import ResetPassword from "../pages/app/ResetPassword";
 import ShowPoll from "../pages/app/polls/ShowPoll";
+import UpdatePoll from "../pages/app/polls/UpdatePoll";
+import CurrentUserPolls from "../pages/app/polls/CurrentUserPolls";
 
 export default [
   {
@@ -29,5 +31,17 @@ export default [
     exact: true,
     layout: DefaultAppLayout,
     component: ShowPoll
+  },
+  {
+    path: "/poll/:id/update",
+    exact: true,
+    layout: DefaultAppLayout,
+    component: UpdatePoll
+  },
+  {
+    path: "/my-polls",
+    exact: true,
+    layout: DefaultAppLayout,
+    component: CurrentUserPolls
   }
 ];

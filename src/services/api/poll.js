@@ -22,7 +22,7 @@ class PollService {
   update = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
     const { uid, client, access_token } = tokens;
     await this.api({
-      method: 'POST',
+      method: 'PUT',
       endpoint: `v1/wave_citizen/polls/${payload.poll.id}/update`,
       payload,
       headers: {

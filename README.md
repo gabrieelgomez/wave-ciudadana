@@ -1,68 +1,159 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Movie Company API Documentation
+- Login
+- People
+- Movies
+- Roles
+- Cast
 
-## Available Scripts
 
-In the project directory, you can run:
+# Login
 
-### `yarn start`
+## Sign ing, POST /v1/auth/sign_in
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Body Parameters:
+```JSON BODY
+{
+  "email": "user@admin.com",
+  "password": "12345678"
+}
+```
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Response body:
+```JSON BODY
+{
+  "data": {
+    "id": 1,
+    "email": "user@admin.com",
+    "provider": "email",
+    "uid": "user@admin.com",
+    "allow_password_change": false,
+    "name": null,
+    "nickname": null,
+    "image": null,
+    "type": "user"
+  }
+}
+```
 
-### `yarn test`
+# People
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Create, POST /v1/people/create
 
-### `yarn build`
+### Body Parameters:
+```JSON BODY
+{
+  "person":{
+		"first_name": "John",
+		"last_name": "Doe",
+		"aliases": "john_doe"
+	}
+}
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Update, PUT /v1/people/:person_id/update
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Body Parameters:
+```JSON BODY
+{
+  "person":{
+    "first_name": "first name updating"
+  }
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Show, GET /v1/people/:person_id
+## Index, GET /v1/people
+## Delete, DELETE /v1/people/:person_id/destroy
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Role
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Get all, GET /v1/roles
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Response:
+```JSON BODY
+{
+  "actor": {
+    "id": 1,
+    "name": "actor",
+    "created_at": "2020-04-27T00:20:20.783Z",
+    "updated_at": "2020-04-27T00:20:20.783Z"
+  },
+  "director": {
+    "id": 2,
+    "name": "director",
+    "created_at": "2020-04-27T00:20:20.789Z",
+    "updated_at": "2020-04-27T00:20:20.789Z"
+  },
+  "producer": {
+    "id": 3,
+    "name": "producer",
+    "created_at": "2020-04-27T00:20:20.795Z",
+    "updated_at": "2020-04-27T00:20:20.795Z"
+  }
+}
+```
 
-## Learn More
+# Movies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Create, POST /v1/movies/create
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Body Parameters:
+```JSON BODY
+{
+  "movie":{
+		"title": "Gladiador",
+		"release_year": "20-04-2020",
+		"casts_attributes": [
+			{
+				"person_id": "1",
+				"role_id": "1"
+			},
+			{
+				"person_id": "5",
+				"role_id": "2"
+			}
+		]	
+	}
+}
+```
+## Update, PUT /v1/people/:person_id/update
 
-### Code Splitting
+### Body Parameters:
+```JSON BODY
+{
+  "movie":{
+    "title": "Gladiador 2",
+		"casts_attributes": [
+			{
+        "id": "1",
+				"destroy": true
+			}
+		]	
+  }
+}
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Show, GET /v1/movies/:movie_id
+## Index, GET /v1/movies
+## Delete, DELETE /v1/movies/:movie_id/destroy
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
 
-### Making a Progressive Web App
+# Cast
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+## Create a person's cast to movie, POST /v1/casts/create
 
-### Advanced Configuration
+### Body Parameters:
+```JSON BODY
+{
+  "cast":{
+		"person_id": 1,
+		"movie_id": 10,
+		"role_id": 1
+	}
+}
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Destroy a person from casting, DELETE /v1/casts/:cast_id/destroy

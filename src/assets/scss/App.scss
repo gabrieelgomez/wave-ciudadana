@@ -248,7 +248,39 @@ h1, h2, h3, h4 {
 }
 
 .page {
-  padding: 20px 0;
+  padding: 20px;
+
+  .page-header {
+    height: 80px;
+    border-radius: 10px;
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding-left: 100px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,.1);
+    margin-bottom: 30px;
+
+    img {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 110%;
+    }
+
+    h1 {
+      margin-bottom: 0;
+      color: $primary;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    span {
+      font-size: 13px;
+      font-family: $fontPrimary;
+    }
+  }
 }
 
 .quick-post {
@@ -498,13 +530,13 @@ h1, h2, h3, h4 {
   font-family: $fontPrimary;
 }
 
-.feed-card-header {
+.info-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 
-  .feed-card-name {
+  .info-card-name {
     display: flex;
     align-items: center;
 
@@ -519,14 +551,31 @@ h1, h2, h3, h4 {
   }
 }
 
-.feed-card-footer {
+.info-card-actions {
+  font-size: 15px;
+
+  a {
+    margin-right: 8px;
+  }
+
+  span {
+    cursor: pointer;
+    color: $primary;
+
+    &:hover {
+      color: #40a9ff;
+    }
+  }
+}
+
+.info-card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-top: 1px solid #e8e8e8;
   padding-top: 15px;
 
-  .feed-card-footer-info {
+  .info-card-footer-info {
     font-size: 12px;
   }
 
@@ -566,6 +615,15 @@ h1, h2, h3, h4 {
   color: #fff;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.banner-box {
+  position: relative;
+
+  img {
+    height: 120px;
+    object-fit: cover;
+  }
 }
 
 .banner-profile {
