@@ -2,7 +2,9 @@ import React from 'react';
 import PollService from '../../../services/api/poll';
 import HeaderPage from '../../../components/app/HeaderPage';
 import headerImg from '../../../assets/img/icons/vote.svg';
-import swal from 'sweetalert'
+import FormUpdate from '../../../components/app/Polls/FormUpdate';
+import swal from 'sweetalert';
+import moment from 'moment';
 import { Row, Col, Form } from 'antd';
 import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
 import { connect } from 'react-redux';
@@ -39,7 +41,6 @@ class Show extends React.Component {
       type: data.type,
       ...data.attributes
     }
-    console.log(poll)
 
     this.setState({
       poll: poll
@@ -54,6 +55,7 @@ class Show extends React.Component {
         items_attributes: poll.items
       }
     }
+    console.log(payload)
 
     const successCallback = () => {
       swal('Datos actualizados exitosamente', '', 'success')
@@ -71,6 +73,92 @@ class Show extends React.Component {
     this.service.update({payload, tokens, successCallback, errorCallback})
   }
 
+  handleUpdate = () => {
+    const { poll } = this.state;
+    this.updatePoll(poll)
+  }
+
+  datePickerChange = (date) => {
+    var datepickerDate = moment(date).format('YYYY-MM-DD');
+    var proposedDate = datepickerDate + "T00:00:00.000Z";
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          due_date: proposedDate
+        }
+      }
+    });
+  }
+
+  handleSelectChange = (e) => {
+    const value = e;
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          poll_category_id: value
+        }
+      }
+    });
+  }
+
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          [name]: value
+        }
+      }
+    });
+  }
+
+  addField = () => {
+    this.setState(prevState => {
+      return {
+        poll: {
+          ...prevState.poll,
+          items: [...prevState.poll.items, { title: "" }]
+        }
+      }
+    })
+  }
+
+  itemshandleChange = (e, i) => {
+    const items = this.state.poll.items;
+    items[i].title = e.target.value;
+
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          items: this.state.poll.items
+        }
+      }
+    })
+  }
+
+  removeField = (id) => {
+    const items = this.state.poll.items;
+    const updatedItems = items.map(item => {
+      if (id === item.id) {
+        Object.assign(item, {_destroy: true})
+      }
+      return item
+    })
+
+    this.setState(prevState=> {
+      return {
+        poll: {
+          ...prevState.poll,
+          items: updatedItems
+        }
+      }
+    })
+  }
+
   render() {
     const { poll } = this.state;
     const pollCategories = this.state.poll_categories;
@@ -80,6 +168,17 @@ class Show extends React.Component {
         <HeaderPage title={poll.title} img={headerImg} subtitle="Encuesta" />
         <Row>
           <Col xs={{ span: 22, offset: 1 }} md={{ span: 16, offset: 4 }} lg={{ span: 12, offset: 6 }}>
+            <FormUpdate
+              poll={poll}
+              pollCategories={pollCategories}
+              handleUpdate={this.handleUpdate}
+              handleChange={this.handleChange}
+              handleSelectChange={this.handleSelectChange}
+              datePickerChange={this.datePickerChange}
+              addField={this.addField}
+              removeField={this.removeField}
+              itemshandleChange={this.itemshandleChange}
+            />
             <StyledCard>
               <Form.Item>
                 <StyledTextAreaFeed placeholder="Comenta..."/>
