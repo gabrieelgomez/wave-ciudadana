@@ -55,7 +55,6 @@ class Show extends React.Component {
         items_attributes: poll.items
       }
     }
-    console.log(payload)
 
     const successCallback = () => {
       swal('Datos actualizados exitosamente', '', 'success')

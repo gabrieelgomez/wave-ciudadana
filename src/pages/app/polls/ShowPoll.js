@@ -87,7 +87,6 @@ class Show extends React.Component {
               tokens={tokens}
               currentUser={currentUser}
               item={poll}
-              type={poll.type}
               handleRemove={this.handleRemove}
             />
             <StyledCard>
