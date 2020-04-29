@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
-import { Row, Col, Form, DatePicker, Select, Icon } from 'antd';
+import PollItems from './Items';
+import { Row, Col, Form, DatePicker, Select } from 'antd';
 import { StyledTextAreaFeed, StyledInput } from '../../styled';
 const { Option } = Select;
 
@@ -65,7 +66,7 @@ class PollForm extends React.Component {
     })
   }
 
-  itemshandleRemove = (i) => {
+  removeField = (i) => {
     const items = this.state.poll.items_attributes;
     items.splice(i,1);
 
@@ -99,10 +100,6 @@ class PollForm extends React.Component {
   render() {
     const {title, description, poll_category_id, items_attributes} = this.state.poll;
 
-    const poll_category = this.props.categories
-    const currentPollCategoryName = poll_category !== undefined ? poll_category.name : 'Cargando...';
-    const placeholderSelect = poll_category_id === '' ? 'Seleccionar categoría de encuesta' : currentPollCategoryName;
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <div className="border-bottom">
@@ -125,7 +122,7 @@ class PollForm extends React.Component {
           <Row>
             <Col span={12}>
               <Form.Item>
-                <Select placeholder={placeholderSelect} defaultValue={poll_category_id} style={{ width: 180 }} onChange={this.handleSelectChange}>
+                <Select placeholder={poll_category_id} defaultValue={poll_category_id} style={{ width: 180 }} onChange={this.handleSelectChange}>
                   { this.props.categories !== undefined ? this.props.categories.map((item) => {
                       return <Option key={item.id} value={item.id}>{item.name}</Option>
                     })
@@ -147,22 +144,7 @@ class PollForm extends React.Component {
             </Col>
           </Row>
         </div>
-        <h4>Items</h4>
-        {items_attributes.map((item, i)=> {
-          return (
-            <div className="item" key={i+1}>
-              <Form.Item>
-                <StyledInput
-                  onChange={(e) => {this.itemshandleChange(e, i)}}
-                  value={item.title}
-                  placeholder={`Item ${i+1}`} 
-                />
-              </Form.Item>
-              <span className="remove-item" onClick={() => {this.itemshandleRemove(i)}}><Icon type="delete"/></span>
-            </div>
-          )
-        })}
-        <span className="add-item" onClick={this.addField}>Agregar item <Icon type="plus"/></span>
+        <PollItems items={items_attributes} addField={this.addField} removeField={this.removeField} itemshandleChange={this.itemshandleChange} />
         <button hidden type='submit' ref={this.props.pollFormRef}>submit</button>
       </Form>
     )

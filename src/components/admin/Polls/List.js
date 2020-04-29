@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 import { StyledTable } from '../../styled';
 import { Link } from 'react-router-dom';
 import { truncate } from '../../../helpers';
@@ -25,6 +25,15 @@ const AdminPollsList = (props) => {
       />
       <Column title="Usuario" dataIndex="user.name" key="user.name" />
       <Column title="Categoría de Encuesta" dataIndex="poll_category.name" key="poll_category.name" />
+      <Column title="Status" dataIndex="expired" key="expired" render={text => (
+        <div>
+          { text.toString() === "true" ? (
+            <Tag color="#b7eb8f">Expirado</Tag>
+          ) : (
+            <Tag color="#ffa39e">Vigente</Tag>
+          )} 
+        </div>
+      )}/>
     </StyledTable>
   )
 }

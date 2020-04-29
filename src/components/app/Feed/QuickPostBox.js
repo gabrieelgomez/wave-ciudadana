@@ -49,7 +49,9 @@ class QuickPostBox extends React.Component {
 
     const successCallback = () => {
       this.handleClose()
-      swal('Encuesta creada exitosamente', '', 'success')
+      swal('Encuesta creada exitosamente', '', 'success').then(() => {
+        window.location.reload()
+      })
     }
 
     const errorCallback = (err) => {

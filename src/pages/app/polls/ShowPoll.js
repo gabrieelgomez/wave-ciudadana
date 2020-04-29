@@ -3,6 +3,7 @@ import PollInfo from '../../../components/app/Polls/Info';
 import PollService from '../../../services/api/poll';
 import HeaderPage from '../../../components/app/HeaderPage';
 import headerImg from '../../../assets/img/icons/vote.svg';
+import swal from 'sweetalert'
 import { Row, Col, Form } from 'antd';
 import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
 import { connect } from 'react-redux';
@@ -35,9 +36,46 @@ class Show extends React.Component {
     })
   }
 
+  removePoll = async (id) => {
+    const { tokens } = this.props;
+
+    const successCallback = () => {
+      swal(`Encuesta eliminada`, {
+        icon: "warning",
+      }).then(()=> {
+        this.props.history.push('/my-polls');
+      });
+    }
+
+    const errorCallback = (err) => {
+      swal(`Hubo un error, no se ha podido eliminar`, {
+        icon: "error",
+      })
+    }
+
+    this.service.delete({id, tokens, successCallback, errorCallback})
+  }
+
+  handleRemove = (id) => {
+    swal({
+      title: "¿Estás seguro de eliminar?",
+      text: "Si elimina este record, afectará todos los subrecords que han sido creados a partir de él, siendo eliminados también",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.removePoll(id)
+      } else {
+        swal(`Encuesta está a salvo`);
+      }
+    });
+  }
+
   render() {
     const { poll } = this.state;
-    const { api, tokens } = this.props;
+    const { api, tokens, currentUser} = this.props;
 
     return (
       <div className="container page">
@@ -47,8 +85,9 @@ class Show extends React.Component {
             <PollInfo
               api={api}
               tokens={tokens}
+              currentUser={currentUser}
               item={poll}
-              type={poll.type}
+              handleRemove={this.handleRemove}
             />
             <StyledCard>
               <Form.Item>
