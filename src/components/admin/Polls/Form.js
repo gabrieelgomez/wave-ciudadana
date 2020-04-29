@@ -19,6 +19,7 @@ const PollForm = (props) => {
     description,
     poll_category_id,
     due_date,
+    poll_category,
     items = []
   } = props.data;
 
@@ -28,7 +29,7 @@ const PollForm = (props) => {
     <Form onSubmit={props.handleSubmit}>
       <Row>
         <Col span={12} lg={8} md={12} xs={24}>
-          <Form.Item style={{padding: '0 15px'}}>
+          <Form.Item>
             <label>Título de la encuesta</label>
             <Input
               type="text"
@@ -52,9 +53,9 @@ const PollForm = (props) => {
         </Col>
 
         <Col span={8} lg={8} md={8} xs={24}>
-          <Form.Item style={{padding: '0 15px'}}>
+          <Form.Item>
             <label>Categoría de la encuesta</label><br></br>
-            <Select placeholder={poll_category_id} defaultValue={poll_category_id} style={{ width: 180 }} onChange={props.handleSelect}>
+            <Select placeholder={poll_category_id ? poll_category.name : ""} defaultValue={poll_category_id} style={{ width: 180 }} onChange={props.handleSelect}>
               { props.pollCategories !== undefined ? props.pollCategories.map((item) => {
                   return <Option key={item.id} value={item.id}>{item.name}</Option>
                 })
@@ -66,7 +67,7 @@ const PollForm = (props) => {
         </Col>
 
         <Col span={24} lg={24} md={24} xs={24}>
-          <Form.Item style={{padding: '0 15px'}}>
+          <Form.Item>
             <label>Descripción</label>
             <TextArea
               name="description"
@@ -78,7 +79,7 @@ const PollForm = (props) => {
         </Col>
 
         <Col span={24} lg={24} md={24} xs={24}>
-          <PollItems items={items} addField={props.addField} />
+          <PollItems items={items} addField={props.addField} itemshandleChange={props.itemshandleChange} itemshandleRemove={props.itemshandleRemove} />
         </Col>
       </Row>
       { props.children }
