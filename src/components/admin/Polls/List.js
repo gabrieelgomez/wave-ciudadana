@@ -28,10 +28,10 @@ const AdminPollsList = (props) => {
       <Column title="Status" dataIndex="expired" key="expired" render={text => (
         <div>
           { text.toString() === "true" ? (
-            <Tag color="#b7eb8f">Expirado</Tag>
-          ) : (
-            <Tag color="#ffa39e">Vigente</Tag>
-          )} 
+            <Tag color="#ffa39e">Expirado</Tag>
+            ) : (
+            <Tag color="#b7eb8f">Vigente</Tag>
+          )}
         </div>
       )}/>
     </StyledTable>
