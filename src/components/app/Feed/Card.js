@@ -33,8 +33,8 @@ const FeedCard = (props) => {
     <StyledCard>
       { props.type === "wave_citizen_polls" &&
         <div>
-          <div className="feed-card-header">
-            <div className="feed-card-name">
+          <div className="info-card-header">
+            <div className="info-card-name">
               <Avatar size={20} src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
               { info.type_poll === 'poll_admin' ? (
                 <span className="name">{info.user.name}</span>
@@ -65,8 +65,8 @@ const FeedCard = (props) => {
               </Panel>
             </StyledCollapse>
           }
-          <div className="feed-card-footer">
-            <div className="feed-card-footer-info"> {info.total_poll_votes} votos | Vence el {info.due_date ? formatDueDateShow : ''}</div>
+          <div className="info-card-footer">
+            <div className="info-card-footer-info"> {info.total_poll_votes} votos | Vence el {info.due_date ? formatDueDateShow : ''}</div>
             <div>
               <Badge count={5}>
                 <Icon type="message"></Icon>
@@ -81,8 +81,8 @@ const FeedCard = (props) => {
 
       { props.type === "wave_citizen_proposals" &&
         <div>
-          <div className="feed-card-header">
-            <div className="feed-card-name">
+          <div className="info-card-header">
+            <div className="info-card-name">
               <Avatar size={20} src={"https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
               { info.type_proposal === 'proposal_admin' ? (
                 <span className="name">{info.user.name}</span>
@@ -98,7 +98,7 @@ const FeedCard = (props) => {
           <small>{info.proposal_category.name}</small>
           <h3>{info.title}</h3>
           <p>{truncate(info.description, 150)}</p>
-          <div className="feed-card-footer">
+          <div className="info-card-footer">
             <div></div>
             <div>
               <Icon type="message"></Icon>

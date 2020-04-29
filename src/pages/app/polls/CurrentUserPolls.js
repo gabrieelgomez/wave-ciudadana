@@ -38,18 +38,21 @@ class CurrentUserPolls extends React.Component {
       <div className="container page">
         <Row gutter={16}>
           <HeaderPage title="Mis encuestas" img={headerImg} />
-          {polls.map((item, i)=> {
-            return (
-              <Col key={i} xs={24} md={8} lg={8}>
-                <PollInfo
-                  api={api}
-                  item={item}
-                  currentUser={currentUser}
-                  type={item.type}
-                  />
-              </Col>
-            )
-          })}
+          { polls.length !== 0 ? (
+            polls.map((item, i)=> {
+              return (
+                <Col key={i} xs={24} md={8} lg={8}>
+                  <PollInfo
+                    api={api}
+                    item={item}
+                    currentUser={currentUser}
+                    type={item.type}
+                    />
+                </Col>
+              )
+            })
+          ) : ( <p>No tienes encuestas </p> )
+          }
         </Row>
       </div>
     );

@@ -42,7 +42,9 @@ class Show extends React.Component {
     const successCallback = () => {
       swal(`Encuesta eliminada`, {
         icon: "warning",
-      })
+      }).then(()=> {
+        this.props.history.push('/my-polls');
+      });
     }
 
     const errorCallback = (err) => {
@@ -52,6 +54,23 @@ class Show extends React.Component {
     }
 
     this.service.delete({id, tokens, successCallback, errorCallback})
+  }
+
+  handleRemove = (id) => {
+    swal({
+      title: "¿Estás seguro de eliminar?",
+      text: "Si elimina este record, afectará todos los subrecords que han sido creados a partir de él, siendo eliminados también",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.removePoll(id)
+      } else {
+        swal(`Encuesta está a salvo`);
+      }
+    });
   }
 
   render() {
@@ -69,7 +88,7 @@ class Show extends React.Component {
               currentUser={currentUser}
               item={poll}
               type={poll.type}
-              removePoll={this.removePoll}
+              handleRemove={this.handleRemove}
             />
             <StyledCard>
               <Form.Item>
