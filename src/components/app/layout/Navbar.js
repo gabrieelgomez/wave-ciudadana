@@ -50,6 +50,7 @@ class Navbar extends React.Component {
     } else if (showRegister) {
       form = <RegisterForm cb={this.handleCancel}/>
     }
+
     return (
       <div className="header">
         <nav>
