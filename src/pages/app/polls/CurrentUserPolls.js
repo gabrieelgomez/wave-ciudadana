@@ -14,18 +14,18 @@ class CurrentUserPolls extends React.Component {
   }
 
   componentDidMount() {
-    this.service = new PollService(this.props.api)
+    this.poll_service = new PollService(this.props.api)
     this.getPolls()
   }
 
   getPolls = async () => {
     const { tokens } = this.props;
-    const data = await this.service.getAll({tokens})
-
     const {currentUser} = this.props;
+    const citizen_id = currentUser.id
+    const currentUserPolls = await this.poll_service.getByCitizen({tokens, citizen_id})
 
-    const currentUserPolls = data.filter(poll => poll.citizen_id === currentUser.id )
-    
+    // const currentUserPolls = data.filter(poll => poll.citizen_id === currentUser.id )
+
     this.setState({
       polls: currentUserPolls
     })

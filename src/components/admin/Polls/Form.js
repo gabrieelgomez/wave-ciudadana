@@ -19,7 +19,9 @@ const PollForm = (props) => {
     description,
     poll_category_id,
     due_date,
-    poll_category,
+    poll_category = {
+      name: ''
+    },
     items = []
   } = props.data;
 

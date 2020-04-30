@@ -13,9 +13,10 @@ const TypeCandidateForm = (props) => {
   const {
     name,
     country_id,
-    country
+    country = {
+      name: ''
+    }
   } = props.data;
-
   return (
     <Form onSubmit={props.handleSubmit}>
       <Row>

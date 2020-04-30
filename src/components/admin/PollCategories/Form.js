@@ -13,7 +13,9 @@ const PollCategoryForm = (props) => {
   const {
     name,
     country_id,
-    country
+    country = {
+      name: ''
+    }
   } = props.data;
 
   return (
