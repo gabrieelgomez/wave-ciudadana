@@ -67,7 +67,7 @@ const RegisterForm = (props) => {
       </Item>
       <Item>
         {getFieldDecorator('password', {
-          rules: [{ required: true, message: 'Ingresa tu contraseña!' }],
+          rules: [{ required: true, message: 'Ingresa tu contraseña!' }, {min: 6, message: 'Mínimo 6 caracteres'}],
         })(
           <StyledInputIcon
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -80,7 +80,7 @@ const RegisterForm = (props) => {
       </Item>
       <Item>
         {getFieldDecorator('password_confirmation', {
-          rules: [{ required: true, message: 'Ingresa tu confirmación de contraseña!' }],
+          rules: [{ required: true, message: 'Ingresa tu confirmación de contraseña!' }, {min: 6, message: 'Mínimo 6 caracteres'}],
         })(
           <StyledInputIcon
             prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}

@@ -48,7 +48,7 @@ class CurrentUserPolls extends React.Component {
       })
     }
 
-    this.service.delete({id, tokens, successCallback, errorCallback})
+    this.poll_service.delete({id, tokens, successCallback, errorCallback})
   }
 
   handleRemove = (id) => {
