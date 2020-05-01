@@ -56,7 +56,7 @@ class UpdateCountry extends React.Component {
 
   updateCountry = async (country) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'PUT',
       endpoint: `v1/wave_citizen/countries/${country.id}/update`,
       payload: {
@@ -78,7 +78,6 @@ class UpdateCountry extends React.Component {
         })
       }
     })
-    console.log(res)
   }
 
   render() {

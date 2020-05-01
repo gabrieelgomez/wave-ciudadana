@@ -98,7 +98,7 @@ class UpdateProposalCategory extends React.Component {
 
   updateProposalCategory = async (proposal_category) => {
     const { uid, client, access_token } = this.props.tokens;
-    const res = await this.props.api({
+    await this.props.api({
       method: 'PUT',
       endpoint: `v1/wave_citizen/proposal_categories/${proposal_category.id}/update`,
       payload: {
@@ -120,7 +120,6 @@ class UpdateProposalCategory extends React.Component {
         })
       }
     })
-    console.log(res)
   }
 
   render() {

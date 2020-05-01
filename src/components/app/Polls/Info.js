@@ -43,6 +43,8 @@ const PollInfo = (props) => {
                 tokens={tokens}
                 items={info.items}
                 isVoted={isVoted}
+                total_poll_votes={info.total_poll_votes}
+                poll_voted={info.voted_by_current_user}
               />
             }
           </div>

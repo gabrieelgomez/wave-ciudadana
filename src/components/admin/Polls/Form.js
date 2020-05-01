@@ -25,6 +25,10 @@ const PollForm = (props) => {
     items = []
   } = props.data;
 
+  function disabledDate(current) {
+    return current && current < moment().endOf('day');
+  }
+
   const formatDueDateShow = moment.utc(due_date).format("L");
 
   return (
@@ -48,6 +52,7 @@ const PollForm = (props) => {
             <label>Fecha de vencimiento</label><br></br>
             <DatePicker
               format="DD/MM/YYYY"
+              disabledDate={disabledDate}
               placeholder={due_date ? formatDueDateShow : ''}
               onChange={props.datePickerChange}
             />

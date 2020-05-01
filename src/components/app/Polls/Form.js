@@ -97,6 +97,10 @@ class PollForm extends React.Component {
     this.props.handleSubmit(this.state.poll)
   }
 
+  disabledDate = (current) => {
+    return current && current < moment().endOf('day');
+  }
+
   render() {
     const {title, description, poll_category_id, items_attributes} = this.state.poll;
 
@@ -136,6 +140,7 @@ class PollForm extends React.Component {
               <Form.Item>
                 <DatePicker
                   format="DD/MM/YYYY"
+                  disabledDate={this.disabledDate}
                   placeholder="Fecha de vencimiento"
                   onChange={this.datePickerChange}
                   style={{ width: '100%' }}

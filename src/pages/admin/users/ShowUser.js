@@ -20,7 +20,6 @@ class ShowUser extends React.Component {
       endpoint: `v1/users/${id}`
     })
     const data = res.data.data;
-    console.log(res)
 
     this.setState({
       user: {
