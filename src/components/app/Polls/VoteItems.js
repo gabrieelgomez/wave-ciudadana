@@ -9,6 +9,12 @@ const StyledRadioButton = styled(Radio.Button)`
   i {
     margin-right: 5px;
   }
+
+  span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 `
 
 const StyledRadioGroup = styled(Radio.Group)`
@@ -45,8 +51,6 @@ class VoteItems extends React.Component {
     }
 
     const successCallback = () => {
-      swal('Voto registrado', '', 'success')
-
       if (this.props.isVoted === false) {
         const newItems = this.state.items.map(i => {
           if (i.id === this.state.selectedItem) {
@@ -61,6 +65,10 @@ class VoteItems extends React.Component {
           items: newItems
         })
       }
+
+      swal('Voto registrado', '', 'success').then(()=> {
+        window.location.reload()
+      });
     }
 
     const errorCallback = err => {
@@ -94,19 +102,27 @@ class VoteItems extends React.Component {
     };
 
     const { items, voted } = this.state;
+    const { total_poll_votes, poll_voted } = this.props;
     
     return (
       <div className="spacing-top">
         <List>
           <StyledRadioGroup onChange={this.onChange}>
             { items.map((item, i) => {
+              const percentageItem = item.total_item_votes * 100 / total_poll_votes;
+
               return (
                 <List.Item key={i} onClick={()=> this.handleSelectedItem(item.id)}>
                     <StyledRadioButton style={radioStyle} value={item.id} disabled={voted}>
-                    { item.voted_by_current_user && 
-                      <Icon type="check" />
+                    <div>
+                      { item.voted_by_current_user &&
+                        <Icon type="check" />
+                      }
+                      {item.title}
+                    </div>
+                    { total_poll_votes !== 0 && poll_voted &&
+                      <div>{percentageItem.toFixed(0) + '%'}</div>
                     }
-                    {item.title}
                     </StyledRadioButton>
                 </List.Item>
               )

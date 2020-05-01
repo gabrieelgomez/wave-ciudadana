@@ -83,8 +83,6 @@ class Register extends React.Component {
 
       cb();
 
-      console.log(response)
-
       if (response.status === 200) {
         this.props.setCurrentUser(response.data.data.citizen);
 

@@ -10,6 +10,10 @@ const FormUpdate = (props) => {
   const {title, description, poll_category_id, poll_category, due_date, items} = props.poll;
   const formatDueDateShow = moment.utc(due_date).format("L");
 
+  function disabledDate(current) {
+    return current && current < moment().endOf('day');
+  }
+
   return (
     <StyledCard>
       <Form onSubmit={props.handleUpdate}>
@@ -47,6 +51,7 @@ const FormUpdate = (props) => {
               <Form.Item>
                 <DatePicker
                   format="DD/MM/YYYY"
+                  disabledDate={disabledDate}
                   placeholder={formatDueDateShow}
                   onChange={props.datePickerChange}
                   style={{ width: '100%' }}
