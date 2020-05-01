@@ -112,7 +112,7 @@ class PollForm extends React.Component {
             ></StyledInput>
           </Form.Item>
           <Form.Item>
-            <StyledTextAreaFeed 
+            <StyledTextAreaFeed
               name="description"
               value={description}
               placeholder="Escribe tu encuesta"

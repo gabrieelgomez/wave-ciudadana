@@ -23,7 +23,7 @@ export const api = ({ endpoint, method, payload = {}, headers = {}, successCallb
         headers: h,
         data: payload
       })
-  
+
       if (res.headers.hasOwnProperty('access-token')) {
         console.debug('SETTING TOKENS')
 

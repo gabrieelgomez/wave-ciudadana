@@ -5,6 +5,10 @@ import CustomModal from '../../common/ui/Modal';
 import PollForm from '../Polls/Form';
 import PollService from '../../../services/api/poll';
 import swal from 'sweetalert';
+import { SET_POLLS_HOME } from '../../../actions/poll';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { api } from '../../../services/api';
 const { TabPane }  = Tabs;
 
 class QuickPostBox extends React.Component {
@@ -17,6 +21,7 @@ class QuickPostBox extends React.Component {
   componentDidMount() {
     this.service = new PollService(this.props.api)
     this.pollFormRef = React.createRef();
+    this.getPolls()
   }
 
   handleClose = () => {
@@ -50,7 +55,6 @@ class QuickPostBox extends React.Component {
     const successCallback = () => {
       this.handleClose()
       swal('Encuesta creada exitosamente', '', 'success').then(() => {
-        window.location.reload()
       })
     }
 
@@ -64,8 +68,16 @@ class QuickPostBox extends React.Component {
     }
 
     this.service.create({payload, tokens, successCallback, errorCallback})
+    window.location.reload()
+    this.getPolls()
   }
-  
+
+  getPolls = async (dispatch) => {
+    const {tokens} = this.props;
+    const data = await this.service.getAll({tokens})
+    this.props.polls(data)
+  }
+
   handleSubmit = () => {
     this.pollFormRef.current.click()
   }
@@ -117,4 +129,21 @@ class QuickPostBox extends React.Component {
   }
 }
 
-export default QuickPostBox;
+const mapStateToProps = (state) => {
+  const { tokens, currentUser } = state.session;
+  const { pollsHome } = state.polls;
+
+  return { tokens, currentUser, pollsHome };
+}
+
+const getActions = {
+  api,
+  polls: SET_POLLS_HOME
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(getActions, dispatch)
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuickPostBox);

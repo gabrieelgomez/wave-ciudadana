@@ -3,19 +3,19 @@ import QuickPostBox from './QuickPostBox';
 import List from './List';
 
 const Feed = (props) => {
-  const { api, tokens, currentUser, pollCategories } = props;
+
+  const { api, tokens, currentUser, pollCategories, pollsHome, savePollsHome } = props;
 
   return (
     <div>
       <QuickPostBox
-        api={api}
-        tokens={tokens}
-        currentUser={currentUser}
         pollCategories={pollCategories}
       />
-      <List 
+      <List
         api={api}
         tokens={tokens}
+        pollsHome={pollsHome}
+        savePollsHome={savePollsHome}
         currentUser={currentUser}
       />
     </div>

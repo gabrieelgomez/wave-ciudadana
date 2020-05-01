@@ -1,5 +1,4 @@
 import React from 'react';
-import PollService from '../../../services/api/poll';
 import FeedCard from './Card';
 
 class List extends React.Component {
@@ -8,16 +7,14 @@ class List extends React.Component {
   }
 
   componentDidMount() {
-    this.service = new PollService(this.props.api)
     this.getPolls()
   }
 
   getPolls = async () => {
-    const { tokens } = this.props;
-    const data = await this.service.getAll({tokens})
+    const { pollsHome } = this.props;
 
     this.setState({
-      polls: data
+      polls: Object.assign([], pollsHome)
     })
   }
 
@@ -27,7 +24,7 @@ class List extends React.Component {
       <div>
         {polls.map((item, i)=> {
           return (
-            <FeedCard 
+            <FeedCard
               key={i}
               item={item}
               type={item.type}

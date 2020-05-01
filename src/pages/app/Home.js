@@ -5,7 +5,9 @@ import Feed from '../../components/app/Feed';
 import PollService from '../../services/api/poll';
 import { Row, Col, Affix } from 'antd';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import { api } from '../../services/api';
+import { SET_POLLS_HOME } from '../../actions/poll';
 
 class Home extends React.Component {
   state = {
@@ -18,6 +20,7 @@ class Home extends React.Component {
     this.service = new PollService(this.props.api)
     if (this.props.currentUser) {
       this.getCategories()
+      this.getPolls()
     }
   }
 
@@ -31,8 +34,14 @@ class Home extends React.Component {
     })
   }
 
+  getPolls = async () => {
+    const {tokens} = this.props;
+    const data = await this.service.getAll({tokens})
+    this.props.polls(data)
+  }
+
   render() {
-    const {api, tokens, currentUser} = this.props;
+    const {api, tokens, currentUser, pollsHome, polls} = this.props;
     const pollCategories = this.state.categories.poll;
 
     return (
@@ -50,6 +59,8 @@ class Home extends React.Component {
                   api={api}
                   tokens={tokens}
                   currentUser={currentUser}
+                  pollsHome={pollsHome}
+                  savePollsHome={polls}
                   pollCategories={pollCategories}
                 />
               </Col>
@@ -65,11 +76,31 @@ class Home extends React.Component {
 }
 const mapStateToProps = (state) => {
   const { tokens, currentUser } = state.session;
-  return { tokens, currentUser };
+  const { pollsHome } = state.polls;
+
+  return { tokens, currentUser, pollsHome };
 }
 
 const mapDispatchToProps = {
-  api
+  api,
+  polls: SET_POLLS_HOME
 }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     polls: (polls) => {
+//       debugger
+//       dispatch(SET_POLLS_HOME)
+//     },
+//     api: () => dispatch(api),
+//   }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return bindActionCreators({
+//         api,
+//         polls: SET_POLLS_HOME
+//     }, dispatch);
+// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
