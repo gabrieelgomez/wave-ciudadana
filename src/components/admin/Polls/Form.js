@@ -22,8 +22,11 @@ const PollForm = (props) => {
     poll_category = {
       name: ''
     },
+    items_attributes = [],
     items = []
   } = props.data;
+
+  const pollItems = items.length !== 0 ? items : items_attributes
 
   function disabledDate(current) {
     return current && current < moment().endOf('day');
@@ -86,7 +89,7 @@ const PollForm = (props) => {
         </Col>
 
         <Col span={24} lg={24} md={24} xs={24}>
-          <PollItems items={items} addField={props.addField} itemshandleChange={props.itemshandleChange} itemshandleRemove={props.itemshandleRemove} />
+          <PollItems items={pollItems} addField={props.addField} itemshandleChange={props.itemshandleChange} itemshandleRemove={props.itemshandleRemove} />
         </Col>
       </Row>
       { props.children }

@@ -75,17 +75,22 @@ class PollService {
 
     let data = [];
 
-    if (res.data) {
-      data = res.data.data.map((item, idx) => {
-        const attrs = item.attributes;
+    try {
+      if (res.data) {
+        data = res.data.data.map((item, idx) => {
+          const attrs = item.attributes;
 
-        return {
-          id: item.id,
-          type: item.type,
-          ...attrs
-        }
-      });
+          return {
+            id: item.id,
+            type: item.type,
+            ...attrs
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
+
 
     return data;
   }
@@ -103,16 +108,20 @@ class PollService {
 
     let data = [];
 
-    if (res.data) {
-      data = res.data.data.map((item, idx) => {
-        const attrs = item.attributes;
+    try {
+      if (res.data) {
+        data = res.data.data.map((item, idx) => {
+          const attrs = item.attributes;
 
-        return {
-          id: item.id,
-          type: item.type,
-          ...attrs
-        }
-      });
+          return {
+            id: item.id,
+            type: item.type,
+            ...attrs
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
 
     return data;
@@ -131,15 +140,19 @@ class PollService {
 
     let data = [];
 
-    if (res.data) {
-      data = res.data.data.map((item) => {
-        const attrs = item.attributes;
+    try {
+      if (res.data) {
+        data = res.data.data.map((item) => {
+          const attrs = item.attributes;
 
-        return {
-          id: item.id,
-          ...attrs
-        }
-      });
+          return {
+            id: item.id,
+            ...attrs
+          }
+        });
+      }
+    } catch (error) {
+      console.error(error);
     }
 
     return data;
