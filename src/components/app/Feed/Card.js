@@ -64,7 +64,7 @@ const FeedCard = (props) => {
           }
           <div className="info-card-footer">
             <div className="info-card-footer-info"> {info.total_poll_votes} votos | Vence el {info.due_date ? formatDueDateShow : ''}</div>
-            <div>
+            <div className="footer-icons-l">
               <Badge count={5}>
                 <Icon type="message"></Icon>
               </Badge>

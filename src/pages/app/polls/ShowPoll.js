@@ -3,11 +3,13 @@ import PollInfo from '../../../components/app/Polls/Info';
 import PollService from '../../../services/api/poll';
 import HeaderPage from '../../../components/app/HeaderPage';
 import headerImg from '../../../assets/img/icons/vote.svg';
+import FormComment from '../../../components/app/FormComment';
 import swal from 'sweetalert'
-import { Row, Col, Form } from 'antd';
-import { StyledTextAreaFeed, StyledCard, StyledButton } from '../../../components/styled';
+import { Row, Col } from 'antd';
+import { StyledCard } from '../../../components/styled';
 import { connect } from 'react-redux';
 import { api } from '../../../services/api';
+import ListComments from '../../../components/app/Polls/ListComments';
 
 class Show extends React.Component {
   state = {
@@ -75,6 +77,7 @@ class Show extends React.Component {
 
   render() {
     const { poll } = this.state;
+    console.log(poll)
     const { api, tokens, currentUser} = this.props;
 
     return (
@@ -90,11 +93,17 @@ class Show extends React.Component {
               handleRemove={this.handleRemove}
             />
             <StyledCard>
-              <Form.Item>
-                <StyledTextAreaFeed placeholder="Comenta..."/>
-                <StyledButton>Comentar</StyledButton>
-              </Form.Item>
+              <FormComment
+                api={api}
+                tokens={tokens}
+                currentUser={currentUser}
+                poll_id={poll.id}
+              />
             </StyledCard>
+            <ListComments
+              poll={poll}
+              currentUser={currentUser}
+            />
           </Col>
         </Row>
       </div>
