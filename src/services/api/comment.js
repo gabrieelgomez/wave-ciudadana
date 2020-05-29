@@ -19,18 +19,33 @@ class CommentService {
     })
   }
 
-  getPollComments = async ({tokens, id}) => {
+  update = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
     const { uid, client, access_token } = tokens;
-    const res = await this.api({
-      method: 'GET',
-      endpoint: `v1/comments/wave_citizen_polls/${id}`,
+    await this.api({
+      method: 'PUT',
+      endpoint: `v1/comments/${payload.id}/update`,
+      payload,
       headers: {
         'access-token': access_token,
         client, uid
-      }
+      },
+      successCallback,
+      errorCallback
     })
+  }
 
-    return res;
+  delete = async ({id, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
+    const { uid, client, access_token } = tokens;
+    await this.api({
+      method: 'DELETE',
+      endpoint: `v1/comments/${id}/destroy`,
+      headers: {
+        'access-token': access_token,
+        client, uid
+      },
+      successCallback,
+      errorCallback
+    })
   }
 }
 
