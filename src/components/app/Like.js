@@ -31,9 +31,37 @@ const Like = (props) => {
     service.create({payload, tokens, successCallback, errorCallback})
   }
 
+  function removeLike() {
+    const { tokens } = props;
+    const payload = {
+      likeable_id: poll.id,
+	    likeable_type: "WaveCitizen::Poll"
+    }
+
+    const successCallback = () => {
+      swal(`Ya no te gusta esta encuesta`, {
+        icon: "success",
+      }).then(()=> {
+        window.location.reload()
+      });
+    }
+
+    const errorCallback = (err) => {
+      swal(`Hubo un error, no se ha podido eliminar tu like`, {
+        icon: "error",
+      })
+    }
+
+    service.delete({payload, tokens, successCallback, errorCallback})
+  }
+
   return (
     <Badge count={poll.total_likes}>
-      <Icon type="like" onClick={()=> createLike()}></Icon>
+      { poll.liked_by_current_user ? (
+        <Icon className="like-active" type="heart" onClick={()=> removeLike()}></Icon>
+      ) : (
+        <Icon type="heart" onClick={()=> createLike()}></Icon>
+      )}
     </Badge>
   )
 }
