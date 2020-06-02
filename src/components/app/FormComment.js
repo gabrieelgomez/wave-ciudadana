@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import CommentService from '../../services/api/comment';
+import LoadingButton from '../common/ui/LoadingButton';
 import swal from 'sweetalert'
 import { Form } from 'antd';
-import { StyledTextAreaFeed, StyledButton } from '../styled';
-import CommentService from '../../services/api/comment';
+import { StyledTextAreaFeed } from '../styled';
 
 const FormComment = (props) => {
   let [body, setBody] = useState("");
@@ -41,7 +42,7 @@ const FormComment = (props) => {
     <Form className="comment-form" onSubmit={()=> createComment()}>
       <Form.Item>
         <StyledTextAreaFeed placeholder="Comenta..." value={body} onChange={(e)=> setBody(e.target.value)} />
-        <StyledButton onClick={()=> createComment()}>Comentar</StyledButton>
+        <LoadingButton title="Comentar" action={createComment} />
       </Form.Item>
     </Form>
   )

@@ -102,6 +102,8 @@ class Show extends React.Component {
             </StyledCard>
             <ListComments
               poll={poll}
+              api={api}
+              tokens={tokens}
               currentUser={currentUser}
             />
           </Col>

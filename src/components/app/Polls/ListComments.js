@@ -2,7 +2,7 @@ import React from 'react';
 import CardComment from '../CardComment';
 
 const ListComments = (props) => {
-  const { poll, currentUser } = props;
+  const { poll, currentUser, api, tokens } = props;
   const comments = poll.comments;
 
   const commentsExist = () => (poll && comments && comments.length > 0)
@@ -14,8 +14,10 @@ const ListComments = (props) => {
           return (
             <CardComment
               key={item.id}
-              comment={item}
+              api={api}
+              tokens={tokens}
               currentUser={currentUser}
+              comment={item}
             />
           )
         })

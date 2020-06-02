@@ -65,9 +65,10 @@ class List extends React.Component {
 
     return (
       <div>
-        {polls.map((poll, i)=> {
+        {polls.map((poll)=> {
           return (
             <PollInfo
+              key={poll.id}
               api={api}
               tokens={tokens}
               currentUser={currentUser}
