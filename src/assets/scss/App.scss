@@ -2,6 +2,7 @@
 
 $primary: #0c2e60;
 $secondary: #ff663b;
+$white: #fff;
 $fontPrimary: 'Martel Sans';
 
 ::-webkit-scrollbar {
@@ -57,7 +58,7 @@ h1, h2, h3, h4 {
 .App {
   font-family: 'Martel Sans', sans-serif;
   text-align: center;
-  background-color: #fff;
+  background-color: $white;
   height: 100vh;
   background-repeat: no-repeat;
   background-position: bottom;
@@ -162,7 +163,7 @@ h1, h2, h3, h4 {
       transition: .5s;
 
       a, span {
-        color: #fff;
+        color: $white;
       }
 
       &.currentUser {
@@ -171,7 +172,7 @@ h1, h2, h3, h4 {
 
       i {
         margin-right: 5px;
-        color: #fff;
+        color: $white;
       }
     }
   }
@@ -254,7 +255,7 @@ h1, h2, h3, h4 {
     height: 80px;
     border-radius: 10px;
     position: relative;
-    background: #fff;
+    background: $white;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -285,7 +286,7 @@ h1, h2, h3, h4 {
 
 .quick-post {
   border-radius: 12px;
-  background-color: #fff;
+  background-color: $white;
   box-shadow: 0 0 40px 0 rgba(94,92,154,.06);
 }
 
@@ -329,7 +330,7 @@ h1, h2, h3, h4 {
       width: 100%;
       line-height: 1.25;
       color: rgba(0, 0, 0, 0.65);
-      background-color: #fff;
+      background-color: $white;
       background-image: none;
       background-clip: padding-box;
       border: 1px solid #d9d9d9;
@@ -350,16 +351,16 @@ h1, h2, h3, h4 {
       }
 
       &::-webkit-input-placeholder {
-        color: #fff;
+        color: $white;
 
       }
 
       &::-moz-placeholder {
-        color: #fff;
+        color: $white;
       }
 
       &:-ms-input-placeholder {
-        color: #fff;
+        color: $white;
       }
 
       &:focus + .ant-input-suffix, &:not(:placeholder-shown) + .ant-input-suffix {
@@ -554,8 +555,12 @@ h1, h2, h3, h4 {
 .info-card-actions {
   font-size: 15px;
 
-  a {
-    margin-right: 8px;
+  a, i {
+    margin-left: 8px;
+  }
+
+  a i {
+    margin-left: unset;
   }
 
   span {
@@ -579,18 +584,24 @@ h1, h2, h3, h4 {
     font-size: 12px;
   }
 
-  i {
-    margin-left: 10px;
+  .footer-icons-l i {
+    margin-left: 8px;
+    font-size: 15px;
+  }
+
+  .footer-icons-r i {
+    margin-right: 8px;
     font-size: 15px;
   }
 
   .ant-badge-count {
     min-width: 15px;
     height: 15px;
-    background-color: #fff;
+    background-color: $primary;
     font-size: 10px;
     padding: 0;
-    color: $primary;
+    color: $white;
+    top: -4px;
   }
 }
 
@@ -612,7 +623,7 @@ h1, h2, h3, h4 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: #fff;
+  color: $white;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -633,7 +644,7 @@ h1, h2, h3, h4 {
   height: 60px;
   color: $primary;
   flex-direction: column;
-  background-color: #fff;
+  background-color: $white;
   right: 0;
   display: flex;
   justify-content: center;
@@ -641,4 +652,18 @@ h1, h2, h3, h4 {
   cursor: pointer;
   border-top-left-radius: 20px;
   font-size: 12px;
+}
+
+.list-comments {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 0 10px;
+}
+
+.comment-form .ant-form-item {
+  margin-bottom: 0;
+}
+
+.like-active {
+  color: $secondary;
 }

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Avatar, Badge, Icon } from 'antd';
 import { StyledCard } from '../../styled';
 import VoteItems from './VoteItems';
+import Like from '../Like';
 
 const PollInfo = (props) => {
   const { api, tokens, currentUser, item } = props;
@@ -50,9 +51,14 @@ const PollInfo = (props) => {
           </div>
           <div className="info-card-footer">
             <div className="info-card-footer-info"> {info.total_poll_votes} votos | Vence el {info.due_date ? formatDueDateShow : ''}</div>
-            <div>
+            <div className="footer-icons-l">
               <Icon type="message"></Icon>
-              <Icon type="like"></Icon>
+              <Like
+                poll={info}
+                api={api}
+                tokens={tokens}
+                currentUser={currentUser}
+              />
             </div>
           </div>
         </div>

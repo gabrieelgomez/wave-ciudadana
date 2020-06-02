@@ -174,4 +174,4 @@ class PollService {
   }
 }
 
-export default PollService
+export default PollService;
