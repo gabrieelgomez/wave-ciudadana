@@ -3,7 +3,7 @@ import PollInfo from '../../../components/app/Polls/Info';
 import PollService from '../../../services/api/poll';
 import HeaderPage from '../../../components/app/HeaderPage';
 import headerImg from '../../../assets/img/icons/vote.svg';
-import FormComment from '../../../components/app/FormComment';
+import CreateComment from '../../../components/app/Comments/Create';
 import swal from 'sweetalert'
 import { Row, Col } from 'antd';
 import { StyledCard } from '../../../components/styled';
@@ -77,7 +77,6 @@ class Show extends React.Component {
 
   render() {
     const { poll } = this.state;
-    console.log(poll)
     const { api, tokens, currentUser} = this.props;
 
     return (
@@ -93,10 +92,9 @@ class Show extends React.Component {
               handleRemove={this.handleRemove}
             />
             <StyledCard>
-              <FormComment
+              <CreateComment
                 api={api}
                 tokens={tokens}
-                currentUser={currentUser}
                 poll_id={poll.id}
               />
             </StyledCard>

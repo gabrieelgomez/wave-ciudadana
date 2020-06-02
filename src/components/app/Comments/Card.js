@@ -1,18 +1,32 @@
-import React from 'react';
-import CommentService from '../../services/api/comment';
+import React, { useState } from 'react';
+import CommentService from '../../../services/api/comment';
+import EditComment from './Edit';
 import moment from 'moment';
 import swal from 'sweetalert'
 import { Avatar, Icon } from 'antd';
-import { StyledCard } from '../styled';
+import { StyledCard } from '../../styled';
 
 const CardComment = (props) => {
-  const { api, currentUser, comment } = props;
+  let [canEdit, setCanEdit] = useState(false);
+
+  const { api, currentUser, tokens, comment } = props;
   const service = new CommentService(api);
 
   const author = comment.user;
-  const commentDate = moment(comment.created_at).startOf('day').fromNow();
+  const author_id = author.id.toString()
+  const currentUser_id = currentUser.id.toString()
+  const isCurrentUserAuthor = author_id === currentUser_id;
+  const commentDate = moment(comment.updated_at).startOf('day').fromNow();
 
-  const handleRemoveComment = (id) => {
+  function handleEditComment() {
+    if (canEdit) {
+      setCanEdit(false)
+    } else {
+      setCanEdit(true)
+    }
+  }
+
+  function handleRemoveComment(id) {
     swal({
       title: "¿Estás seguro de eliminar?",
       text: "Si elimina este comentario, no podrá recuperarlo",
@@ -57,15 +71,32 @@ const CardComment = (props) => {
             <Avatar size={30} src={author.avatar ? author.avatar : "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"} />
             <span className="name">{author.name}</span>
           </div>
-          {  author.id == currentUser.id &&
+          { isCurrentUserAuthor &&
             <div className="info-card-actions">
-              <Icon type="edit"></Icon>
-              <div onClick={()=> handleRemoveComment(comment.id)}><Icon type="delete"></Icon></div>
+              { canEdit ? (
+                <span onClick={()=> handleEditComment()}><Icon type="close"></Icon></span>
+              ) : (
+                <div>
+                  <span onClick={()=> handleEditComment()}><Icon type="edit"></Icon></span>
+                  <span onClick={()=> handleRemoveComment(comment.id)}><Icon type="delete"></Icon></span>
+                </div>
+                )
+              }
             </div>
           }
         </div>
         <div className="info-card-body">
-          <p>{comment.body}</p>
+          { canEdit ? (
+            <EditComment
+              comment={comment}
+              api={api}
+              tokens={tokens}
+              currentUser={currentUser}
+            />
+          ) : (
+            <p>{comment.body}</p>
+            )
+          }
         </div>
         <div className="info-card-footer">
           <div className="footer-icons-r">

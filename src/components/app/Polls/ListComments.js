@@ -1,5 +1,5 @@
 import React from 'react';
-import CardComment from '../CardComment';
+import CardComment from '../Comments/Card';
 
 const ListComments = (props) => {
   const { poll, currentUser, api, tokens } = props;

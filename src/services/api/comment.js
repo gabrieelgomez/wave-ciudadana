@@ -19,11 +19,11 @@ class CommentService {
     })
   }
 
-  update = async ({payload, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
+  update = async ({payload, id, tokens, successCallback = () => {}, errorCallback = () => {}}) => {
     const { uid, client, access_token } = tokens;
     await this.api({
       method: 'PUT',
-      endpoint: `v1/comments/${payload.id}/update`,
+      endpoint: `v1/comments/${id}/update`,
       payload,
       headers: {
         'access-token': access_token,

@@ -555,8 +555,12 @@ h1, h2, h3, h4 {
 .info-card-actions {
   font-size: 15px;
 
-  a {
-    margin-right: 8px;
+  a, i {
+    margin-left: 8px;
+  }
+
+  a i {
+    margin-left: unset;
   }
 
   span {
