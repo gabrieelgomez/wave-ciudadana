@@ -52,7 +52,7 @@ const PollInfo = (props) => {
           <div className="info-card-footer">
             <div className="info-card-footer-info"> {info.total_poll_votes} votos | Vence el {info.due_date ? formatDueDateShow : ''}</div>
             <div className="footer-icons-l">
-              <Icon type="message"></Icon>
+              <Badge count={info.total_comments}><Icon type="message"></Icon></Badge>
               <Like
                 poll={info}
                 api={api}
