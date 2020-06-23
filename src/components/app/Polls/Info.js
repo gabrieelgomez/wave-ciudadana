@@ -9,11 +9,17 @@ import Like from '../Like';
 const PollInfo = (props) => {
   const { api, tokens, currentUser, item } = props;
   const info = item;
-  
+
   const formatDueDateShow = moment.utc(info.due_date).format("L");
   const isVoted = info.voted_by_current_user;
   const isAdminPoll = info.type_poll === 'poll_admin'
   const human = isAdminPoll ? info.user : info.citizen;
+
+  function noEdit() {
+    if (info.total_likes > 0 || info.total_comments > 0 || info.total_poll_votes) {
+      return true
+    }
+  }
 
   return (
     <StyledCard>
@@ -29,7 +35,9 @@ const PollInfo = (props) => {
             }
             { human.id === currentUser.id &&
               <div className="info-card-actions">
-                <Link to={`/poll/${info.id}/update`}><Icon type="edit"></Icon></Link>
+                { !noEdit() &&
+                  <Link to={`/poll/${info.id}/update`}><Icon type="edit"></Icon></Link>
+                }
                 <span onClick={() => props.handleRemove(info.id)}><Icon type="delete"></Icon></span>
               </div>
             }

@@ -664,6 +664,12 @@ h1, h2, h3, h4 {
   margin-bottom: 0;
 }
 
-.like-active {
-  color: $secondary;
+.like {
+  &:hover {
+    color: $secondary;
+  }
+
+  &.active {
+    color: $secondary;
+  }
 }

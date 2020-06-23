@@ -11,14 +11,25 @@ class Home extends React.Component {
   state = {
     categories: {
       poll: []
-    }
+    },
+    polls: []
   }
 
   componentDidMount() {
     this.service = new PollService(this.props.api)
     if (this.props.currentUser) {
+      this.getPolls()
       this.getCategories()
     }
+  }
+
+  getPolls = async () => {
+    const { tokens } = this.props;
+    const data = await this.service.getAll({tokens})
+
+    this.setState({
+      polls: data
+    })
   }
 
   getCategories = async () => {
@@ -34,6 +45,7 @@ class Home extends React.Component {
   render() {
     const {api, tokens, currentUser} = this.props;
     const pollCategories = this.state.categories.poll;
+    const {polls} = this.state;
 
     return (
       <div>
@@ -51,6 +63,8 @@ class Home extends React.Component {
                   tokens={tokens}
                   currentUser={currentUser}
                   pollCategories={pollCategories}
+                  polls={polls}
+                  getPolls={this.getPolls}
                 />
               </Col>
               <Col span={6}></Col>

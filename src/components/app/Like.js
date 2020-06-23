@@ -58,9 +58,9 @@ const Like = (props) => {
   return (
     <Badge count={poll.total_likes}>
       { poll.liked_by_current_user ? (
-        <Icon className="like-active" type="heart" onClick={()=> removeLike()}></Icon>
+        <Icon className="like active" type="heart" onClick={()=> removeLike()}></Icon>
       ) : (
-        <Icon type="heart" onClick={()=> createLike()}></Icon>
+        <Icon className="like" type="heart" onClick={()=> createLike()}></Icon>
       )}
     </Badge>
   )

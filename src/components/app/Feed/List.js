@@ -4,22 +4,9 @@ import PollInfo from '../Polls/Info';
 import swal from 'sweetalert'
 
 class List extends React.Component {
-  state = {
-    polls: []
-  }
 
   componentDidMount() {
     this.service = new PollService(this.props.api)
-    this.getPolls()
-  }
-
-  getPolls = async () => {
-    const { tokens } = this.props;
-    const data = await this.service.getAll({tokens})
-
-    this.setState({
-      polls: data
-    })
   }
 
   removePoll = async (id) => {
@@ -60,12 +47,11 @@ class List extends React.Component {
   }
 
   render() {
-    const polls = this.state.polls;
-    const { api, tokens, currentUser } = this.props;
+    const { api, tokens, currentUser, polls } = this.props;
 
     return (
       <div>
-        {polls.map((poll)=> {
+        {polls !== undefined && polls.map((poll)=> {
           return (
             <PollInfo
               key={poll.id}

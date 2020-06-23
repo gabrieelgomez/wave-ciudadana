@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
-import { Form, Card, Col, Row } from 'antd';
+import { Form, Col, Row } from 'antd';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { BASE_DOMAIN } from '../../constants';
 import { withRouter } from "react-router-dom";
-import styled from 'styled-components';
-import { StyledButton, StyledInput } from '../../components/styled';
-
-const StyledCard = styled(Card)`
-  text-align:center;
-  padding: 0 50px;
-  h1 {
-    font-weight: 700;
-    margin-top: 30px;
-  }
-`
+import { StyledButton, StyledInput, StyledCard } from '../../components/styled';
 
 const Item = Form.Item;
 
@@ -97,7 +87,7 @@ class ResetPassword extends Component {
 
     })
     .catch((error) => {
-      const errMessage = error ? error.response.data.errors : 'Algo salió mal, intenta de nuevo';
+      const errMessage = error ? error.response.data.error : 'Algo salió mal, intenta de nuevo';
       swal(errMessage, "", "error");
     });
   }

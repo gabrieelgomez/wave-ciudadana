@@ -3,7 +3,7 @@ import QuickPostBox from './QuickPostBox';
 import List from './List';
 
 const Feed = (props) => {
-  const { api, tokens, currentUser, pollCategories } = props;
+  const { api, tokens, currentUser, pollCategories, polls, getPolls } = props;
 
   return (
     <div>
@@ -12,11 +12,13 @@ const Feed = (props) => {
         tokens={tokens}
         currentUser={currentUser}
         pollCategories={pollCategories}
+        getPolls={getPolls}
       />
       <List 
         api={api}
         tokens={tokens}
         currentUser={currentUser}
+        polls={polls}
       />
     </div>
   )

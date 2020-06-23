@@ -103,6 +103,9 @@ const CardComment = (props) => {
             <Icon type="clock-circle-o" />
             <small>{commentDate}</small>
           </div>
+          {comment.updated_at !== comment.created_at &&
+            <small>Editado</small>
+          }
         </div>
       </div>
     </StyledCard>
